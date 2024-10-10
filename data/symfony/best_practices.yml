@@ -1,0 +1,89 @@
+category: Symfony > Best Practices
+questions:
+    - question: "Which of the following Composer commands is recommended to execute on production servers to increase the performance of your Symfony applications?"
+      answers:
+        - { value: "$ composer optimize-autoload --no-dev", correct: false }
+        - { value: "$ composer optimize-autoload", correct: false }
+        - { value: "$ composer dump-autoloader --optimize --no-dev", correct: false }
+        - { value: "$ composer dump-autoload --optimize --apc-class-autoload", correct: false }
+        - { value: "$ composer dump-autoload --optimize --no-dev --classmap-authoritative", correct: true }
+      help: |
+        https://symfony.com/doc/current/performance.html
+        https://getcomposer.org/doc/articles/autoloader-optimization.md
+
+    - question: |
+        According to the official Symfony Best Practices Guide, what is the recommended way to install Symfony when creating a new project from scratch?
+      answers:
+        - { value: "Use the Composer create-project command.", correct: false }
+        - { value: "Clone the symfony/symfony-standard Github repository with git.", correct: false }
+        - { value: "Request a Symfony Installation floppy disk to SensioLabs.", correct: false }
+        - { value: "Download and unpack a frozen ZIP archive.", correct: false }
+        - { value: "Use the official Symfony Installer command line tool.", correct: true }
+      help: |
+        https://symfony.com/doc/current/best_practices/creating-the-project.html#installing-symfony
+
+    - question: |
+        According to the official Symfony Best Practices Guide, what format do you need to use to define your own services?
+      answers:
+        - { value: "PHP", correct: false }
+        - { value: "XML", correct: false }
+        - { value: "YAML", correct: true }
+        - { value: "Annotations", correct: false }
+      help: |
+        http://symfony.com/doc/current/best_practices/business-logic.html#service-format-yaml
+
+    - question: |
+        According to the Symfony Best Practices Guide, which of the following assertions is true about Symfony controllers?
+      answers:
+      - { value: "Controllers must always return an array.", correct: false }
+      - { value: "Controllers must be thin whereas models must be fat.", correct: true }
+      - { value: "In the MVC architecture, the Controller layer is responsible for encapsulating the business logic.", correct: false }
+      - { value: "Controllers are responsible for building and executing SQL queries against a database.", correct: false }
+      help: |
+        https://symfony.com/doc/current/best_practices/controllers.html
+
+    - question: |
+        According to the official Symfony Best Practices Guide, which syntax do you need to use for directory and template names?
+      answers:
+      - { value: "PascalCase", correct: false }
+      - { value: "lowerCamelCase", correct: false }
+      - { value: "lower_snake_case", correct: true }
+      help: |
+        https://symfony.com/doc/current/best_practices/templates.html
+
+    - question: |
+        According to the official Symfony Best Practices Guide and using the Symfony installer, which command allow you to create a blog application?
+      answers:
+      - { value: "symfony create-project blog", correct: false }
+      - { value: "symfony create blog", correct: false }
+      - { value: "symfony install blog", correct: false }
+      - { value: "symfony new blog", correct: true }
+      help: |
+        https://symfony.com/doc/current/best_practices/templates.html
+
+    - question: |
+        Is it a best practice to use the @Template annotation?
+      answers:
+      - { value: "Yes", correct: false }
+      - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/best_practices/templates.html
+
+    - question: |
+        According to the official Symfony Best Practices Guide, where do you need to add form buttons?
+      answers:
+      - { value: "in the controllers", correct: false }
+      - { value: "in the templates", correct: true }
+      - { value: "in the form classes", correct: true }
+      help: |
+        https://symfony.com/doc/current/best_practices/forms.html#form-button-configuration
+
+    - question: |
+        According to the official Symfony Best Practices Guide, which format do you need to use to configure routing, caching and security whenever possible?
+      answers:
+      - { value: php, correct: false }
+      - { value: yaml, correct: false }
+      - { value: xml, correct: false }
+      - { value: annotations, correct: true }
+      help: |
+        https://symfony.com/doc/current/best_practices/controllers.html

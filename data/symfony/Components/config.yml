@@ -1,0 +1,68 @@
+category: Symfony > Components > Config
+questions:
+    - question: |
+        Is the following configuration valid ?
+
+        $rootNode
+            ->children()
+                ->arrayNode('connections')
+                    ->children()
+                        ->scalarNode('my_custom_parameter')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        connections:
+            my-custom-parameter: value
+      answers:
+        - { value: "No", correct: false }
+        - { value: "Yes", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/config/definition.html#normalization
+
+    - question: |
+        What is the prupose of Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition::fixXmlConfig ?
+      answers:
+        - { value: "It ensures that single XML elements are turned into an array", correct: true }
+        - { value: "It applies a custom function to an XML element if an error occurs", correct: false }
+        - { value: "It always applies a custom function to an XML element", correct: false }
+        - { value: "It normalizes XML element name", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/config/definition.html#normalization
+
+    - question: |
+        Which of the following are validation rules provided by Symfony\Component\Config\Definition\Builder\ExprBuilder?
+      answers:
+        - { value: ifArray(), correct: true }
+        - { value: ifNotInArray(), correct: true }
+        - { value: ifInArray(), correct: true }
+        - { value: ifString(), correct: true }
+        - { value: ifTrue(), correct: true }
+        - { value: ifNull(), correct: true }
+        - { value: always(), correct: true }
+        - { value: never(), correct: false }
+        - { value: ifNotNull(), correct: false }
+      help: |
+        https://symfony.com/doc/current/components/config/definition.html#normalization
+
+    - question: |
+        Which configuration file format can be used to define PHP constants as parameters?
+      answers:
+        - { value: YAML, correct: true }
+        - { value: XML, correct: true }
+        - { value: PHP, correct: true }
+        - { value: INI, correct: false }
+        - { value: Annotation, correct: false }
+      help: |
+        https://symfony.com/doc/current/configuration.html#configuration-parameters
+
+    - question: |
+        How to overwrite a configuration array if the value is also defined in a second configuration array ?
+      answers:
+        - { value: By using ->enableMerging(), correct: false }
+        - { value: By using ->canBeOverwritten(), correct: false }
+        - { value: By using ->performDeepMerging(), correct: false }
+        - { value: By using ->performNoDeepMerging(), correct: true }
+      help: |
+        https://symfony.com/doc/current/components/config/definition.html#merging-options

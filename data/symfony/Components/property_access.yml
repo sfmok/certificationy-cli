@@ -1,0 +1,121 @@
+category: Symfony > Components > PropertyAccess
+questions:
+    - question: |
+        What is the way to get the value of the first_name index of the $person array?
+
+        $person = array(
+            'first_name' => 'Wouter',
+        );
+      answers:
+        - { value: "$firstName = $accessor->getValue($person, 'first_name');", correct: false }
+        - { value: "$firstName = $accessor->readIndex($person, 'first_name');", correct: false }
+        - { value: "$firstName = $accessor->readProperty($person, 'first_name');", correct: false }
+        - { value: "$firstName = $accessor->getValue($person, '[first_name]');", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/property_access/introduction.html#reading-from-arrays
+
+    - question: "Is the __call feature enabled by default?"
+      answers:
+        - { value: "No", correct: true }
+        - { value: "Yes", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/property_access/introduction.html#magic-call-method
+
+    - question: |
+        What will be the result of the following code?
+
+        use Symfony\Component\PropertyAccess\PropertyAccess;
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        $person = array(
+            'first_name' => 'Wouter',
+        );
+
+        $age = $accessor->getValue($person, 'age');
+      answers:
+      - { value: "The value of $age will be null.", correct: false }
+      - { value: "The value of $age will be 0.", correct: false }
+      - { value: A Symfony\Component\PropertyAccess\Exception\NoSuchIndexException will be thrown., correct: false }
+      - { value: A Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException will be thrown., correct: true }
+      help: |
+        https://symfony.com/doc/current/components/property_access/introduction.html#reading-from-arrays
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/PropertyAccess/PropertyAccessor.php#L86
+
+    - question: |
+        What will be the result of the following code?
+
+        use Symfony\Component\PropertyAccess\PropertyAccess;
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        $person = array(
+            'first_name' => 'Wouter',
+        );
+
+        $age = $accessor->getValue($person, '[age]');
+      answers:
+        - { value: A Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException will be thrown., correct: false }
+        - { value: The value of $age will be null., correct: true }
+        - { value: The value of $age will be 0., correct: false }
+        - { value: A Symfony\Component\PropertyAccess\Exception\NoSuchIndexException will be thrown., correct: false }
+      help: |
+        https://symfony.com/doc/current/components/property_access/introduction.html#reading-from-arrays
+
+    - question: |
+        What will be the result of the following code?
+
+        use Symfony\Component\PropertyAccess\PropertyAccess;
+
+        $accessor = PropertyAccess::createPropertyAccessor()
+                    ->enableExceptionOnInvalidIndex()
+                    ->getPropertyAccessor();
+
+        $person = array(
+            'first_name' => 'Wouter',
+        );
+
+        $age = $accessor->getValue($person, '[age]');
+      answers:
+        - { value: A Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException will be thrown., correct: false }
+        - { value: The value of $age will be null., correct: false }
+        - { value: The value of $age will be 0., correct: false }
+        - { value: A Symfony\Component\PropertyAccess\Exception\NoSuchIndexException will be thrown., correct: true }
+      help: |
+        https://symfony.com/doc/current/components/property_access/introduction.html#reading-from-arrays
+
+    - question: |
+        What will be the value of $firstName?
+
+        use Symfony\Component\PropertyAccess\PropertyAccess;
+  
+        $accessor = PropertyAccess::createPropertyAccessor();
+        
+        class Person {
+          public $firstName;
+          
+          public function getFirstName()
+          {
+            return 'Ryan';
+          }
+        }
+        
+        $person = new Person();
+        $person->firstName = 'Wouter';
+        
+        $firstName = $accessor->getValue($person, 'firstName');
+      answers:
+        - { value: Wouter, correct: false }
+        - { value: Ryan, correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/property_access.html#accessing-public-properties
+
+    - question: |
+        What is the way to enable magic __call method?
+      answers:
+        - { value: $accessor = PropertyAccess::createPropertyAccessor(true);, correct: false }
+        - { value: $accessor = PropertyAccess::createPropertyAccessorBuilder()->getPropertyAccessor(true);, correct: false }
+        - { value: $accessor = PropertyAccess::createPropertyAccessor()->enableMagicCall();, correct: false }
+        - { value: $accessor = PropertyAccess::createPropertyAccessor()->enableMagicCall()->getPropertyAccessor();, correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/property_access/introduction.html#magic-call-method

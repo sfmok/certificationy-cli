@@ -1,0 +1,72 @@
+category: Symfony > Components > Console
+questions:
+    - question: "Which loader is recommended for translations ?"
+      answers:
+        - { value: "xlf", correct: true }
+        - { value: "ini", correct: false }
+        - { value: "php", correct: false }
+        - { value: "yml", correct: false }
+      help: |
+        https://symfony.com/doc/current/translation.html#translation-resource-file-names-and-locations
+
+    - question: |
+        Which of the followings are part of the built-in loaders?
+      answers:
+        - { value: "ArrayLoader", correct: true }
+        - { value: "CsvFileLoader", correct: true }
+        - { value: "IcuDatFileLoader", correct: true }
+        - { value: "IcuResFileLoader", correct: true }
+        - { value: "CsvLoader", correct: false }
+        - { value: "IniFileLoader", correct: true }
+        - { value: "JsonLoader", correct: false }
+        - { value: "JsonFileLoader", correct: true }
+        - { value: "MoFileLoader", correct: true }
+        - { value: "PhpFileLoader", correct: true }
+        - { value: "PoFileLoader", correct: true }
+        - { value: "QtFileLoader", correct: true }
+        - { value: "XliffFileLoader", correct: true }
+        - { value: "YamlFileLoader", correct: true }
+      help: |
+        https://github.com/symfony/translation/tree/6.1/Loader
+
+    - question: |
+        Which method must implement a TranslationLoader that implements Symfony\Component\Translation\Loader\LoaderInterface?
+      answers:
+        - { value: public function load($locale, $domain);, correct: false }
+        - { value: public function load($resource, $locale, $domain);, correct: false }
+        - { value: public function load($resource, $locale, $domain = 'messages');, correct: false }
+        - { value: public function load($resource, $locale = 'en', $domain = 'messages');, correct: false }
+        - { value: public function load($locale = 'en', $domain = 'messages');, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/translation/custom_formats.html
+
+    - question: |
+        What is the correct option to add other directories in the translator configuration ?
+      answers:
+        - { value: paths, correct: true }
+        - { value: custom_directories, correct: false }
+        - { value: custom_paths, correct: false }
+        - { value: directories, correct: false }
+        - { value: add_paths, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/configuration/framework.html#translator
+
+    - question: |
+        When you want to use a translation in another domain than the default domain, you must specify the domain as:
+      answers:
+        - { value: second argument of trans(), correct: false }
+        - { value: first argument of trans(), correct: false }
+        - { value: fourth argument of trans(), correct: false }
+        - { value: third argument of trans(), correct: true }
+      help: |
+        https://symfony.com/doc/current/components/translation/introduction.html#using-message-domains
+
+    - question: |
+        What is the way to add a loader to the translator?
+      answers:
+        - { value: $translator->addLoader(new ArrayLoader());, correct: false }
+        - { value: "$translator->addLoader('array', new ArrayLoader());", correct: true }
+        - { value: "$translator->addLoader(new ArrayLoader(), 'array');", correct: false }
+        - { value: $translator->addArrayLoader(new ArrayLoader());, correct: false }
+      help: |
+        https://github.com/symfony/translation/blob/5.0/Translator.php#L103

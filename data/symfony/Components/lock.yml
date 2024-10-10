@@ -1,0 +1,19 @@
+category: Symfony > Components > Filesystem
+questions:
+    - question: |
+        How to destroy the following lock ?
+        
+        use Symfony\Component\Lock\LockFactory;
+        use Symfony\Component\Lock\Store\SemaphoreStore;
+  
+        $store = new SemaphoreStore();
+        $factory = new LockFactory($store);
+        
+        $lock = $factory->createLock('pdf-invoice-generation');
+      answers:
+        - { value: "$lock->release();", correct: true }
+        - { value: "$lock->destroy();", correct: false }
+        - { value: "$lock->unset();", correct: false }
+        - { value: "$lock->remove();", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/lock.html

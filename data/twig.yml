@@ -1,0 +1,322 @@
+category: Twig
+questions:
+    - question: |
+        If the user variable is not defined, what will be the result of rendering this Twig template?
+        
+        Hi {{ user.name ?? 'anonymous' }}!
+      answers:
+        - { value: "This template will display an error when rendering it.", correct: false }
+        - { value: "Hi null!", correct: false }
+        - { value: "Hi!", correct: false }
+        - { value: "Hi anonymous!", correct: true }
+        - { value: "Hi ??!", correct: false }
+      help: |
+        http://twig.sensiolabs.org/doc/templates.html#other-operators
+
+    - question: |
+          Which of the following Twig internal objects is responsible for tokenizing the template source code into smaller pieces for easier processing?
+      answers:
+        - { value: "The Environment", correct: false }
+        - { value: "The Parser", correct: false }
+        - { value: "The Compiler", correct: false }
+        - { value: "The Lexer", correct: true }
+      help: |
+        http://twig.sensiolabs.org/doc/internals.html
+
+    - question: |
+        Consider the following Twig code snippet:
+
+        The {{ color }} car!
+
+        What will be the result of evaluating this template when passing it the blue for the color variable value and when the strict_variables global setting is on?
+      answers:
+        - { value: "The template will be successfully evaluated and the string The blue car! will be displayed in the web browser.", correct: true }
+        - { value: "Twig will raise a Twig_Error_Runtime exception preventing the template from being evaluated.", correct: false }
+      help: |
+        https://github.com/twigphp/Twig/blob/1.x/lib/Twig/Extension/Core.php#L1447-L1479
+        https://twig.symfony.com/doc/1.x/templates.html#variables
+        https://twig.symfony.com/doc/2.x/templates.html#variables
+
+    - question: |
+        Consider the following Twig code snippet:
+
+        The {{ color }} car!
+
+        What will be the result of evaluating this template without passing it a color variable when the strict_variables global setting is off?
+      answers:
+        - { value: "The template will be partially evaluated and the string The will be displayed in the web browser.", correct: false }
+        - { value: "Twig will raise a Twig_Error_Runtime exception preventing the template from being evaluated.", correct: false }
+        - { value: "The template will be succesfully evaluated and the string The empty car! will be displayed in the web browser.", correct: false }
+        - { value: "The template will be succesfully evaluated and the string The car! will be displayed in the web browser.", correct: true }
+      help: |
+        https://twig.symfony.com/doc/1.x/templates.html#variables
+        https://twig.symfony.com/doc/2.x/templates.html#variables
+        https://twig.symfony.com/doc/2.x/api.html#environment-options
+        https://github.com/twigphp/Twig/blob/1.x/lib/Twig/Extension/Core.php#L1447-L1479
+
+    - question: |
+        Consider the following typical 3-level hierarchy of Twig templates:
+        
+        {# base.html.twig #}
+        <head>
+            <title>{% block title 'ACME' %}</title>
+        </head>
+        ...
+        
+        {# layout.html.twig #}
+        {% extends 'base.html.twig' %}
+        
+        {% block title 'Welcome to ACME!' %}
+        
+        {# index.html.twig #}
+        {% extends 'layout.html.twig' %}
+        {% block title %}
+            {{ block('title', 'base.html.twig') }}
+        {% endblock %}
+        
+        What will be the value of the <title> element when rendering the index.html.twig template?
+      answers:
+        - { value: "An empty string.", correct: false }
+        - { value: "ACME Welcome to ACME!", correct: false }
+        - { value: "ACME", correct: true }
+        - { value: "Welcome to ACME!", correct: false }
+        - { value: "This template will display an error because the block() function defines only one argument.", correct: false }
+      help: |
+        Twig 1.28 (November 2016) added a second optional argument to the block() function to allow rendering blocks defined in different templates. See http://twig.sensiolabs.org/doc/functions/block.html
+
+    - question: 'How to get the current route name from Twig?'
+      answers:
+          - { value: "{{ app.request.attributes.get('_route') }}", correct: true }
+          - { value: "{{ app.request.attributes._route }}", correct: false }
+          - { value: "{{ app.request.attributes.get('route') }}", correct: false }
+          - { value: "{{ app.routing.route }}", correct: false }
+          - { value: "{{ app.request.attributes._routeName }}", correct: false }
+          - { value: "{{ app.request.route }}", correct: false }
+      help: |
+          http://symfony.com/doc/current/templating/app_variable.html
+          http://symfony.com/doc/current/components/routing.html
+
+    - question: |
+        Consider the following Twig snippet:
+
+        {% if block('footer', 'common_blocks.html.twig') is defined %}
+            ...
+        {% endif %}
+
+        Which of the following statements are true?
+      answers:
+        - { value: "The code checks if the common_blocks.html.twig template contains a Twig block called footer", correct: true }
+        - { value: "The code is wrong because the block() function doesn't allow to pass a second argument.", correct: false }
+        - { value: "The code is wrong because the is defined test cannot be used with the block() function.", correct: false }
+        - { value: "The if condition will be false if the footer block exists in the common_blocks.html.twig template but it's empty (it doesn't have any content inside).", correct: false }
+      help: |
+        https://twig.symfony.com/doc/2.x/functions/block.html
+
+    - question: |
+        Consider the following code snippet:
+
+        {% set foo, bar = 'FOO' %}
+
+        <p>
+          Foo is {{ foo }} and Bar is {{ bar }}.
+        </p>
+
+        What will be the outcome of evaluating this Twig code?
+      answers:
+        - { value: "The output will display the string Foo is and Bar is ..", correct: false }
+        - { value: "The output will display the string Foo is FOO and Bar is ..", correct: false }
+        - { value: "The output will display the string Foo is FOO and Bar is FOO..", correct: false }
+        - { value: "Twig will raise a Twig_Error_Syntax exception.", correct: true }
+      help: |
+        https://twig.symfony.com/doc/3.x/tags/set.html
+
+    - question: |
+        Consider the following Twig code snippet:
+
+        The {{ color }} car!
+
+        What will be the result of evaluating this template when passing it the blue for the color variable value and when the strict_variables global setting is off?
+      answers:
+      - { value: "The template will be successfully evaluated and the string The blue car! will be displayed in the web browser.", correct: true }
+      - { value: "Twig will raise a Twig_Error_Runtime exception preventing the template from being evaluated.", correct: false }
+      help: |
+        https://github.com/twigphp/Twig/blob/1.x/lib/Twig/Extension/Core.php#L1447-L1479
+        https://twig.symfony.com/doc/1.x/templates.html#variables
+        https://twig.symfony.com/doc/2.x/templates.html#variables
+
+    - question: |
+        Which of the following Twig internal objects is responsible for transforming an AST (Abstract Syntax Tree) into PHP code?
+      answers:
+          - { value: "The Lexer", correct: false }
+          - { value: "The Compiler", correct: true }
+          - { value: "The Parser", correct: false }
+          - { value: "The Environment", correct: false }
+      help: |
+          https://twig.symfony.com/doc/internals.html
+
+    - question: |
+        Which of the following is not a supported Twig tag?
+      answers:
+      - { value: "include", correct: false }
+      - { value: "for", correct: false }
+      - { value: "while", correct: true }
+      - { value: "do", correct: false }
+      - { value: "embed", correct: false }
+      help: |
+        https://twig.symfony.com/doc/3.x/tags/index.html
+
+    - question: |
+          What is the value of $render with the following code?
+          $data = [
+              'first' => 0,
+              'first-page' => 1
+          ];
+
+          $render = $twig->render('index.html.twig', ['page' => 5,  'data' => $data]);
+
+          {# index.html.twig #}
+          {{ data.first-page }}
+      answers:
+          - { value: "null", correct: false }
+          - { value: "0", correct: false }
+          - { value: "-5", correct: true }
+          - { value: "1", correct: false }
+      help: |
+          https://twig.symfony.com/doc/2.x/templates.html#math
+
+    - question: |
+        Consider the following Twig code snippet:
+
+        The {{ color }} car!
+
+        What will be the result of evaluating this template without passing it a color variable when the strict_variables global setting is on?
+      answers:
+        - { value: "The template will be partially evaluated and the string The will be displayed in the web browser.", correct: false }
+        - { value: "Twig will raise a Twig_Error_Runtime exception preventing the template from being evaluated.", correct: true }
+        - { value: "The template will be succesfully evaluated and the string The empty car! will be displayed in the web browser.", correct: false }
+        - { value: "The template will be succesfully evaluated and the string The car! will be displayed in the web browser.", correct: false }
+      help: |
+        https://twig.symfony.com/doc/1.x/templates.html#variables
+        https://twig.symfony.com/doc/2.x/templates.html#variables
+        https://twig.symfony.com/doc/2.x/api.html#environment-options
+        https://github.com/twigphp/Twig/blob/1.x/lib/Twig/Extension/Core.php#L1447-L1479
+
+    - question: "Which of the following Twig internal objects is responsible for converting a tokens stream into a meaningful tree of nodes (aka AST or Abstract Syntax Tree)?"
+      answers:
+        - { value: "The Compiler", correct: false }
+        - { value: "The Environment", correct: false }
+        - { value: "The Parser", correct: true }
+        - { value: "The Lexer", correct: false }
+      help: |
+        http://twig.symfony.com/doc/internals.html
+
+    - question: "What is the correct way to display the value of a PHP constant?"
+      answers:
+        - { value: "{{ constant('Namespace\\\\Classname::CONSTANT_NAME') }}", correct: true }
+        - { value: "{{ constant('Namespace\\Classname::CONSTANT_NAME') }}", correct: false }
+        - { value: "{{ Namespace\\\\Classname::CONSTANT_NAME }}", correct: false }
+        - { value: "{{ Namespace\\Classname::CONSTANT_NAME }}", correct: false }
+      help: |
+        https://twig.symfony.com/doc/functions/constant.html
+
+    - question: |
+        Consider the following Twig snippet:
+        
+        {% with %}
+            {% set maxItems = 7 %}
+            {# ... #}
+        {% endwith %}
+
+        {# ... #}
+
+        {% for i in 1..maxItems %}
+            {# ... #}
+        {% endfor %}
+      answers:
+        - { value: No. The template will display an error because the with tag is not defined., correct: false }
+        - { value: Yes, correct: false }
+        - { value: No. The template won't iterate from 1 to 7. It will execute the for loop just one time (where i is 1)., correct: false }
+        - { value: No. The template will display an error because the maxItems variable is not defined outside the with tag., correct: true }
+      help: |
+        https://twig.sensiolabs.org/doc/tags/with.html
+
+    - question: |
+        Which of the following $options allow a TwigFilter decide how to escape data by itself?
+      answers:
+        - { value: "['is_safe' => true]", correct: false }
+        - { value: "['is_safe' => ['html']]", correct: true }
+        - { value: "['is_safe']", correct: false }
+        - { value: "['is_safe' => 'html']", correct: false }
+      help: |
+        https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
+
+    - question: |
+        Is it possible to pass PHP objects to a Twig template?
+      answers:
+        - { value: Yes, correct: true }
+        - { value: No, correct: false }
+      help: |
+        https://twig.sensiolabs.org/doc/templates.html#variables
+
+    - question: |
+        Considering Twig filters, how to retrieve a, b and foo from a filter defined with a name *_path_*?
+        We assume using this filter in a template with:
+        
+        {{ 'foo'|a_path_b }}
+        
+        The callable function will be called with the given parameters respectively:
+      answers:
+        - { value: "('foo', 'a', 'b')", correct: false }
+        - { value: "('foo', ['patterns' => ['a', 'b']])", correct: false }
+        - { value: "('foo', ['a', 'b'])", correct: false }
+        - { value: "('a', 'b', 'foo')", correct: true }
+      help: |
+        https://twig.symfony.com/doc/2.x/advanced.html#dynamic-filters
+
+    - question: |
+        When writing a Twig_Test, what is a node_class for?
+      answers:
+        - { value: The given test will be compiled into PHP primitives., correct: true }
+        - { value: The given test will use a semantic validation in addition to the basic evaluation., correct: false }
+        - { value: The node_class is a mandatory option to get defined in a Twig_Environment., correct: false }
+        - { value: The given test will rely on a custom Twig_NodeVisitorInterface., correct: false }
+      help: |
+        https://twig.symfony.com/doc/2.x/advanced.html#tests
+
+    - question: |
+        In the following Twig template:
+
+        {% set maxItems = 10 %}
+
+        {% with { maxItems: 5 } %}
+            {% for i in 1..maxItems %}
+                {# ... #}
+            {% endfor %}
+        {% endwith %}
+
+        {% for j in 1..maxItems %}
+            {# ... #}
+        {% endfor %}
+
+        Which will be the last values iterated by i and j variables in the for loops?
+      answers:
+        - { value: "i = 5 and j = 5", correct: false }
+        - { value: "i = 10 and j = 5", correct: false }
+        - { value: "i = 10 and j = 10", correct: false }
+        - { value: "i = 5 and j = 10", correct: true }
+      help: |
+        https://twig.sensiolabs.org/doc/tags/with.html
+
+    - question: |
+        What is the output of the following twig code?
+        
+        {% for i in range(1, 10, 2) %}
+            {{ i }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      answers:
+        - { value: "2,4,6,8,10", correct: false }
+        - { value: "1,2,3,4,5,6,7,8,9,10", correct: false }
+        - { value: "1,10,1,10", correct: false }
+        - { value: "1,3,5,7,9", correct: true }
+      help: |
+        http://twig.sensiolabs.org/doc/functions/range.html

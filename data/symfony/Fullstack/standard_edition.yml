@@ -1,0 +1,263 @@
+category: Symfony > Fullstack > Standard Edition
+questions:
+    - question: "In order to give an Extension the power to prepend settings just as if they had been written explicitly by the user in the application configuration, which interface do you need to implement?"
+      answers:
+        - { value: Symfony\Component\Config\Definition\ConfigurationInterface, correct: false }
+        - { value: Symfony\Component\DependencyInjection\Extension\ExtensionInterface, correct: false }
+        - { value: Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface, correct: false }
+        - { value: Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface, correct: true }
+      help: |
+        http://symfony.com/doc/current/bundles/prepend_extension.html
+
+    - question: "What is the default domain for validation message?"
+      answers:
+        - { value: "validator", correct: false }
+        - { value: "validation", correct: false }
+        - { value: "validators", correct: true }
+        - { value: "default", correct: false }
+        - { value: "messages", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/configuration/framework.html#translation-domain
+
+    - question: "How to show hidden services"
+      answers:
+        - { value: "bin/console debug:container", correct: false }
+        - { value: "app/console debug:container --show-hidden", correct: false }
+        - { value: "bin/console debug:container --show-hidden", correct: true }
+        - { value: "app/console debug:container", correct: false }
+        - { value: "It's not possible.", correct: false }
+      help: |
+        Hidden services ids starts by dot (.)
+        https://symfony.com/doc/current/service_container/debug.html
+
+    - question: "What is the class to extends in a Symfony functional test class?"
+      answers:
+        - { value: Symfony\Bundle\FrameworkBundle\Test\Functional\WebTestCase, correct: false }
+        - { value: Symfony\Component\Test\WebTestCase, correct: false }
+        - { value: Symfony\Bundle\FrameworkBundle\Test\WebTestCase, correct: true }
+        - { value: Symfony\Bundle\FrameworkBundle\Test\FunctionalTestCase, correct: false }
+        - { value: Symfony\Component\Test\FunctionalTestCase, correct: false }
+      help: |
+        http://symfony.com/doc/current/book/testing.html#your-first-functional-test
+
+    - question: "What is the tag to register a custom service that loads Twig templates?"
+      answers:
+        - { value: "twig.loader_service", correct: false }
+        - { value: "twig.template_loader", correct: false }
+        - { value: "twig.loader", correct: true }
+        - { value: "twig_loader", correct: false }
+      help: |
+        http://symfony.com/doc/current/reference/dic_tags.html#twig-loader
+
+    - question: "Can you configure your routes in PHP?"
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        http://symfony.com/doc/current/book/routing.html#routing-in-action
+
+    - question: |
+        What happen when this code is not behind a firewall ?
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="...">Delete</a>
+        {% endif %}
+      answers:
+        - { value: "An exception will be thrown", correct: false }
+        - { value: "The link delete is shown", correct: false }
+        - { value: "The link delete is not shown", correct: true }
+      help: |
+        in sf < 2.8 this code will throw exception
+        https://symfony.com/doc/5.0/security.html#access-control-in-templates
+
+    - question: "Should we inject the doctrine service when creating a form with an entity field?"
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/forms/types/entity.html
+
+    - question: |
+        What are the functions for URL generation in a template Twig?
+      answers:
+        - { value: "path()", correct: true }
+        - { value: "url()", correct: true }
+        - { value: "link()", correct: false }
+        - { value: "route()", correct: false }
+        - { value: "generate_url()", correct: false }
+      help: |
+        https://symfony.com/doc/current/book/templating.html#linking-to-pages
+
+    - question: |
+        How can we specify the default translation domain used in a Twig template?
+      answers:
+        - { value: "Within the template's constructor.", correct: false }
+        - { value: "Within service container.", correct: false }
+        - { value: "With trans_default_domain Twig block.", correct: true }
+        - { value: "Within dependency injector.", correct: false }
+      help: |
+        http://symfony.com/doc/current/reference/twig_reference.html#trans-default-domain
+
+    - question: |
+        A service is defined as described by the following YAML definition:
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private
+
+    - question: |
+        Does the order of the controller arguments matter when mapping route parameters to controller arguments?
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/controller.html
+
+    - question: |
+        Which of the followings are core cache warmers?
+      answers:
+        - { value: "RoutingCacheWarmer", correct: false }
+        - { value: "TemplateCacheWarmer", correct: true }
+        - { value: "LogsCacheWarmer", correct: false }
+        - { value: "TemplateCacheCacheWarmer", correct: true }
+        - { value: "TemplatePathsCacheWarmer", correct: true }
+        - { value: "RouterCacheWarmer", correct: true }
+        - { value: "AnnotationsCacheWarmer", correct: true }
+        - { value: "SerializerCacheWarmer", correct: true }
+        - { value: "ValidatorCacheWarmer", correct: true }
+        - { value: "ProxyCacheWarmer", correct: true }
+        - { value: "ExpressionCacheWarmer", correct: true }
+        - { value: "LogCacheWarmer", correct: false }
+      help: |
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Bundle/FrameworkBundle/CacheWarmer
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Bundle/TwigBundle/CacheWarmer
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Bundle/SecurityBundle/CacheWarmer
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Bridge/Doctrine/CacheWarmer
+
+    - question: |
+        How to enable Prophecy with the PHPUnit bridge ?
+      answers:
+        - { value: "It's not possible", correct: false }
+        - { value: "By setting the env var SYMFONY_PHPUNIT_ENABLE to prophecy", correct: false }
+        - { value: "By setting the env var SYMFONY_PHPUNIT_REMOVE to false", correct: false }
+        - { value: "By setting the env var SYMFONY_PHPUNIT_REMOVE to symfony/yaml", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/phpunit_bridge.html#modified-phpunit-script
+
+    - question: |
+        What is the default domain for form label?
+      answers:
+        - { value: "labels", correct: false }
+        - { value: "default", correct: false }
+        - { value: "form", correct: false }
+        - { value: "messages", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/reference/forms/types/form.html#translation-domain
+
+    - question: |
+        Given an application with several entity managers, what option of the Symfony\Bridge\Doctrine\Form\Type\EntityType form type can be set in order to specify which manager should be used ?
+      answers:
+        - { value: manager, correct: false }
+        - { value: This is not possible., correct: false }
+        - { value: entity_manager, correct: false }
+        - { value: em, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/forms/types/entity.html#em
+
+    - question: |
+        What happens if an esi is tried to be rendered but there is no Reverse Proxy Cache in the stack?
+      answers:
+        - { value: The block render a 404 HTTP code status., correct: false }
+        - { value: The block is not rendered., correct: false }
+        - { value: An exception is thrown by Symfony., correct: false }
+        - { value: The block is rendered., correct: true }
+      help: |
+        https://symfony.com/doc/current/http_cache/esi.html
+
+    - question: |
+        Which of these is the correct way to send an email in Symfony?
+      answers:
+        - { value: $mailer->send($message);, correct: true }
+        - { value: $this->getMailer()->send($message);, correct: false }
+        - { value: $message->send();, correct: false }
+        - { value: $mailer->sendEmail($message);, correct: false }
+      help: |
+        https://symfony.com/doc/5.0/email.html
+
+    - question: |
+        What is the config option of web_profiler to display a debug page of a RedirectResponse?
+      answers:
+        - { value: "intercept: redirections", correct: false }
+        - { value: "intercept_redirects: true", correct: true }
+        - { value: "redirections: intercept", correct: false }
+        - { value: "redirections: debug", correct: false }
+      help: |
+        http://symfony.com/doc/current/reference/configuration/web_profiler.html#full-default-configuration
+
+    - question: |
+        Where are located the logs in a default configuration of Symfony?
+      answers:
+        - { value: var/log, correct: true }
+        - { value: var/logs, correct: false }
+        - { value: app/logs, correct: false }
+        - { value: app/log, correct: false }
+      help: |
+        https://symfony.com/doc/5.0/logging.html#where-logs-are-stored
+
+    - question: |
+        What is the event of the following listeners?
+        
+        Symfony\Component\HttpKernel\EventListener\ProfilerListener 	0
+        Symfony\Component\HttpKernel\EventListener\ExceptionListener 	-128
+      answers:
+        - { value: KernelEvents::EXCEPTION, correct: true }
+        - { value: KernelEvents::RESPONSE, correct: false }
+        - { value: KernelEvents::TERMINATE, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/events.html
+
+    - question: |
+        What type of value can be set to the query_builder option of the Symfony\Bridge\Doctrine\Form\Type\EntityType form type ?
+      answers:
+        - { value: A string containing a where clause., correct: false }
+        - { value: An array of sql statement., correct: false }
+        - { value: An instance of Doctrine\ORM\QueryBuilder., correct: true }
+        - { value: A closure., correct: true }
+        - { value: A string containing a valid query., correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/events.html
+
+    - question: |
+        What are the built-in configuration environments that Symfony supports by default?
+      answers:
+        - { value: test, correct: true }
+        - { value: dev, correct: true }
+        - { value: prod, correct: true }
+        - { value: staging, correct: false }
+        - { value: live, correct: false }
+      help: |
+        https://symfony.com/doc/current/configuration/environments.html
+
+    - question: |
+        Which Symfony component is used in the asset Twig function Symfony\Bridge\Twig\Extension\AssetExtension?
+      answers:
+        - { value: Asset, correct: true }
+        - { value: Assetic, correct: false }
+        - { value: Gulp, correct: false }
+        - { value: CssSelector, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/twig_reference.html#asset
+
+    - question: |
+        Is the following service configuration valid?
+        
+        services:
+            app.user_manager:
+                class: "Acme\User\Manager"
+                arguments: ['@router', '@logger', '@doctrine.orm.entity_manager']
+      answers:
+        - { value: Yes, correct: false }
+        - { value: No, correct: true }
+      help: |
+        https://symfony.com/blog/new-in-symfony-2-8-yaml-deprecations

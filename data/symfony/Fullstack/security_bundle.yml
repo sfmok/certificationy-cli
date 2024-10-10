@@ -1,0 +1,29 @@
+category: Symfony > Fullstack > Security Bundle
+questions:
+    - question: "Which command allows you to encode passwords?"
+      answers:
+        - { value: "security:encode-password", correct: true }
+        - { value: "security:encoder-password", correct: false }
+        - { value: "security:password-encode", correct: false }
+        - { value: "security:password-encoder", correct: false }
+      help: |
+        https://symfony.com/doc/current/security.html#security-encoding-user-password
+
+    - question: |
+        What is the aim of the security switch_user option?
+      answers:
+        - { value: "To change the roles of the user easily.", correct: false }
+        - { value: "To let some user be able to switch from one to another.", correct: true }
+        - { value: "To be able to have several accounts and switch easily.", correct: false }
+      help: |
+        https://symfony.com/doc/current/cookbook/security/impersonating_user.html
+
+    - question: |
+        What is the tag to add a custom voter to Symfony's authorization logic?
+      answers:
+        - { value: security.auth_voter", correct: false }
+        - { value: security_voter, correct: false }
+        - { value: security.authorization_voter, correct: false }
+        - { value: security.voter, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#security-voter

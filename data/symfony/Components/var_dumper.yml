@@ -1,0 +1,35 @@
+category: Symfony > Components > Var Dumper
+questions:
+    - question: |
+        Which methods are available when using the Symfony\Component\VarDumper\Test\VarDumperTestTrait?
+      answers:
+        - { value: assertDumpEquals, correct: true }
+        - { value: assertDumpMatchesFormat, correct: true }
+        - { value: assertDumpSameAs, correct: false }
+        - { value: assertDumpNotEmpty, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/var_dumper/introduction.html#using-the-vardumper-component-in-your-phpunit-test-suite
+
+    - question: "What is a Dumper?"
+      answers:
+        - { value: "A dumper is responsible for outputting a string representation of a PHP variable.", correct: true }
+        - { value: "A dumper is responsible for creating a var_export of any PHP variable.", correct: false }
+        - { value: "A dumper is responsible for getting each property values of PHP object.", correct: false }
+        - { value: "A dumper is responsible for creating a var_dump of any PHP variable.", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/var_dumper/advanced.html#dumpers
+
+    - question: What is the second optional parameter of the Symfony\Component\VarDumper\VarDumper::dump method ?
+      answers:
+        - { value: An optional $return boolean variable to return the information rather than print it., correct: false }
+        - { value: Nothing, the Symfony\Component\VarDumper\VarDumper::dump has just one parameter., correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/var_dumper.html#the-dump-function
+
+    - question: Which Dumper is not available in the VarDumper component?
+      answers:
+        - { value: HttpDumper, correct: true }
+        - { value: CliDumper, correct: false }
+        - { value: HtmlDumper, correct: false }
+      help: |
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Component/VarDumper/Dumper

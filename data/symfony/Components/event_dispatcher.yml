@@ -1,0 +1,118 @@
+category: Symfony > Components > Event Dispatcher
+questions:
+    - question: |
+        What is the __construct argument of the Symfony\Component\EventDispatcher\ImmutableEventDispatcher?
+      answers:
+        - { value: "An array of listeners.", correct: false }
+        - { value: "Nothing.", correct: false }
+        - { value: "An instance of Symfony\\Component\\EventDispatcher\\EventDispatcher.", correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/EventDispatcher/ImmutableEventDispatcher.php
+        https://symfony.com/doc/current/components/event_dispatcher/immutable_dispatcher.html
+
+    - question: |
+        How can you register the AcmeListener to the EventDispatcher in order to call the onFooAction method when the acme.action event is dispatched with the following code?
+        
+        use Symfony\Component\EventDispatcher\EventDispatcher;
+
+        $dispatcher = new EventDispatcher();
+
+        $listener = new AcmeListener();
+      answers:
+        - { value: "$dispatcher->addListener('acme.action', array($listener, 'onFooAction'));", correct: true }
+        - { value: "$dispatcher->addListener('acme.action', $listener, 'onFooAction');", correct: false }
+        - { value: "$dispatcher->registerListener('acme.action', $listener, 'onFooAction');", correct: false }
+        - { value: "$dispatcher->registerListener('acme.action', array($listener, 'onFooAction'));", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/event_dispatcher.html#connecting-listeners
+
+    - question: |
+        Is it possible to make the same listener object listen to multiple events?
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/event_dispatcher.html#connecting-listeners
+
+    - question: |
+        From an Event instance, is it possible to get the EventDispatcher instance that dispatched this event?
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/event_dispatcher.html#event-name-introspection
+
+    - question: |
+        What is returned by $dispatcher->dispatch('bar.event', $event) in the following code?
+        
+        $event = new OrderPlacedEvent($order);
+        $dispatcher->dispatch('bar.event', $event);
+      answers:
+        - { value: Nothing, correct: false }
+        - { value: $event, correct: true }
+        - { value: $dispatcher, correct: false }
+        - { value: "true", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/event_dispatcher.html#the-dispatcher
+
+    - question: Which design pattern does the EventDispatcher component implement?
+      answers:
+          - { value: "Adapter", correct: false }
+          - { value: "Strategy", correct: false }
+          - { value: "Factory Method", correct: false }
+          - { value: "Mediator", correct: true }
+      help: |
+          https://symfony.com/doc/current/components/event_dispatcher/introduction.html#introduction
+          https://en.wikipedia.org/wiki/Mediator_pattern
+
+    - question: |
+        Is the following class correct to be used as an event subscriber?
+        
+        namespace Acme\Store\Event;
+  
+        use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+        use Symfony\Component\HttpKernel\KernelEvents;
+        use Acme\Store\Event\OrderPlacedEvent;
+        
+        class StoreSubscriber
+        {
+          public static function getSubscribedEvents()
+          {
+            return array(
+            KernelEvents::RESPONSE => array(
+            array('onKernelResponsePre', 10),
+            array('onKernelResponsePost', -10),
+            ),
+            OrderPlacedEvent::NAME => 'onStoreOrder',
+            );
+          }
+      
+          public function onKernelResponsePre(FilterResponseEvent $event)
+          {
+            // ...
+          }
+      
+          public function onKernelResponsePost(FilterResponseEvent $event)
+          {
+            // ...
+          }
+      
+          public function onStoreOrder(OrderPlacedEvent $event)
+          {
+            // ...
+          }
+        }
+      answers:
+          - { value: "Yes", correct: false }
+          - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/event_dispatcher.html#using-event-subscribers
+
+    - question: |
+        What happens if two listeners have the same priority?
+      answers:
+        - { value: They are executed in the order that they were added to the dispatcher., correct: true }
+        - { value: It throws an InvalidPriorityException., correct: false }
+        - { value: They are executed in the alphanumeric order., correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/event_dispatcher.html#connecting-listeners

@@ -1,0 +1,202 @@
+category: Symfony > Components > HttpFoundation
+questions:
+    - question: |
+        For a request to http://example.com/blog/index.php/post/hello-world what will be the value of $pathInfo in the following code?
+      
+        $pathInfo = $request->getPathInfo();
+      answers:
+        - { value: "/post/hello-world", correct: true }
+        - { value: "/blog/index.php/post/hello-world", correct: false }
+        - { value: "/index.php/post/hello-world", correct: false }
+        - { value: "example.com/blog/index.php/post/hello-world", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/http_foundation.html#identifying-a-request
+
+    - question: |
+        What will be returned by the following code when the query string is ?foo=bar?
+        
+        $request->query->get('bar', 'baz');
+      answers:
+        - { value: "baz", correct: true }
+        - { value: "A Symfony\\Component\\HttpFoundation\\Exception\\QueryException will be thrown", correct: false }
+        - { value: "false", correct: false }
+        - { value: "null", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
+
+    - question: "How to get a cookie from a $request object?"
+      answers:
+        - { value: "$request->headers->get('key', 'default value');", correct: false }
+        - { value: "$request->getCookies->get('key', 'default value');", correct: false }
+        - { value: "$request->cookies->get('key', 'default value');", correct: true }
+        - { value: "$request->get('cookie')->get('key', 'default value');", correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/Request.php#L122
+        https://symfony.com/doc/current/components/http_foundation/introduction.html#setting-cookies
+
+    - question: |
+        Which of the following are valid status code to create a Symfony\Component\HttpFoundation\RedirectResponse?
+      answers:
+        - { value: "201", correct: true }
+        - { value: "302", correct: true }
+        - { value: "307", correct: true }
+        - { value: "308", correct: true }
+        - { value: "304", correct: false }
+        - { value: "301", correct: true }
+        - { value: "303", correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/RedirectResponse.php
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/Response.php#L1177
+        https://tools.ietf.org/html/rfc7231#section-6
+        https://tools.ietf.org/html/rfc7538
+
+    - question: |
+        What is returned by the isEmpty method of Symfony\Component\HttpFoundation\Response?
+      answers:
+        - { value: "true if the response content is null", correct: false }
+        - { value: "true if there is an server error", correct: false }
+        - { value: "true if the response status code are 204 or 304", correct: true }
+        - { value: "true if the response has no headers", correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/Response.php#L1187
+
+    - question: |
+        How to access $_POST data when using a Symfony\Component\HttpFoundation\Request $request object?
+      answers:
+        - { value: "$request->getPostData()", correct: false }
+        - { value: "$request->getPost()", correct: false }
+        - { value: "$request->request", correct: true }
+        - { value: "$request->post", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
+
+    - question: |
+        Which of the following are valid Symfony response classes extending the base Symfony\Component\HttpFoundation\Response class?
+      answers:
+      - { value: "RedirectResponse", correct: true }
+      - { value: "RedirectedResponse", correct: false }
+      - { value: "StreamResponse", correct: false }
+      - { value: "StreamedResponse", correct: true }
+      - { value: "BinaryFileResponse", correct: true }
+      - { value: "JsonResponse", correct: true }
+      - { value: "ImageResponse", correct: false }
+      - { value: "NotFoundResponse", correct: false }
+      - { value: "FileResponse", correct: false }
+      - { value: "BinaryResponse", correct: false }
+      - { value: "ImageFileResponse", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/http_foundation/introduction.html#redirecting-the-user
+        https://symfony.com/doc/current/components/http_foundation/introduction.html#streaming-a-response
+        https://symfony.com/doc/current/components/http_foundation/introduction.html#serving-files
+        https://symfony.com/doc/current/components/http_foundation/introduction.html#creating-a-json-response
+
+    - question: |
+        Which of the following parameter bags are not available in the Request object?
+      answers:
+      - { value: "response", correct: false }
+      - { value: "request", correct: true }
+      - { value: "controller", correct: false }
+      - { value: "server", correct: true }
+      - { value: "headers", correct: true }
+      - { value: "cookies", correct: true }
+      - { value: "files", correct: true }
+      - { value: "query", correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/Request.php
+
+    - question: |
+        Is it possible to create a Symfony\Component\HttpFoundation\RedirectResponse with the 201 status code?
+      answers:
+        - { value: "No", correct: false }
+        - { value: "Yes", correct: true }
+      help: |
+        https://tools.ietf.org/html/rfc7231#section-6.3.2
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/Response.php#L1177
+
+    - question: "How to check if the Response validators (ETag, Last-Modified) match a conditional value specified in the client Request ?"
+      answers:
+        - { value: "$response->isOk();", correct: false }
+        - { value: "$response->isCacheable();", correct: false }
+        - { value: "$response->isModified($request);", correct: false }
+        - { value: "$response->isNotModified($request);", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/http_foundation.html#managing-the-http-cache
+
+    - question: |
+        How to access $_FILES data when using a Symfony\Component\HttpFoundation\Request $request object?
+      answers:
+        - { value: $request->getFileData(), correct: false }
+        - { value: $request->file, correct: false }
+        - { value: $request->getFiles(), correct: false }
+        - { value: $request->files, correct: true }
+        - { value: $request->getFilesData(), correct: true }
+      help: |
+        https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
+
+    - question: |
+        What is the default status code of a Symfony\Component\HttpFoundation\RedirectResponse object?
+      answers:
+        - { value: 301, correct: false }
+        - { value: 300, correct: false }
+        - { value: 303, correct: false }
+        - { value: 302, correct: true }
+        - { value: 307, correct: false }
+      help: |
+        https://datatracker.ietf.org/doc/html/rfc2616#section-10.3.3
+
+    - question: |
+        Which methods can be used for expiration caching ?
+      answers:
+        - { value: setSharedMaxAge, correct: true }
+        - { value: setCache, correct: true }
+        - { value: setMaxAge, correct: true }
+        - { value: setLastModified, correct: false }
+        - { value: setExpires, correct: true }
+        - { value: setEtag, correct: false }
+      help: |
+        https://symfony.com/doc/current/http_cache/expiration.html
+        https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php
+
+    - question: |
+        Is it possible to change the status code of a Symfony\Component\HttpFoundation\Response?
+      answers:
+        - { value: Yes with the setStatus() method, correct: false }
+        - { value: No, correct: false }
+        - { value: Yes with the setStatusCode() method, correct: true }
+        - { value: Yes with the setCode() method, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/http_foundation.html#response
+
+    - question: |
+        What is the way to access the session from the $request?
+      answers:
+        - { value: $request->getSession(), correct: true }
+        - { value: $request->session, correct: false }
+        - { value: $request->getPhpSession(), correct: false }
+        - { value: $request->fetchSession(), correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/http_foundation.html#accessing-the-session
+
+    - question: |
+        Which classes exists to help you test some code that is using a Symfony\Component\HttpFoundation\Session\Session object ?
+      answers:
+        - { value: MockMemorySessionStorage, correct: false }
+        - { value: MockArraySessionStorage, correct: true }
+        - { value: MockFileSessionStorage, correct: true }
+        - { value: MockSessionStorage, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/http_foundation/session_testing.html
+
+    - question: |
+        Which options are available in the Symfony\Component\HttpFoundation\Response::setCache(array $options) method ?
+      answers:
+        - { value: not_modified, correct: false }
+        - { value: expires, correct: false }
+        - { value: etag, correct: true }
+        - { value: public, correct: true }
+        - { value: last_modified, correct: true }
+        - { value: private, correct: true }
+        - { value: max_age, correct: true }
+        - { value: s_maxage, correct: true }
+      help: |
+        https://symfony.com/doc/5.0/http_cache.html

@@ -1,0 +1,688 @@
+category: PHP > PHP Basics
+questions:
+    - question: |
+        Consider the following code snippet:
+        
+        try {
+            call_this_undefined_function();
+        } catch (???? $e) {
+          echo 'Oups, there is a serious problem there!';
+        }
+        
+        Which statement does the ???? placeholder replace in this script in order to make it print the string Oups, there is a serious problem there! on the standard output since PHP 7.0?
+      answers:
+        - { value: "ErrorException", correct: false }
+        - { value: "Error", correct: true }
+        - { value: "BadFunctionCallException", correct: false }
+        - { value: "Warning", correct: false }
+        - { value: "Exception", correct: false }
+      help: |
+        http://php.net/manual/en/language.exceptions.php
+        http://php.net/manual/en/class.error.php
+
+    - question: "Which of the following operations must occur prior to any output being sent to the client (assuming output buffering is disabled)"
+      answers:
+        - { value: "Processing GET and POST data", correct: false }
+        - { value: "Starting a session", correct: false }
+        - { value: "Sending HTTP Headers", correct: true }
+        - { value: "Modifying session data", correct: false }
+        - { value: "Manipulating Cookie data", correct: false }
+      help: |
+        http://php.net/manual/en/book.outcontrol.php
+
+    - question: "From which global arrays is it possible to read submitted form data?"
+      answers:
+        - { value: "$_ENV", correct: false }
+        - { value: "$_GET", correct: true }
+        - { value: "$_POST", correct: true }
+        - { value: "$_REQUEST", correct: true }
+        - { value: "$_SESSION", correct: false }
+        - { value: "$_COOKIE", correct: false }
+      help: |
+        http://php.net/manual/en/reserved.variables.get.php
+        http://php.net/manual/en/reserved.variables.post.php
+        http://php.net/manual/en/reserved.variables.session.php
+        http://php.net/manual/en/reserved.variables.request.php
+        http://php.net/manual/en/reserved.variables.environment.php
+        http://php.net/manual/en/reserved.variables.cookies.php
+
+    - question: "You want to fully overload all PDO features with OOP. What do you need to accomplish that?"
+      answers:
+        - { value: "Call PDO::setStatementClass()", correct: false }
+        - { value: "Extend the PDO class", correct: false }
+        - { value: "Use the PDO parameter PDO::ATTR_STATEMENT_CLASS", correct: true }
+        - { value: "Extend the PDOStatement class", correct: true }
+        - { value: "Use the PDO parameter PDO::ATTR_USE_CLASS", correct: false }
+      help: |
+        https://www.php.net/pdo
+
+    - question: |
+        Consider the following code snippet:
+        
+        <ul>
+        <?php foreach ($letters as $letter) : ?>
+            <li><?= $letter ?></li>
+        <?php endforeach ?>
+        </ul>
+        
+        Which of the following $letters variable declarations will make this script generate an HTML list of the 26 alphabet letters on any PHP versions?
+      answers:
+        - { value: "$letters = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ');", correct: true }
+        - { value: "$letters = range('A', 'Z');", correct: true }
+        - { value: "$letters = split('//', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');", correct: false }
+        - { value: "$letters = explode('', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');", correct: false }
+        - { value: "$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';", correct: false }
+      help: |
+        http://php.net/manual/en/function.range.php
+        http://php.net/manual/en/function.explode.php
+        http://php.net/manual/en/function.split.php
+        http://php.net/manual/en/function.str-split.php
+
+    - question: |
+        What is PSR-7?
+      answers:
+        - { value: "Huggable Interface.", correct: false }
+        - { value: "HTTP message interface.", correct: true }
+        - { value: "A container interface.", correct: false }
+        - { value: "A logger interface.", correct: false }
+      help: |
+        http://www.php-fig.org/psr/psr-7/
+
+    - question: "Which native function can be used to get the HTML content of Google.com's homepage?"
+      answers:
+        - { value: "http_build_query()", correct: false }
+        - { value: "get_web_adress()", correct: false }
+        - { value: "fopen()", correct: true }
+        - { value: "This is not possible.", correct: false }
+        - { value: "url_open()", correct: false }
+      help: |
+        https://php.net/manual/en/function.fopen.php
+        https://php.net/manual/en/function.http-build-query.php
+
+    - question: |
+        Consider the following code snippet:
+
+        function foo(&$a = 8)
+        {
+            $b = &$a;
+            $b -= $a + 3;
+
+            return $b;
+        }
+
+        $a = foo(4);
+        echo $a;
+
+        What will be the outcome of executing this script?
+      answers:
+        - { value: "8", correct: false }
+        - { value: "-3", correct: false }
+        - { value: "A PHP fatal error.", correct: true }
+        - { value: "3", correct: false }
+        - { value: "-4", correct: false }
+      help: |
+        https://php.net/manual/en/language.references.php
+
+    - question: "What is the main difference between the include and require language constructs?"
+      answers:
+        - { value: "The include and include_once language constructs cause a fatal error if the file doesn't exist.", correct: false }
+        - { value: "The require and require_once language constructs can't be used with absolute URLs.", correct: false }
+        - { value: "There is no differences other than their names.", correct: false }
+        - { value: "The require and require_once language constructs cause a fatal error when the file can't be read.", correct: true }
+        - { value: "The include and include_once language constructs are processed at runtime whereas the require and require_once language constructs are processed at compile time.", correct: false }
+      help: |
+        https://php.net/manual/en/function.include.php
+        https://php.net/manual/en/function.require.php
+
+    - question: |
+        What will output the following code ?
+
+        $input = <<<'EOF'
+        1;PHP;Likes dollar signs
+        2;Python;Likes whitespace
+        3;Ruby;Likes blocks
+        EOF;
+
+        function input_parser($input) {
+            foreach (explode("\n", $input) as $line) {
+                $fields = explode(';', $line);
+                $id = array_shift($fields);
+
+                yield $id => $fields;
+            }
+        }
+
+        foreach (input_parser($input) as $id => $fields) {
+            echo "$id:\n";
+            echo "    $fields[0]\n";
+            echo "    $fields[1]\n";
+        }
+      answers:
+        - { value: "
+              1;PHP;Likes dollar signs
+              2;Python;Likes whitespace
+              3;Ruby;Likes blocks", correct: false }
+        - { value: "
+             1:
+                 PHP
+                 Likes dollar signs
+             2:
+                 Python
+                 Likes whitespace
+             3:
+                Ruby
+                Likes blocks", correct: true }
+        - { value: "An error", correct: false }
+      help: |
+        https://php.net/manual/en/function.explode.php
+        https://php.net/manual/en/function.array-shift.php
+        https://php.net/manual/en/language.generators.syntax.php
+
+    - question: |
+        When was PHP created by Rasmus Lerdorf?
+      answers:
+        - { value: "1987", correct: false }
+        - { value: "1995", correct: true }
+        - { value: "2005", correct: false }
+        - { value: "2000", correct: false }
+      help: |
+        https://php.net/manual/en/history.php.php
+
+    - question: |
+        Which of the following statements allows to retrieve the value of the User-Agent HTTP request header field?
+      answers:
+        - { value: "$HTTP_HEADERS_VARS['USER_AGENT'];", correct: false }
+        - { value: "http_get_request_header('User-Agent');", correct: false }
+        - { value: "$_SERVER['HTTP_USER_AGENT'];", correct: true }
+        - { value: "It is not possible to read an HTTP request header field value with PHP.", correct: false }
+      help: |
+        https://php.net/manual/en/reserved.variables.server.php
+
+    - question: |
+        Consider the following code snippet:
+
+        $a = 20;
+
+        function my_function($b)
+        {
+            $a = 30;
+            global $a, $c;
+
+            return $c = ($b + $a);
+        }
+
+        print my_function(40) + $c;
+
+        What does this script output when it's executed with PHP?
+      answers:
+      - { value: "70", correct: false }
+      - { value: "An error saying something like Undefined variable: ....", correct: false }
+      - { value: "110", correct: false }
+      - { value: "60", correct: false }
+      - { value: "120", correct: true }
+      help: |
+        https://php.net/manual/en/language.variables.scope.php
+
+    - question: |
+        Consider the following code snippet:
+
+        class Bar
+        {
+            private $foo = 'private';
+        }
+        
+        function getter()
+        {
+            return function() {
+                return $this->foo;
+            };
+        }
+
+        ????
+        
+        Which statement does the ???? placeholder replace in order to make this code snippet output the string private?
+      answers:
+      - { value: "echo getter()->bindTo('Bar', 'Bar')();", correct: false }
+      - { value: "echo getter()->bindTo(new Bar(), 'Bar')();", correct: true }
+      - { value: "echo getter()->bindTo(new Bar())();", correct: false }
+      - { value: "echo getter()->bindTo(new Bar(), new Bar())();", correct: true }
+      - { value: "This is not possible.", correct: false }
+      help: |
+        https://php.net/manual/en/class.closure.php
+
+    - question: |
+        Consider the following code snippet:
+
+        $base_array = array("red", "green", "yellow", "white");
+        $replacements_array = array(0 => "orange", 4 => "blue");
+        
+        $result = array_replace($base_array, $replacements_array);
+        print_r($result);
+      answers:
+      - { value: "Array ( [0] => blue [1] => white [2] => yellow [3] => green [4] => orange )", correct: false }
+      - { value: "Array ( [0] => orange [1] => green [2] => yellow [3] => white [4] => blue )", correct: true }
+      - { value: "Array ( [0] => yellow [1] => white [2] => blue [3] => green [4] => orange )", correct: false }
+      - { value: "An error", correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/en/function.array-replace.php
+
+    - question: |
+        Consider the following code snippet:
+
+        $data = ['bar' => 'foo'];
+        ???
+        echo $bar;
+
+        Which statement does the ??? placeholder replace in order to make the script print the string foo on the standard output?
+      answers:
+        - { value: "import_variables();", correct: false }
+        - { value: "parse_array($data);", correct: false }
+        - { value: "extract($data);", correct: true }
+        - { value: "http_extract_data($data);", correct: false }
+      help: |
+        http://php.net/manual/en/function.extract.php
+
+    - question: |
+        In PHP 7, can a generator contain a return statement ?
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+        - { value: "Yes, but empty only", correct: false }
+      help: |
+        https://php.net/manual/en/language.generators.syntax.php
+
+    - question: |
+        Which of the following list of potential data sources should be considered trusted ?
+      answers:
+        - { value: "None", correct: true }
+        - { value: "$_COOKIE", correct: false }
+        - { value: "$_POST", correct: false }
+        - { value: "$_ENV", correct: false }
+        - { value: "$_SERVER", correct: false }
+      help: |
+        https://php.net/manual/en/security.php
+
+    - question: |
+        Consider the following code snippet:
+  
+        echo print('hello');
+        
+        What will be the output when running this script?
+      answers:
+        - { value: "hello0", correct: false }
+        - { value: "hello1", correct: true }
+        - { value: "hello", correct: false }
+        - { value: "hellotrue", correct: false }
+        - { value: "hello5", correct: false }
+      help: |
+        https://php.net/echo
+        https://php.net/print
+
+    - question: |
+        What is the default timeout of a PHP session cookie ?
+      answers:
+        - { value: "Depends on the web server", correct: false }
+        - { value: "Until the browser is closed", correct: true }
+        - { value: "10 minutes", correct: false }
+        - { value: "20 minutes", correct: false }
+      help: |
+        https://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
+
+    - question: |
+        What is the best measure one can take to prevent a cross-site request forgery ?
+      answers:
+        - { value: "Disallow requests from outside hosts", correct: false }
+        - { value: "Filter all output", correct: false }
+        - { value: "Turn off allow_url_fopen in php.ini", correct: false }
+        - { value: "Add a secret token to all form submissions", correct: true }
+        - { value: "Filter all input", correct: false }
+      help: |
+        https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet
+
+    - question: |
+        What will be the output of the following code?
+        
+        class Foo
+        {
+            const BAR = 4+1;
+        }
+        echo Foo::BAR;
+      answers:
+        - { value: 4, correct: false }
+        - { value: An error, correct: false }
+        - { value: 5, correct: true }
+        - { value: 1, correct: false }
+      help: |
+        https://php.net/manual/en/language.constants.syntax.php
+
+    - question: |
+        How can you get the value of the session identifier when the session is correctly started?
+      answers:
+        - { value: With the SID constant, correct: true }
+        - { value: By using session_name(), correct: false }
+        - { value: By using session_start(), correct: false }
+        - { value: With the $_COOKIE variable, correct: false }
+        - { value: By using session_id(), correct: true }
+      help: |
+        https://php.net/manual/en/function.session-name.php
+        https://php.net/manual/en/function.session-id.php
+        https://php.net/manual/en/function.session-start.php
+        https://php.net/manual/en/session.constants.php
+        https://php.net/manual/en/reserved.variables.cookies.php
+
+    - question: |
+        What should replace the /* ... */ to create a Zlib-compressed file foo.gz with a compression level of 9 ?
+
+        $file = /* ... */;
+
+        $f = fopen($file, 'wb9');
+        fwrite($f, $data);
+        fclose($f);
+      answers:
+        - { value: "'compress.gzip://foo.gz?level=9'", correct: false }
+        - { value: "'zlib://foo.gz'", correct: false }
+        - { value: "'gzip://foo.gz?level=9'", correct: false }
+        - { value: "'compress.zlib://foo.gz'", correct: true }
+        - { value: "'compress.zip://foo.gz?level=9'", correct: false }
+      help: |
+        https://php.net/manual/en/wrappers.compression.php
+
+    - question: |
+        What is the output ?
+        echo strcmp(123, '123');
+      answers:
+        - { value: "1", correct: false }
+        - { value: "0", correct: true }
+        - { value: "-1", correct: false }
+        - { value: "An error", correct: false }
+      help: |
+        https://php.net/manual/en/language.types.type-juggling.php
+        https://php.net/manual/fr/function.strcmp.php
+
+    - question: "Which of the following is the recommended error reporting level for a development environment?"
+      answers:
+        - { value: "E_ALL & ~E_NOTICE & ~E_WARNING", correct: false }
+        - { value: "E_ALL & ~E_NOTICE", correct: false }
+        - { value: "E_ALL | E_STRICT", correct: false }
+        - { value: "E_ALL", correct: true }
+      help: |
+        https://php.net/manual/en/errorfunc.constants.php
+
+    - question: |
+        Which of the following types is not serializable to JSON with the json_encode() native function?
+      answers:
+        - { value: "string", correct: false }
+        - { value: "boolean", correct: false }
+        - { value: "object", correct: false }
+        - { value: "closure", correct: true }
+      help: |
+        https://php.net/manual/en/book.json.php
+        https://php.net/json-encode
+
+    - question: |
+        What will be displayed with the following code?
+        
+        <?php
+        $bool = true;
+        $array = array();
+        $a = 14;
+        $a = $a + $bool - $array;
+        echo $a;
+      answers:
+        - { value: "15", correct: false }
+        - { value: "14", correct: false }
+        - { value: "An error", correct: true }
+        - { value: "0", correct: false }
+      help: |
+        https://php.net/manual/en/language.operators.php
+
+    - question: |
+        What should replace the /* ... */ in order to echo foo ?
+        
+        $t = 'foo';
+        $o = (object)$t;
+        echo $o->/* ... */;
+      answers:
+        - { value: "This is not possible.", correct: false }
+        - { value: "scalar", correct: true }
+        - { value: "text", correct: false }
+        - { value: "object", correct: false }
+        - { value: "foo", correct: false }
+      help: |
+        https://php.net/manual/en/language.types.type-juggling.php
+        https://php.net/manual/en/language.types.object.php#language.types.object.casting
+
+    - question: |
+        What is the best way to split a string with the -=- pattern?
+      answers:
+        - { value: explode("-=-", $string);, correct: true }
+        - { value: preg_split("-=-", $string);, correct: false }
+        - { value: str_split($string, strpos($string, "-=-"));, correct: false }
+      help: |
+        https://php.net/manual/en/language.types.type-juggling.php
+        https://php.net/manual/en/language.types.object.php#language.types.object.casting
+
+    - question: |
+        Consider the following code snippet:
+        
+        function oranges($oranges = 17)
+        {
+            $oranges += $apples;
+
+            return $oranges;
+        }
+        $apples = 5;
+        $oranges = oranges($apples);
+        echo $oranges;
+        
+        What will be the outcome when executing this script?
+      answers:
+        - { value: "A PHP notice error.", correct: true }
+        - { value: "5", correct: true }
+        - { value: "23", correct: false }
+        - { value: "10", correct: false }
+      help: |
+        https://php.net/manual/en/language.functions.php
+
+#    - question: |
+#        What values in $user or $pass will modify the SQL semantics and lead to SQL injection in the code below ?
+#        $query = "UPDATE users SET password='$pass' WHERE user='$user'";
+#      answers:
+#        - { value: $user = "foobar\' WHERE user='admin'";, correct: false }
+#        - { value: $pass = "foobar' WHERE user='admin' --";, correct: true }
+#        - { value: $user = "foobar\' WHERE user='admin'";, correct: false }
+#        - { value: |
+#              $pass = "\"foobar\" WHERE";
+#              $user = "\"admin\"";
+#          , correct: false }
+#      help: |
+#        https://php.net/manual/fr/security.database.sql-injection.php
+
+    - question: |
+        Which of the following keywords has nothing to do with the switch control structure?
+      answers:
+        - { value: case, correct: false }
+        - { value: break, correct: false }
+        - { value: continue, correct: true }
+        - { value: default, correct: false }
+      help: |
+        https://php.net/manual/en/language.control-structures.php
+
+#    - question: |
+#        Consider the following code snippet:
+#
+#        trigger_error('This method is deprecated.');
+#
+#        Which of the following is valid way to catch and process errors that were triggered with the trigger_error() function?
+#      answers:
+#        - { value: |
+#          try {
+#            trigger_error('This method is deprecated.');
+#          } catch (\Error $e) {
+#            // do something
+#          }, correct: false }
+#        - { value: $errors = get_triggered_errors();, correct: false }
+#        - { value: |
+#          set_error_handler(function ($level, $message, $file, $line, array $vars = []) {
+#            error_log($message);
+#            if ('cli' !== PHP_SAPI) {
+#              header('HTTP/1.1 500 Internal Server Error');
+#              echo 'Oops something wrong happened!';
+#              exit;
+#            }
+#          });, correct: true }
+#      help: |
+#        https://php.net/trigger_error
+#        https://php.net/set_error_handler
+#        https://php.net/manual/en/function.error-log.php
+
+    - question: |
+        What is the output of the following code?
+        
+        $myArray = array();
+
+        array_unshift($myArray, 10, 20);
+
+        echo $myArray[0];
+      answers:
+        - { value: 200, correct: false }
+        - { value: 10, correct: true }
+        - { value: 20, correct: false }
+        - { value: An error, correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/fr/function.array-unshift.php
+
+    - question: |
+        Which of the following PHP scripts are guaranteed to always output the string Hello World! on any PHP versions?
+      answers:
+        - { value: <? echo 'Hello World'; ?>, correct: true }
+        - { value: <?php echo 'Hello World'; ?>, correct: true }
+        - { value: <?= 'Hello World'; ?>, correct: true }
+        - { value: <% echo 'Hello World'; %>, correct: false }
+      help: |
+        https://php.net/manual/en/language.basic-syntax.phptags.php
+        https://php.net/manual/en/ini.core.php#ini.short-open-tag
+
+    - question: |
+        What is missing in the following code snippet in place of ??? ?
+        
+        $f = function (): ??? {
+            yield null;
+        };
+      answers:
+        - { value: iterable, correct: true }
+        - { value: use (Iterable), correct: false }
+        - { value: array, correct: false }
+        - { value: void, correct: false }
+      help: |
+        https://php.net/manual/en/language.types.iterable.php
+
+    - question: |
+        What is the output ?
+        <?php
+          $a = 10;
+          echo strlen($a) . count($a);
+          do {
+            echo $a . "elephpant ";
+            $a++;
+          } while($a <= 1);
+      answers:
+        - { value: "21", correct: false }
+        - { value: "2110elephpant", correct: true }
+        - { value: "1210elephpant", correct: false }
+        - { value: "12", correct: false }
+        - { value: "10elephpant", correct: false }
+      help: |
+          https://php.net/manual/en/function.count.php
+          https://php.net/manual/en/function.strlen.php
+
+    - question: |
+        What is the output ?
+        
+        $name = 'Jean Luc';
+        $age  = 9;
+  
+        printf("My name is %2$.4s and I'm %1$02d", $age, $name);
+      answers:
+        - { value: "My name is 9 and I'm Jean Luc", correct: false }
+        - { value: "My name is Jean 9 and I'm Luc", correct: false }
+        - { value: "My name is Jean and I'm 09", correct: true }
+        - { value: "My name is Jean Luc and I'm 9", correct: false }
+        - { value: "My name is $Jean Luc and I'm $9", correct: false }
+      help: |
+        https://php.net/manual/en/function.printf.php
+
+    - question: |
+        Which statement does the ???? placeholder replace in order to make this program execute without any errors?
+      answers:
+        - { value: die();, correct: true }
+        - { value: exit();, correct: true }
+        - { value: __halt_compiler();, correct: true }
+        - { value: abort();, correct: false }
+        - { value: quit();, correct: false }
+      help: |
+        https://www.php.net/manual/en/function.exit.php
+        https://www.php.net/manual/en/function.die.php
+        https://www.php.net/manual/en/function.halt-compiler.php
+
+    - question: |
+        What will be the output of the following code?
+        
+        <?php
+
+        namespace Foo;
+
+        class Bar
+        {
+            public function baz()
+            {
+                return __METHOD__;
+            }
+        }
+
+        $b = new Bar;
+        echo $b->baz();
+      answers:
+        - { value: Foo\Bar::baz, correct: true }
+        - { value: An error, correct: false }
+        - { value: Bar::baz, correct: false }
+        - { value: baz, correct: false }
+      help: |
+        https://php.net/manual/en/language.constants.predefined.php
+
+    - question: |
+        Which of the following is not a supported control structure keyword in PHP?
+      answers:
+        - { value: endwhile;, correct: false }
+        - { value: enddowhile;, correct: true }
+        - { value: endif;, correct: false }
+        - { value: endforeach;, correct: false }
+        - { value: endfor;, correct: false }
+      help: |
+        https://php.net/manual/en/language.control-structures.php
+
+    - question: |
+        When is it acceptable to store sensitive information in an HTTP cookie ?
+      answers:
+        - { value: When it is encrypted, correct: true }
+        - { value: It is always acceptable, correct: false }
+        - { value: When the cookie is sent over a secure HTTP request, correct: true }
+        - { value: When it is encrypted, correct: false }
+        - { value: When the setcookie_secured() function is used, correct: false }
+      help: |
+        https://php.net/manual/en/features.cookies.php
+
+    - question: |
+        How can you get the value of the current configuration directives (php.ini) of a PHP extension?
+      answers:
+        - { value: With php://config stream, correct: false }
+        - { value: With ini_get_all(), correct: true }
+        - { value: With the $GLOBALS array, correct: false }
+        - { value: With the reflection API, correct: true }
+        - { value: With get_loaded_extensions(), correct: true }
+      help: |
+        https://php.net/manual/en/function.ini-get-all.php
+        https://php.net/manual/en/reflectionextension.getinientries.php
+        https://php.net/manual/en/function.get-loaded-extensions.php

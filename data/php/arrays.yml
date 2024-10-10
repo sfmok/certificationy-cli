@@ -1,0 +1,177 @@
+category: PHP > Arrays
+questions:
+    - question: |
+        How do you create an array called $arr consisting of a single element with the value 15?
+      answers:
+        - { value: "$arr = array_push(15);", correct: false }
+        - { value: "$arr = array(15 => 0);", correct: false }
+        - { value: "BadFunctionCallException", correct: false }
+        - { value: "$arr = new array(15);", correct: false }
+        - { value: "$arr = array(15);", correct: true }
+      help: |
+        https://php.net/array
+
+    - question: "What PHP function is used to create a new array pre-filled with a sequential series of values?"
+      answers:
+        - { value: "array_construct", correct: false }
+        - { value: "array_fill", correct: false }
+        - { value: "range", correct: true }
+        - { value: "array_combine", correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/en/function.range.php
+
+    - question: "What is the average complexity of an insertion in a PHP array ?"
+      answers:
+        - { value: "O(n log (n))", correct: false }
+        - { value: "O(log (n))", correct: false }
+        - { value: "O(n2)", correct: false }
+        - { value: "O(n)", correct: false }
+        - { value: "O(1)", correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Hash_table
+
+    - question: |
+        How can you get a random value of the following array?
+
+        $values = array('foo', 'key' => 'bar', true, 'baz', 36);
+      answers:
+        - { value: "$values[shuffle($values)]", correct: false }
+        - { value: "array_shuffle($values)", correct: false }
+        - { value: "$values[array_rand($values)]", correct: true }
+        - { value: "array_rand($values)", correct: false }
+        - { value: "array_rand(array_flip($values))", correct: false }
+      help: |
+        https://php.net/manual/en/function.shuffle.php (randomizes the order of the elements)
+        https://php.net/manual/en/function.array-flip.php (Exchanges all keys with their associated values)
+        https://php.net/manual/en/function.array-rand.php (Pick one or more random keys)
+        array_flip(): Can only flip STRING and INTEGER values! (Exchanges all keys with their associated values)
+
+    - question: |
+        Given the $info array defined below, what is the best way to assign the first value to a variable called $name and the third value to a variable called $country?
+
+        <?php
+            $info = array(
+                'Paul',
+                31,
+                'Australia'
+            );
+        ?>
+      answers:
+        - { value: "list($name, , $country) = $info;", correct: true }
+        - { value: "list($name, $age, $country) = $info;", correct: false }
+        - { value: "list($name, $country) = $info;", correct: false }
+        - { value: "array_list($name, $age, $country) = $info;", correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/en/function.list.php
+
+    - question: |
+        What is the output of the following PHP code?
+        
+        <?php
+        $myArray = array(
+            0,
+            NULL,
+            '',
+            '0',
+            -1
+        );
+
+        echo count(
+            array_filter($myArray)
+        );
+        ?>
+      answers:
+        - { value: "1", correct: true }
+        - { value: "4", correct: false }
+        - { value: "3", correct: false }
+        - { value: "An error", correct: false }
+      help: |   
+        https://php.net/array
+        https://php.net/manual/en/function.array-filter.php
+        https://php.net/manual/en/function.count.php
+
+    - question: |
+        What is the output ?
+        
+        array_combine(array(1,2,3,6),array(4,5,6));
+      answers:
+        - { value: "array(1,2,3,4,5,6)", correct: false }
+        - { value: "An error", correct: true }
+        - { value: "array(1=>4,2=>5,3=>6)", correct: false }
+        - { value: "array(1=>2,3=>4,5=>6)", correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/en/function.array-combine.php
+
+    - question: |
+        Which of the following operators is also known as the Elvis operator?
+      answers:
+        - { value: "$a <=> $b", correct: false }
+        - { value: "$a ** $b", correct: false }
+        - { value: "$a ?: $b", correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Elvis_operator#PHP
+
+    - question: "What PHP function is used to return an array containing values present in two or more passed arrays?"
+      answers:
+          - { value: "array_common", correct: false }
+          - { value: "array_intersect", correct: true }
+          - { value: "array_union", correct: false }
+          - { value: "array_walk", correct: false }
+      help: |
+          https://php.net/array
+
+    - question: |
+        What is the simplest way to return the values 20 and 30 in a new array without modifying $myArray?
+        
+        $myArray = [10, 20, 30, 40];
+      answers:
+          - { value: "array_splice($myArray, 2, 1);", correct: false }
+          - { value: "array_splice($myArray, 10, 20);", correct: false }
+          - { value: "array_slice($myArray, 1, 2);", correct: true }
+          - { value: "array_splice($myArray, 1, 2);", correct: false }
+      help: |
+          https://php.net/array
+
+    - question: |
+        What is the output ?
+        
+        <?php
+          $array1 = array ("a", "b", "c", "d", "e", "f");
+          $array2 = array_slice($array1, -3);
+          
+          foreach ( $array2 as $val ) {
+            print "$val ";
+          }
+        ?>
+      answers:
+          - { value: d e f, correct: true }
+          - { value: c d e, correct: false }
+          - { value: b c d, correct: false }
+          - { value: a b c, correct: false }
+      help: |
+          https://php.net/array
+
+    - question: |
+        What is the output of the following PHP script?
+        
+        <?php
+          $subs = array(
+          'at'  => '@',
+          'com' => 'net'
+          );
+          
+          $email = 'comnet@example.com';
+          
+          echo strtr($email, $subs);
+        ?>
+      answers:
+        - { value: netnet@example.net, correct: true }
+        - { value: comnet@example.com, correct: false }
+        - { value: netnet@example.com, correct: false }
+        - { value: comnetatexample.net, correct: false }
+      help: |
+        https://php.net/manual/en/function.strtr.php
+

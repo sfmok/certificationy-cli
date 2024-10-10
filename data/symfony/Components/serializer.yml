@@ -1,0 +1,93 @@
+category: Symfony > Components > Serializer
+questions:
+    - question: |
+        How to enable maxDepth support?
+      answers:
+        - { value: "This feature doesn't exists yet", correct: false }
+        - { value: "By setting max_depth to true, in the serialization context", correct: false }
+        - { value: "By adding setting disable_max_depth to false, in the serialization context", correct: false }
+        - { value: "By setting enable_max_depth to true, in the serialization context", correct: true }
+        - { value: "It's enabled by default", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/serializer.html#handling-serialization-depth
+
+    - question: "Which of these methods are automatically detected and used by the Serializer ?"
+      answers:
+        - { value: "has*", correct: true }
+        - { value: "remove*", correct: false }
+        - { value: "add*", correct: false }
+        - { value: "get*", correct: true }
+        - { value: "is*", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/serializer.html#serializing-boolean-attributes
+
+    - question: |
+        What component must be installed in order to use the ObjectNormalizer?
+      answers:
+        - { value: "Config", correct: false }
+        - { value: "EventDispatcher", correct: false }
+        - { value: "DependencyInjection", correct: false }
+        - { value: "PropertyAccess", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/serializer.html
+
+    - question: |
+        Which of the following is a correct YAML group definition?
+      answers:
+        - { value: |
+              Acme\MyObj:
+                foo:
+                  groups: ['group1', 'group2']
+                bar:
+                  groups: ['group3']
+          , correct: false }
+        - { value: |
+              Acme\MyObj:
+                attributes:
+                  foo:
+                    groups: ['group1', 'group2']
+                  bar:
+                    groups: ['group3']
+          , correct: true }
+        - { value: |
+              Acme\MyObj:
+                groups:
+                  group1:
+                    attributes: ['foo']
+                  group2:
+                    attributes: ['foo']
+                  group3:
+                    attributes: ['bar']
+          , correct: false }
+        - { value: |
+              Acme\MyObj:
+                group1:
+                  attributes: ['foo']
+                group2:
+                  attributes: ['foo']
+                group3:
+                  attributes: ['bar']
+          , correct: true }
+      help: |
+        https://symfony.com/doc/current/components/serializer.html#attributes-groups
+
+    - question: |
+        What component must be installed in order to use the ObjectNormalizer?
+      answers:
+        - { value: EventDispatcher, correct: false }
+        - { value: Config, correct: true }
+        - { value: DependencyInjection, correct: false }
+        - { value: PropertyAccess, correct: true }
+      help: |
+        https://symfony.com/doc/2.7/components/serializer.html#installation
+
+    - question: |
+        What are the built-in mapping loaders for the definitions of serialization?
+      answers:
+        - { value: YamlFileLoader, correct: true }
+        - { value: IniFileLoader, correct: false }
+        - { value: AnnotationLoader, correct: true }
+        - { value: JsonFileLoader, correct: false }
+        - { value: XmlFileLoader, correct: true }
+      help: |
+        https://symfony.com/doc/current/components/serializer.html#attributes-groups

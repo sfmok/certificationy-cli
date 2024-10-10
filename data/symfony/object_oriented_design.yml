@@ -1,0 +1,446 @@
+category: Object Oriented Design
+questions:
+    - question: |
+        What design patterns do the security voters use in Symfony?
+      answers:
+        - { value: "Strategy", correct: false }
+        - { value: "Iterator", correct: false }
+        - { value: "Chain of Responsibility", correct: true }
+        - { value: "Servant", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Behavioral_pattern
+
+    - question: |
+        Consider the following code snippet:
+        
+        class RequestAuthentifier
+        {
+            private $logger;
+
+            public function __construct(Logger $logger = null)
+            {
+                $this->logger = $logger;
+            }
+
+            public function authenticate(Request $request)
+            {
+                if ($this->logger) {
+                    $this->logger->info('Authenticating HTTP request.');
+                }
+
+                $token = $request->getHeader('X-API-Token');
+                // ...
+            }
+        }
+        
+        Which design pattern can be used here to prevent from checking the existence of the logger dependency?
+      answers:
+        - { value: "Null Object", correct: true }
+        - { value: "Composite", correct: false }
+        - { value: "Factory", correct: false }
+        - { value: "Builder", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Null_Object_pattern
+
+    - question: |
+        How can you modify the copy of an object during a clone operation?
+      answers:
+        - { value: "By using the __construct()", correct: false }
+        - { value: "By using the __get() and __set() methods", correct: false }
+        - { value: "By using the __clone() method", correct: true }
+        - { value: "This is not possible", correct: false }
+        - { value: "By creating my own function to do that", correct: false }
+      help: |
+        http://php.net/manual/en/language.oop5.cloning.php
+
+    - question: "Which of the following design patterns classification family does the Prototype design pattern belong to?"
+      answers:
+        - { value: "Behavioral design patterns", correct: false }
+        - { value: "Structural design patterns", correct: false }
+        - { value: "Creational design patterns", correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Prototype_pattern
+
+    - question: |
+        Consider the following code snippet:
+
+        <?php
+
+        class ConferenceTicketOrder
+        {
+            private $id;
+            private $reference;
+            private $unitPrice;
+            private $vatAmount;
+            private $totalAmount;
+            private $quantity;
+
+            public function __construct($reference, $unitPrice)
+            {
+                $this->reference = $reference;
+                $this->unitPrice = $unitPrice;
+            }
+
+            public function purchase($quantity, $vat = .20)
+            {
+                $totalAmount = $this->quantity * $this->unitPrice;
+
+                $this->quantity = (int) $quantity;
+                $this->vatAmount = round($totalAmount * $vat, 2);
+                $this->totalAmount = round($totalAmount + $this->vatAmount, 2);
+            }
+
+            public function save(PDO $db)
+            {
+                if (null === $this->totalAmount) {
+                    throw new \RuntimeException('Cannot save an incomplete order.');
+                }
+
+                $db->beginTransaction();
+                try {
+                    $this->doSave($db);
+                    $db->commit();
+                } catch (PDOException $e) {
+                    $db->rollback();
+                    throw $e;
+                }
+            }
+
+            private function doSave(PDO $db)
+            {
+                if (null === $this->id) {
+                    $stmt = $db->prepare('INSERT INTO orders VALUE(?,?,?,?,?)');
+                    $stmt->bindValue(0, $this->reference);
+                    // ...
+                    $stmt->execute();
+
+                    $this->id = $db->lastInsertId();
+                } else {
+                    $stmt = $db->prepare('UPDATE orders SET quantity = ?, ...');
+                    $stmt->bindValue(0, $this->quantity);
+                    // ...
+                    $stmt->execute();
+                }
+            }
+        }
+
+        The class is instanciated and used as follow:
+
+        $db = new PDO('...');
+        $order = new ConferenceTicketOrder('SL-12345', 149.00);
+        $order->purchase(3);
+        $order->save($db);
+
+        Which one of the five SOLID principles is most likely to be the most violated in this code sample?
+      answers:
+        - { value: "Single Responsability Principle", correct: true }
+        - { value: "Dependency Inversion Principle", correct: false }
+        - { value: "Liskov Substitution", correct: false }
+        - { value: "Interface Segregation", correct: false }
+        - { value: "Open / Closed Principle", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)
+
+    - question: |
+        Consider the following code snippet:
+
+        <?php
+
+        class EventManager
+        {
+          private $listeners = [];
+      
+          public function listen($event, callable $listener, $priority = 0)
+          {
+            $this->listeners[$event][] = [ $listener, $priority ];
+          }
+      
+          private function getSortedListeners($event)
+          {
+            $listenersByPriority = [];
+            foreach ($this->listeners[$event] as $listener) {
+            $priority = $listener[1];
+            $listenersByPriority[$priority][] = $listener[0];
+          }
+            
+            krsort($listenersByPriority);
+            
+            $listeners = [];
+            foreach ($listenersByPriority as $priorityListeners) {
+            $listeners = array_merge($listeners, $priorityListeners);
+          }
+            
+            return $listeners;
+          }
+      
+          public function fire($name, Event $event)
+          {
+            foreach ($this->getSortedListeners($name) as $listener) {
+            if ($event->isStopped()) {
+            break;
+          }
+            call_user_func_array($listener, [ $event ]);
+          }
+          }
+        }
+
+        The class is instanciated and used as follow:
+
+        $db = new PDO('...');
+        $order = new ConferenceTicketOrder('SL-12345', 149.00);
+        $order->purchase(3);
+        $order->save($db);
+
+        Which design pattern does the EventManager class above implement?
+      answers:
+        - { value: "Interpreter", correct: false }
+        - { value: "Observer", correct: false }
+        - { value: "Command", correct: false }
+        - { value: "Mediator", correct: true }
+        - { value: "Iterator", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Software_design_pattern#Behavioral_patterns
+
+    - question: |
+        Which of the following are considered design patterns classification families according to the Gang of Four?
+      answers:
+      - { value: "Architectural design patterns", correct: false }
+      - { value: "Structural design patterns", correct: true }
+      - { value: "Behavioral design patterns", correct: true }
+      - { value: "Optimization design patterns", correct: false }
+      - { value: "Creational design patterns", correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Software_design_pattern
+
+    - question: |
+        Which famous design pattern is implemented here?
+      answers:
+      - { value: "Builder", correct: false }
+      - { value: "Singleton", correct: false }
+      - { value: "Factory", correct: true }
+      - { value: "Observer", correct: false }
+      help: |
+        https://www.slideshare.net/hhamon/design-patterns-avec-php-53-symfony-et-pimple
+        https://speakerdeck.com/hhamon/implementing-design-patterns-with-php
+        https://en.wikipedia.org/wiki/Factory_method_pattern
+        https://en.wikipedia.org/wiki/Category:Software_design_patterns
+
+    - question: |
+        Find the word to fill the blank space in the following sentence:
+        
+        The ________________ design pattern captures and externalizes an object's internal state allowing the object to be restored to this state later without violating its encapsulation.
+      answers:
+      - { value: "Facade", correct: false }
+      - { value: "Memento", correct: true }
+      - { value: "Singleton", correct: false }
+      - { value: "Chain of Responsability", correct: false }
+      - { value: "Adapter", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Memento_pattern
+        https://en.wikipedia.org/wiki/Software_design_pattern
+
+    - question: |
+        Consider the following code snippet:
+        
+        // Simple coupon discount
+        $coupon1 = new ValueCoupon('3s2h7pd65s', new EUR(2000));
+        $coupon1->applyDiscount($order);
+        
+        // Complex coupon discount
+        $coupon2 = new CustomerFirstOrderCoupon(
+        new MinimumPurchaseAmountCoupon(
+        new LimitedLifetimeCoupon(
+        new ValueCoupon('3s2h7pd65s', new EUR(2000)),
+        'now',
+        '+60 days'
+        ),
+        new EUR(17000)
+        )
+        );
+        $coupon2->applyDiscount($order);
+      answers:
+      - { value: "Adapter", correct: false }
+      - { value: "Decorator", correct: false }
+      - { value: "Facade", correct: false }
+      - { value: "Template Method", correct: true }
+      - { value: "Proxy", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Software_design_pattern
+
+    - question: |
+        Find the word to fill the blank space in the following sentence:
+        
+        The ________________ design pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. It lets the algorithm vary independently from clients that use it.
+      answers:
+      - { value: "Adapter", correct: false }
+      - { value: "Decorator", correct: false }
+      - { value: "Memento", correct: false }
+      - { value: "Observer", correct: false }
+      - { value: "Strategy", correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Software_design_pattern
+
+    - question: |
+        Consider the following code snippet:
+        
+        <?php
+  
+        class OrderRepository
+        {
+          public function save(Order $order)
+          {
+            $conn = DatabaseConnection::getInstance();
+            
+            $conn->beginTransaction();
+            try {
+            $this->doSave($conn, $order);
+            $conn->commit();
+          } catch (DatabaseException $e) {
+            $conn->rollback();
+            throw $e;
+          }
+          }
+      
+          private function doSave(DatabaseConnection $conn, Order $order)
+          {
+            if (null === $order->getId()) {
+            $stmt = $conn->prepare('INSERT INTO orders VALUE(?,?,?,?,?)');
+                                                                      $stmt->bindValue(0, $order->getReference());
+                                                                      // ...
+                                                                      $stmt->execute();
+                                                                      $this->updateOrderPk($order, $conn->lastInsertId());
+            } else {
+                     $stmt = $conn->prepare('UPDATE orders SET quantity = ?, ...');
+                     $stmt->bindValue(0, $order->getQuantity());
+                     // ...
+                     $stmt->execute();
+            }
+            }
+                                                                      
+            // ...
+          }
+        
+        Which one of the five SOLID principles is most likely to be the most violated in this code sample?
+      answers:
+        - { value: "Single Responsability Principle", correct: false }
+        - { value: "Dependency Inversion Principle", correct: false }
+        - { value: "Liskov Substitution", correct: false }
+        - { value: "Interface Segregation", correct: false }
+        - { value: "Open / Closed Principle", correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)
+
+    - question: |
+        Consider the following Point class
+        
+        <?php
+  
+        class Point
+        {
+          private $x;
+          private $y;
+      
+          public function __construct($x, $y)
+          {
+            $this->x = $x;
+            $this->y = $y;
+          }
+      
+          public function getX()
+          {
+            return $this->x;
+          }
+      
+          public function getY()
+          {
+            return $this->y;
+          }
+      
+          public function translate($dx, $dy)
+          {
+            return new self($this->x + $dx, $this->y + $dy);
+          }
+        }
+        
+        What kind of object does this class represent?
+      answers:
+        - { value: Value object., correct: true }
+        - { value: Domain service., correct: false }
+        - { value: Data access object., correct: false }
+        - { value: Data transfer object., correct: false }
+        - { value: Persistent entity., correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Value_object
+
+    - question: |
+        What is a Bridge in Symfony?
+      answers:
+        - { value: It is used to have opt-in features that integrate to existing code., correct: false }
+        - { value: It helps to increase coherency., correct: true }
+        - { value: It decouples the implementation of some components from their abstractions., correct: true }
+        - { value: It creates a bridge between services for easier initialisation., correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Bridge_pattern
+
+    - question: |
+        What design pattern does Doctrine mainly uses for its ORM?
+      answers:
+        - { value: Active Record, correct: false }
+        - { value: Active Mapper, correct: false }
+        - { value: Data Record, correct: false }
+        - { value: Data Mapper, correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Data_mapper_pattern
+
+    - question: |
+        Consider the following code snippet:
+        
+        interface RouterInterface
+        {
+            const ABSOLUTE_URL = 0;
+            const ABSOLUTE_PATH = 1;
+            const RELATIVE_PATH = 2;
+            const NETWORK_PATH = 3;
+
+            public function setContext(RequestContext $context);
+
+            public function getContext();
+
+            public function getRouteCollection();
+
+            public function match($pathinfo);
+
+            public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH);
+        }
+      answers:
+        - { value: "Single Responsability Principle", correct: false }
+        - { value: "Dependency Inversion Principle", correct: false }
+        - { value: "Liskov Substitution", correct: false }
+        - { value: "Interface Segregation", correct: true }
+        - { value: "Open / Closed Principle", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Data_mapper_pattern
+
+    - question: |
+        Find the correct expression to fill the blank space in the following sentence:
+        
+        In computer science, a/an ___________________ is a small object that represents a simple entity whose equality is not based on identity.
+      answers:
+        - { value: entity, correct: false }
+        - { value: service, correct: false }
+        - { value: data transfer object, correct: false }
+        - { value: data access object, correct: false }
+        - { value: value object, correct: true }
+      help: |
+        https://en.wikipedia.org/wiki/Value_object
+
+    - question: |
+        Which of the following answers is not a valid SOLID principle?
+      answers:
+        - { value: "Single Responsability Principle", correct: false }
+        - { value: "Dependency Injection", correct: true }
+        - { value: "Liskov Substitution", correct: false }
+        - { value: "Interface Segregation", correct: false }
+        - { value: "Open / Closed Principle", correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)

@@ -1,0 +1,1562 @@
+category: Symfony e-leaning
+questions:
+    - question: 'How could you simulate a POST request to /login with login parameter set to admin ?'
+      answers:
+          - { value: "$request = Request::create('/login', 'POST', [ 'login' => 'admin' ]);", correct: true }
+          - { value: "$request = Request::create('/login', null, [ 'login' => 'admin' ]);", correct: false }
+          - { value: "$request = Request::create('POST', '/login', [ 'login' => 'admin' ]);", correct: false }
+      help: |
+          http://symfony.com/doc/current/components/http_foundation.html#simulating-a-request
+          http://api.symfony.com/3.1/Symfony/Component/HttpFoundation/Request.html#method_create
+
+    - question: 'Wich method should you call to customize the behavior of the global dump() function?'
+      answers:
+          - { value: "set_error_handler($callable);", correct: false }
+          - { value: "VarDumper::setHandler($callable);", correct: true }
+          - { value: "trigger_error($callable);", correct: false }
+          - { value: "VarDumper::setDumper($callable);", correct: false }
+      help: |
+          http://api.symfony.com/3.1/Symfony/Component/VarDumper/VarDumper.html
+          http://symfony.com/doc/current/components/var_dumper/advanced.html#advanced-usage-of-the-vardumper-component
+
+    - question: 'What is the first argument of the constructor of Symfony\Component\Translation\Translator'
+      answers:
+          - { value: "The translation directory", correct: false }
+          - { value: "The locale", correct: true }
+          - { value: "A translator loader", correct: false }
+          - { value: "A translator provider", correct: false }
+      help: |
+          http://api.symfony.com/master/Symfony/Component/Translation/Translator.html
+
+    - question: 'Which of the following methods should be defined in order to implement the Symfony\Component\Security\Core\User\UserInterface ?'
+      answers:
+          - { value: "public function setUsername();", correct: false }
+          - { value: "public function getUser();", correct: false }
+          - { value: "public function eraseCredentials();", correct: true }
+          - { value: "public function setEmail();", correct: false }
+          - { value: "public function getPassword();", correct: true }
+          - { value: "public function getEmail();", correct: false }
+          - { value: "public function getRoles();", correct: true }
+          - { value: "public function clearCredentials();", correct: false }
+          - { value: "public function getSalt();", correct: true }
+          - { value: "public function __construct($username, $password, $salt, array $roles);", correct: false }
+          - { value: "public function setSalt();", correct: false }
+          - { value: "public function setRoles();", correct: false }
+          - { value: "public function setPassword();", correct: false }
+          - { value: "public function getUsername();", correct: true }
+      help: |
+          http://symfony.com/doc/current/security/entity_provider.html#create-your-user-entity
+          http://api.symfony.com/3.1/Symfony/Component/Security/Core/User/UserInterface.html
+
+    - question:
+                What is the output ?
+
+                <?php
+                array_combine([1, 2, 3, 6], [4,5,6]);
+
+      answers:
+          - { value: "[1 => 2, 3 => 4, 5 => 6]", correct: false }
+          - { value: "An error", correct: true }
+          - { value: "[1, 2, 3, 4, 5, 6]", correct: false }
+          - { value: "[1 => 4, 2 => 5, 3 => 6]", correct: false }
+      help: |
+          https://php.net/array
+          https://php.net/manual/en/function.array-combine.php
+
+    - question: |
+        What is the output of the following PHP script?
+
+        <?php
+
+          $values = [15, 12, '15', 34, 15 => 25];
+          $key = array_search('15', $values);
+
+          if (!$key) {
+            echo "Not found";
+          } else {
+            // gettype() will return either 'string' or 'integer'
+            echo $key . ' - ' . strtolower(gettype($values[$key]));
+          }
+      answers:
+          - { value: "Not found", correct: true }
+          - { value: "2 - string", correct: false }
+          - { value: "0 - integer", correct: false }
+          - { value: "4 - integer", correct: false }
+      help: |
+          https://www.php.net/array
+          https://php.net/manual/en/function.array-search.php
+
+    - question: "Is it possible for a PHP class to be declared private or protected in order to limit its scope to the current namespace only?"
+      answers:
+          - { value: "Yes", correct: false }
+          - { value: "No", correct: true }
+      help: |
+          http://php.net/manual/en/language.oop5.visibility.php
+
+    - question: "What is the tag to register a custom service that extracts messages from a file?"
+      answers:
+          - { value: "translator_extractor", correct: false }
+          - { value: "translation.extractor", correct: true }
+          - { value: "translator.extractor", correct: false }
+          - { value: "translation_extractor", correct: false }
+      help: |
+          http://symfony.com/doc/current/reference/dic_tags.html#translation-extractor
+
+    - question: "Which of these methods aren't mentioned in the RFC2616?"
+      answers:
+          - { value: "CONNECT", correct: false }
+          - { value: "LINK", correct: true }
+          - { value: "TRACE", correct: false }
+          - { value: "PATCH", correct: true }
+      help: |
+          https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.1
+
+    - question: "What does The ClockMock class allow to mock ?"
+      answers:
+          - { value: "usleep()", correct: true }
+          - { value: "date()", correct: false }
+          - { value: "it doesn't exists", correct: false }
+          - { value: "microtime()", correct: true }
+          - { value: "sleep()", correct: true }
+          - { value: "time()", correct: true }
+      help: |
+          http://api.symfony.com/3.1/Symfony/Bridge/PhpUnit/ClockMock.html
+          http://symfony.com/doc/current/components/phpunit_bridge.html#clock-mocking
+
+    - question: |
+        Consider the following console command definition summary
+
+        namespace AppBundle\Command;
+
+        use Symfony\Component\Console\Command\Command;
+        use Symfony\Component\Console\Input\InputArgument;
+        use Symfony\Component\Console\Input\InputInterface;
+        use Symfony\Component\Console\Input\InputOption;
+        use Symfony\Component\Console\Output\OutputInterface;
+
+        class PromoteUserCommand extends Command
+        {
+          protected function configure()
+          {
+          $this
+              ->setName('app:promote-user')
+              ->setDescription('Grants a user a given role.')
+              ->addArgument('username', InputArgument::REQUIRED)
+              ->addArgument('role', InputArgument::REQUIRED)
+              ->addOption('admin', null, InputOption::VALUE_NONE)
+          ;
+          }
+
+        // ...
+        }
+
+        Which of the following commands will successfully run in a fresh Symfony Standard Edition package?
+      answers:
+          - { value: "./bin/console app:promote-user hhamon", correct: false }
+          - { value: "./bin/console app:promote-user hhamon ROLE_AUTHOR --admin", correct: true }
+          - { value: "./bin/console app:promote-user hhamon ROLE_AUTHOR --admin=true", correct: false }
+          - { value: "./bin/console a:p hhamon ROLE_AUTHOR", correct: true }
+          - { value: "./bin/console app:promote-user ROLE_AUTHOR username", correct: true }
+          - { value: "./bin/console a:p hhamon ROLE_AUTHOR -a", correct: false }
+      help: |
+          https://symfony.com/doc/3.4/console.html
+
+    - question: Which of the following are valid Symfony top level namespaces?
+      answers:
+          - { value: "Symfony\\Plugin", correct: false }
+          - { value: "Symfony\\Bundle", correct: true }
+          - { value: "Symfony\\Component", correct: true }
+          - { value: "Symfony\\Module", correct: false }
+          - { value: "Symfony\\Bridge", correct: true }
+          - { value: "Symfony\\Contracts", correct: true }
+      help: |
+          https://github.com/symfony/symfony/tree/master/src/Symfony
+
+    - question: "Which of the following are Symfony Core bundles?"
+      answers:
+          - { value: "WebProfilerBundle", correct: true }
+          - { value: "CoreBundle", correct: false }
+          - { value: "TwigBundle", correct: true }
+          - { value: "DebugBundle", correct: true }
+          - { value: "FrameworkBundle", correct: true }
+          - { value: "SecurityBundle", correct: true }
+          - { value: "AuthenticationBundle", correct: false }
+      help: |
+          https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle
+
+    - question: "What are the HTTP status codes for Server Error?"
+      answers:
+          - { value: "3xx", correct: false }
+          - { value: "5xx", correct: true }
+          - { value: "2xx", correct: false }
+          - { value: "1xx", correct: false }
+          - { value: "4xx", correct: false }
+      help: |
+          https://tools.ietf.org/html/rfc2616#section-6.1.1
+
+    - question: "What tracking policy has the best performance with large units of work?"
+      answers:
+          - { value: "DEFERRED_IMPLICIT", correct: false }
+          - { value: "LAZY", correct: false }
+          - { value: "NOTIFY", correct: true }
+          - { value: "DEFERRED_EXPLICIT", correct: false }
+      help: |
+          http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/change-tracking-policies.html#change-tracking-policies
+
+    - question: "What is mysqlnd ?"
+      answers:
+          - { value: "A low level connector designed to replace libmysql dependency", correct: true }
+          - { value: "A persistent connection to a MySQL server", correct: false }
+          - { value: "A PHP extension adding some functions to interact with a MySQL server, like PDO", correct: false }
+          - { value: "A new RDBMS like MySQL or MariaDB", correct: false }
+      help: |
+          http://www.php.net/mysqlnd
+
+    - question: "A cookie is set from foo.com. The domain attribute is set to foo.com. In most browsers, will this cookie be sent with a request to bar.foo.com ?"
+      answers:
+          - { value: "Yes", correct: true }
+          - { value: "No", correct: false }
+      help: |
+          https://en.wikipedia.org/wiki/HTTP_cookie#Cookie_attributes
+
+    - question:
+        What can be achieved using the prototype_name of the Symfony\Component\Form\Extension\Core\Type\CollectionType form type ?
+      answers:
+          - { value: "When one wants to customize the rendering of the field, it allows to override the form prototype block prefix.", correct: false }
+          - { value: "When one uses some third-party javascript library to handle the collection, it allows to wire the prototype to it.", correct: false }
+          - { value: "When one has a prototype embedding other prototypes, it allows to replace each one with a specific value.", correct: true }
+      help: |
+          https://symfony.com/doc/current/reference/forms/types/collection.html
+
+    - question:
+        Assuming an application that stores money amounts multiplied by 100 (eg. 1.23 is stored 123). What option should you set on the Symfony\Component\Form\Extension\Core\Type\MoneyType form type in order to display the correct value to the user ?
+      answers:
+          - { value: "by_reference", correct: false }
+          - { value: "multiply", correct: false }
+          - { value: "scale", correct: false }
+          - { value: "divisor", correct: true }
+      help: |
+          http://symfony.com/doc/current/reference/forms/types/money.html
+
+    - question: "According to the official Symfony Best Practices Guide, which letter case do you need to use for template names as well as their folder?"
+      answers:
+          - { value: "snake_case", correct: true }
+          - { value: "PascalCase", correct: false }
+          - { value: "camelCase", correct: false }
+      help: |
+          https://symfony.com/doc/current/best_practices.html#templates
+
+    - question: |
+          Given the following object to validate configuration (and assuming no group is specified when validate is called):
+          use Symfony\Component\Validator\Constraints as Assert;
+          use Symfony\Component\Validator\GroupSequenceProviderInterface;
+
+          /**
+           * @Assert\GroupSequenceProvider
+           */
+          class Product implements GroupSequenceProviderInterface
+          {
+            /**
+             * @Assert\NotBlank(groups={"foo"})
+             */
+            private $foo;
+
+            /**
+             * @Assert\NotBlank(groups={"foo"})
+             */
+            private $foo2;
+
+            /**
+             * @Assert\NotBlank(groups={"Product"})
+             */
+            private $bar;
+
+            /**
+             * @Assert\NotBlank()
+             */
+            private $bar2;
+
+            public function getGroupSequence(): array
+            {
+              return [['foo', 'Product']];
+            }
+          }
+      answers:
+          - { value: "First, $foo, $foo2 will be validated, then, $bar will be validated, and finally $bar2", correct: false }
+          - { value: "First, $foo, $foo2 will be validated and then, $bar, $bar2", correct: false }
+          - { value: "First, $foo, $foo2 will be validated and then, $bar", correct: false }
+          - { value: "$foo, $foo2, $bar, $bar2 will be validated in the same time", correct: true }
+          - { value: "$foo, $foo2, $bar will be validated in the same time", correct: false }
+      help: |
+          https://symfony.com/doc/3.4/validation/sequence_provider.html
+
+    - question:
+        What is true about the addListener()'s $priority value from Symfony\Component\EventDispatcher\EventDIspatcherInterface?
+      answers:
+          - { value: "Defaults to 1", correct: false }
+          - { value: "The higher this value, the later an event listener will be triggered in the chain", correct: false }
+          - { value: "Defaults to 100", correct: false }
+          - { value: "The higher this value, the earlier an event listener will be triggered in the chain", correct: true }
+          - { value: "Defaults to 0", correct: true }
+      help: |
+          http://symfony.com/doc/current/components/event_dispatcher.html#connecting-listeners
+          http://api.symfony.com/3.1/Symfony/Component/EventDispatcher/EventDispatcherInterface.html#method_addListener
+
+    - question:
+        What is the output ?
+            <?php
+                function fsplit()
+                {
+                $spl = 1;
+            ?>
+
+            <?php
+                echo $spl;
+                }
+      answers:
+          - { value: "Nothing", correct: false }
+          - { value: "1", correct: true }
+          - { value: "2", correct: false }
+          - { value: "Error, function declarations can not be split over multiple PHP segments", correct: false }
+      help: |
+          http://php.net/manual/en/language.basic-syntax.php
+
+    - question: "What are the built-in arguments variants?"
+      answers:
+          - { value: "InputArgument::REQUIRED", correct: true }
+          - { value: "InputArgument::NONE", correct: false }
+          - { value: "InputArgument::IS_ARRAY", correct: true }
+          - { value: "InputArgument::IS_MULTIPLE", correct: false }
+          - { value: "InputArgument::OPTIONAL", correct: true }
+      help: |
+          http://symfony.com/doc/current/console/input.html#using-command-arguments
+
+    - question: "Among the following, which tag does not exist?"
+      answers:
+          - { value: "translation.loader", correct: false }
+          - { value: "twig.load", correct: true }
+          - { value: "monolog.logger", correct: false }
+          - { value: "kernel.cache_warmer", correct: false }
+      help: |
+          http://symfony.com/doc/current/reference/dic_tags.html
+
+    - question: "What is the attribute in the definition of a route setting the locale of a user?"
+      answers:
+          - { value: "_language", correct: false }
+          - { value: "_i18N", correct: false }
+          - { value: "_locale", correct: true }
+          - { value: "_controller", correct: false }
+      help: |
+          http://symfony.com/doc/3.0/book/routing.html#adding-requirements
+
+    - question: |
+        Considering the following code, which assertions are true?
+            $repository = $this->entityManager->getRepository('User');
+            $user = $repository->findOneBy(['name' => 'Toto']);
+            $user2 = $repository->findOneBy(['name' => 'Toto']);
+
+      answers:
+          - { value: "$user !== $user2 and 2 sql queries have been executed.", correct: false }
+          - { value: "$user !== $user2 and 1 sql query has been executed.", correct: false }
+          - { value: "$user === $user2 and 1 sql query has been executed.", correct: false }
+          - { value: "$user === $user2 and 2 sql queries have been executed.", correct: true }
+      help: |
+          http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/unitofwork.html#how-doctrine-keeps-track-of-objects
+
+    - question: "Which of the following statements is true about the AbstractController class located in the FrameworkBundle bundle?"
+      answers:
+          - { value: "It can provide by default any services of the application.", correct: false }
+          - { value: "It must always be the parent class for every single controller of the application.", correct: false }
+          - { value: "It provides helper methods.", correct: true }
+          - { value: "It declares a controller as a service.", correct: false }
+      help: |
+          https://github.com/symfony/symfony/blob/3.3/src/Symfony/Bundle/FrameworkBundle/Controller/AbstractController.php
+          https://symfony.com/doc/current/controller.html
+
+    - question: "What does the CardScheme Constraint stand for ?"
+      answers:
+          - { value: "It validates a credit card number", correct: false }
+          - { value: "It doesn't exist", correct: false }
+          - { value: "It validates if a credit card is a VISA one", correct: false }
+          - { value: "It validates that a card number is valid for a given credit card company", correct: true }
+      help: |
+          http://symfony.com/doc/3.1/reference/constraints/CardScheme.html
+
+    - question: "What is the tag to use to add a command?"
+      answers:
+          - { value: "console_command", correct: false }
+          - { value: "command", correct: false }
+          - { value: "console", correct: false }
+          - { value: "console.command", correct: true }
+      help: |
+          http://symfony.com/doc/current/reference/dic_tags.html#console-command
+
+    - question: "How would you access the data sent to your PHP server using the PUT HTTP method ?"
+      answers:
+          - { value: "Using the php://input stream", correct: true }
+          - { value: "Using $_POST", correct: false }
+          - { value: "It is not possible", correct: false }
+          - { value: "Using $HTTP_PUT_VARS", correct: false }
+      help: |
+          http://php.net/manual/en/features.file-upload.put-method.php
+
+    - question: |
+          Which interface should be implemented when you want to set the choice_loader option of the Symfony\Component\Form\Extension\Core\Type\ChoiceType form type ?
+      answers:
+          - { value: Symfony\Component\Form\Extension\Core\ChoiceLoaderInterface, correct: false }
+          - { value: Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface, correct: true }
+          - { value: Symfony\Component\Form\ChoiceLoaderInterface, correct: false }
+      help: |
+          http://symfony.com/doc/current/reference/forms/types/choice.html#choice-loader
+
+    - question: "Which interface(s) should an Object implement to be usable in a foreach statement?"
+      answers:
+          - { value: "IteratorAggregate", correct: true }
+          - { value: "ArrayAccess", correct: false }
+          - { value: "Iterator", correct: true }
+          - { value: "Traversable", correct: true }
+      help: |
+          https://php.net/manual/fr/reserved.interfaces.php
+
+    - question: |
+          Which of the following is not a valid way to create an instance of Symfony\Component\HttpFoundation\Request ?
+      answers:
+          - { value: "$request = Request::create(/* ... */);", correct: false }
+          - { value: "$request = Request::createRequestFromFactory(/* ... */);", correct: true }
+          - { value: "$request = new Request(/* ... */);", correct: false }
+          - { value: "$request = Request::createFromGlobals(/* ... */);", correct: false }
+      help: |
+          http://symfony.com/doc/current/components/http_foundation.html#request
+          http://symfony.com/doc/current/components/http_foundation.html#simulating-a-request
+          http://api.symfony.com/3.1/Symfony/Component/HttpFoundation/Request.html
+
+    - question: |
+          Which of the following are true about Symfony\Component\OptionsResolver\Options?
+      answers:
+          - { value: "It is an interface.", correct: true }
+          - { value: "The OptionsResolver class extends Options.", correct: false }
+          - { value: "The OptionsResolver class implements Options.", correct: true }
+          - { value: "It is an abstract class.", correct: false }
+      help: |
+          http://api.symfony.com/3.1/Symfony/Component/OptionsResolver/Options.html
+
+    - question: |
+          What will be the result of invoking the isXmlHttpRequest() method on a Symfony\Component\HttpFoundation\Request object?
+      answers:
+          - { value: "true if the request must generate a XML response.", correct: false }
+          - { value: "true if the request has the X-Requested-With header set to XMLHttpRequest.", correct: true }
+          - { value: "true if the request contains XML content.", correct: false }
+          - { value: "true if the request has the Content-Type header set to application/xml.", correct: false }
+      help: |
+          https://github.com/symfony/http-foundation/blob/5.3/Request.php#L1763
+
+    - question: "What is a sub request?"
+      answers:
+          - { value: "A sub request is a request used in tests.", correct: false }
+          - { value: "A sub request is a request from a HTTP reverse proxy.", correct: false }
+          - { value: "A sub request serves to create HTTP cache headers.", correct: false }
+          - { value: "A sub request serves to render just one small portion of a page instead of a full page.", correct: true }
+      help: |
+          http://symfony.com/doc/current/components/http_kernel.html#sub-requests
+
+    - question: "According to the Symfony Best Practices Guide, what is the most recommended format to configure Doctrine metadata mapping between your PHP model classes and their related storage engines?"
+      answers:
+          - { value: "Annotations", correct: true }
+          - { value: "JSON", correct: false }
+          - { value: "YAML", correct: false }
+          - { value: "PHP", correct: false }
+          - { value: "XML", correct: false }
+      help: |
+          http://symfony.com/doc/current/best_practices/business-logic.html#doctrine-mapping-information
+
+    - question: |
+        What is wrong with this repository method ?
+          public function filterBooks(array $filters)
+              {
+                  $qb = $this->createQueryBuild('b');
+                  $qb->where('b.year = :year');
+                  $qb->setParameters(['year' => $filters['year']]);
+
+                  $qb->andWhere('b.gender = :gender');
+                  $qb->setParameters(['gender' => $filters['gender']]);
+
+                  return $qb->getResults();
+              }
+      answers:
+          - { value: "The query builder does not have a getResults() method. You should use getQuery().", correct: true }
+          - { value: "$qb is never updated after its initialization. You should do methods chaining.", correct: false }
+          - { value: "The method getResults does not exists. You should use getResult().", correct: true }
+          - { value: "The second call setParameters(...) will erase data set in the first call. So year will be deleted from the parameters list. You should use setParameter($name, $value).", correct: true }
+      help: |
+          https://symfony.com/doc/current/doctrine.html#querying-for-objects-using-doctrine-s-query-builder
+          http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html#the-querybuilder
+
+    - question: "Which of the following are built-in Twig functions?"
+      answers:
+          - { value: "path()", correct: false }
+          - { value: "date()", correct: true }
+          - { value: "source()", correct: true }
+          - { value: "attribute()", correct: true }
+          - { value: "url()", correct: false }
+          - { value: "max()", correct: true }
+          - { value: "render()", correct: false }
+          - { value: "dump()", correct: true }
+      help: |
+          http://twig.symfony.com/doc/functions/index.html#functions
+
+    - question: "What is the name of the service that allows to retrieve an authentication error when a user doesn't manage to be authenticated by the application?"
+      answers:
+        - { value: "security.authentication_utils", correct: true }
+        - { value: "security.authentication_error_manager", correct: false }
+        - { value: "security.auth_errors_utils", correct: false }
+        - { value: "security.authentication_errors", correct: false }
+      help: |
+        http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    - question: |
+        What will be the output of the following code?
+        $z = 'bar';
+        $f = function ($y) use ($z) {
+            echo $x ?? $y ?? $z;
+        };
+
+        $f(null);
+        $f('foo');
+      answers:
+        - { value: "foobar", correct: false }
+        - { value: "A Fatal error: syntax error will be thrown.", correct: false }
+        - { value: "barfoo", correct: true }
+        - { value: "barbar", correct: false }
+      help: |
+        http://php.net/manual/en/language.operators.comparison.php
+
+    - question: "What are the methods of DataCollectorInterface ?"
+      answers:
+        - { value: "getPosition", correct: false }
+        - { value: "getName", correct: true }
+        - { value: "getData", correct: false }
+        - { value: "getTemplate", correct: false }
+        - { value: "collect", correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/2.3/src/Symfony/Component/HttpKernel/DataCollector/DataCollectorInterface.php
+
+    - question: "Which of the following statements best describes the purpose of PHP's extract() function? This function accepts an array as its first argument."
+      answers:
+        - { value: "The second argument is used to specify a data type (such as 'string'). All values in the passed array of that type are returned in a new array.", correct: false }
+        - { value: "A variable is created in the current scope for each element in the given associative array.", correct: true }
+        - { value: "The passed array is populated by any variables in the current scope.", correct: false }
+        - { value: "Any ZIP files referenced in the passed array are extracted to the current working directory.", correct: false }
+      help: |
+        https://www.php.net/array
+        https://php.net/manual/en/function.extract.php
+
+    - question: "By default, which priority a voter has?"
+      answers:
+        - { value: "-1", correct: false }
+        - { value: "0", correct: true }
+        - { value: "The highest.", correct: false }
+        - { value: "1024", correct: false }
+      help: |
+        No.
+
+    - question: |
+        What is the default status code of a Symfony\Component\HttpFoundation\Response object?
+      answers:
+        - { value: "200", correct: true }
+        - { value: "204", correct: false }
+        - { value: "202", correct: false }
+        - { value: "201", correct: false }
+        - { value: "400", correct: false }
+      help: |
+        http://api.symfony.com/master/Symfony/Component/HttpFoundation/Response.html
+
+    - question: "If debug mode is set to false, how ConfigCache determine if the cache has to be refresh ?"
+      answers:
+        - { value: "By checking the last modification time of the resource", correct: false }
+        - { value: "By checking that the resource exists", correct: true }
+        - { value: "It is always refreshed", correct: false }
+        - { value: "By checking timestamps in a .meta file present in the same directory as the cache file itself", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/config/caching.html
+        http://api.symfony.com/3.1/Symfony/Component/Config/ConfigCache.html#method_isFresh
+
+    - question: "Which of the following are valid directories and files in a Symfony 3.x Standard Edition package?"
+      answers:
+        - { value: "app/Resources/", correct: true }
+        - { value: "var/sessions/", correct: true }
+        - { value: "src/AppBundle/Tests", correct: false }
+        - { value: "app/cache/", correct: false }
+        - { value: "bin/console", correct: false }
+      help: |
+        https://github.com/symfony/symfony-standard/tree/3.0
+        https://symfony.com/doc/3.4/best_practices/creating-the-project.html#structuring-the-application
+
+    - question: |
+        Let's consider a controller making his job. Once the request handled, this controller returns a RedirectResponse in destination to another controller. Let's assume both of the following controllers extend AbstractController class from the Symfony FrameworkBundle. What is the best way for the first controller to send a message to the next one?
+      answers:
+        - { value: "$this->get('session')->getFlashBag()->add('message', 'Some message');", correct: false }
+        - { value: "$this->get('session')->getFlashBag()->add('message', 'Some message');", correct: false }
+        - { value: "$this->addFlash('info', 'Some message');", correct: true }
+        - { value: "$_SESSION['message'] = 'Some message';", correct: false }
+      help: |
+        https://symfony.com/doc/current/controller.html#flash-messages
+        https://github.com/symfony/http-foundation/blob/master/Session/Flash/FlashBag.php
+
+    - question: "Is it possible to define a controller as a service?"
+      answers:
+        - { value: "No", correct: false }
+        - { value: "Yes", correct: true }
+      help: |
+        http://symfony.com/doc/current/cookbook/controller/service.html
+
+    - question: |
+        What is the method to access the pid of the running process of the following code :
+        use Symfony\Component\Process\Process;
+
+        $process = new Process('/usr/bin/php worker.php');
+        $process->start();
+      answers:
+        - { value: "$pid = $process->getData()->getPid();", correct: false }
+        - { value: "$pid = $process->getPid();", correct: true }
+        - { value: "$pid = $process->getData()->getProcessId();", correct: false }
+        - { value: "$pid = $process->getProcessId();", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/process.html#process-pid
+        http://api.symfony.com/3.1/Symfony/Component/Process/Process.html#method_getPid
+
+    - question: "How can you mark a service as deprecated in XML?"
+      answers:
+        - { value: "<service id=\"app.markdown_parser\" class=\"AppBundle\\Markdown\\Parser\">
+              <deprecated>Use \"app.content_parser\" instead</deprecated>
+            </service>", correct: true }
+        - { value: "<service id=\"app.markdown_parser\" class=\"AppBundle\\Markdown\\Parser\">
+              <deprecated>The \"%service_id%\" service is deprecated. Use \"app.content_parser\" instead</deprecated>
+            </service>", correct: true }
+        - { value: "<service id=\"app.markdown_parser\" class=\"AppBundle\\Markdown\\Parser\">
+                <deprecated></deprecated>
+              </service>", correct: true }
+        - { value: "<service id=\"app.markdown_parser\" class=\"AppBundle\\Markdown\\Parser\" deprecated=true></service>", correct: false }
+      help: |
+        https://symfony.com/blog/new-in-symfony-2-8-deprecated-service-definitions
+        https://symfony.com/doc/current/components/dependency_injection/advanced.html#deprecating-services
+
+    - question: "What is the tag to register a custom service that loads translations?"
+      answers:
+        - { value: "translator.loader", correct: false }
+        - { value: "translator_loader", correct: false }
+        - { value: "translation.loader", correct: true }
+        - { value: "translation_loader", correct: false }
+      help: |
+        http://symfony.com/doc/current/reference/dic_tags.html#translation-loader
+
+    - question: "According to the official Symfony Best Practices Guide, which format do you need to use for your translation files?"
+      answers:
+        - { value: "XLIFF", correct: true }
+        - { value: "JSON", correct: false }
+        - { value: "YAML", correct: false }
+        - { value: "CSV", correct: false }
+      help: |
+        https://symfony.com/doc/current/best_practices.html#use-the-xliff-format-for-your-translation-files
+
+    - question: "In the case of an agent-driven negotiation, which response code may be returned when many representations of the resource are available ?"
+      answers:
+        - { value: "300", correct: true }
+        - { value: "207", correct: false }
+        - { value: "303", correct: false }
+        - { value: "210", correct: false }
+      help: |
+        https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
+
+    - question: "In which of these cases will $result contain the number of affected rows?"
+      answers:
+        - { value: "$result = $conn->executeUpdate('DELETE FROM user WHERE id = 1');", correct: true }
+        - { value: "$result = $conn->executeQuery('DELETE FROM user WHERE id = 1');", correct: false }
+        - { value: "$result = $conn->prepare('DELETE FROM user WHERE id = 1')->execute();", correct: false }
+        - { value: "$result = $conn->delete('user', ['id' => 1]);", correct: true }
+      help: |
+        https://github.com/webmozart/doctrine-dbal/blob/master/lib/Doctrine/DBAL/Connection.php
+
+    - question: "How to find a path associated route ?"
+      answers:
+        - { value: "by using the following command : php bin/console router:match /blog/my-latest-post", correct: true }
+        - { value: "by using the following command : php bin/console debug:router:match /blog/my-latest-post", correct: false }
+        - { value: "by using the following command : php bin/console debug:router-match /blog/my-latest-post", correct: false }
+        - { value: "it's not possible", correct: false }
+      help: |
+        http://symfony.com/doc/current/routing/debug.html
+
+    - question: |
+        Consider the following code snippet:
+
+        # web/app.php
+        use Symfony\Component\HttpFoundation\Request;
+
+        $loader = require __DIR__.'/../vendor/autoload.php';
+
+        $kernel = new AppKernel('prod', false);
+
+        $request = Request::createFromGlobals();
+        $response = $kernel->handle($request);
+        $response->send();
+        $kernel->terminate($request, $response);
+      answers:
+        - { value: "The application kernel", correct: false }
+        - { value: "The application main script", correct: false }
+        - { value: "The application runner", correct: false }
+        - { value: "The application gateway", correct: false }
+        - { value: "The application front controller", correct: true }
+      help: |
+        https://symfony.com/doc/3.4/configuration/front_controllers_and_kernel.html#the-front-controller
+
+    - question: "What is the aim of the Symfony\\Component\\HttpKernel\\EventListener\\RouterListener::onKernelRequest() listener on kernel.request event?"
+      answers:
+        - { value: "Checks if the user is allowed to use the current route.", correct: false }
+        - { value: "Initializes the context from the request and sets request attributes based on a matching route.", correct: true }
+        - { value: "Find the correct URL to generate for a route to create a redirect response.", correct: false }
+      help: |
+        https://api.symfony.com/3.0/Symfony/Component/HttpKernel/EventListener/RouterListener.html
+
+    - question: |
+        Can you use the Symfony\Bundle\FrameworkBundle\Controller\Controller::render() or Symfony\Bundle\FrameworkBundle\Controller\AbstractController::render() method with an existing Response?
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        For 3.0: https://github.com/symfony/symfony/blob/3.0/src/Symfony/Bundle/FrameworkBundle/Controller/Controller.php#L183
+        For 4.0: https://github.com/symfony/symfony/blob/4.0/src/Symfony/Bundle/FrameworkBundle/Controller/ControllerTrait.php#L220
+        For 5.0: https://github.com/symfony/symfony/blob/5.0/src/Symfony/Bundle/FrameworkBundle/Controller/AbstractController.php#L255
+
+    - question: |
+        How to access $_GET data when using a Symfony\Component\HttpFoundation\Request $request object?
+      answers:
+        - { value: "$request->getQueryData()", correct: false }
+        - { value: "$request->getGetData()", correct: false }
+        - { value: "$request->query", correct: true }
+        - { value: "$request->getData()", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
+
+    - question: |
+        What is the use of the default_protocol option of the Symfony\Component\Form\Extension\Core\Type\UrlType form type ?
+      answers:
+        - { value: "To force the submitted value to begin with a given URI scheme (eg. http://).", correct: false }
+        - { value: "To render the input with the placeholder property containing the value of the option.", correct: false }
+        - { value: "To prepend the submitted value with an URI scheme (eg. http://) if it does not begin with one.", correct: true }
+      help: |
+        http://symfony.com/doc/current/reference/forms/types/url.html
+
+    - question: "PHP is run on...?"
+      answers:
+        - { value: "Client browser", correct: false }
+        - { value: "Client browser and Web server", correct: false }
+        - { value: "Web server", correct: true }
+      help: |
+        http://php.net/
+
+    - question: "Which filter replace underscores by spaces, lowercase a whole string and put an uppercase for the first letter of the first word?"
+      answers:
+        - { value: "{{ var|capitalize }}", correct: false }
+        - { value: "{{ var|title }}", correct: false }
+        - { value: "{{ var|upper }}", correct: false }
+        - { value: "{{ var|humanize }}", correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/twig_reference.html#humanize
+
+    - question: "Which type of association is not possible on a mapped superclass?"
+      answers:
+        - { value: "Many-To-Many associations are not possible on a mapped superclass which is the owning side.", correct: false }
+        - { value: "Many-To-One associations are not possible on a mapped superclass.", correct: false }
+        - { value: "One-To-One associations are not possible on a mapped superclass.", correct: false }
+        - { value: "One-To-Many associations are not possible on a mapped superclass.", correct: true }
+      help: |
+        http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#mapped-superclasses
+
+    - question: |
+        What is the main purpose of the eraseCredentials() method from the Symfony\Component\Security\Core\User\UserInterface?
+      answers:
+        - { value: "Reset user's credentials from database", correct: false }
+        - { value: "Reload user from database", correct: false }
+        - { value: "Remove sensitive data from the user", correct: true }
+        - { value: "Disable user's account", correct: false }
+      help: |
+        http://api.symfony.com/3.1/Symfony/Component/Security/Core/User/UserInterface.html
+
+    - question: "By default, what is the form field containing the CSRF token?"
+      answers:
+        - { value: "_token", correct: true }
+        - { value: "_secret", correct: false }
+        - { value: "ThisTokenIsNotSoSecretChangeIt", correct: false }
+        - { value: "_csrf", correct: false }
+      help: |
+        http://symfony.com/doc/current/security/csrf.html#csrf-protection-in-symfony-forms
+
+    - question: "Which is the interface used for all security authentication listeners?"
+      answers:
+        - { value: Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListenerInterface, correct: false }
+        - { value: Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface, correct: false }
+        - { value: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface, correct: true }
+        - { value: Symfony\Component\Security\Guard\GuardAuthenticatorInterface, correct: false }
+      help: |
+        http://symfony.com/doc/current/security/custom_authentication_provider.html#the-factory
+        http://api.symfony.com/3.1/Symfony/Bundle/SecurityBundle/DependencyInjection/Security/Factory/SecurityFactoryInterface.html
+
+    - question: "Does Monolog implement the PSR-3 interface?"
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        https://github.com/Seldaek/monolog
+        https://www.php-fig.org/psr/psr-3/
+
+    - question: "What is the tag to use a custom processor for logging?"
+      answers:
+        - { value: "kernel_processor", correct: false }
+        - { value: "kernel.processor", correct: false }
+        - { value: "processor", correct: false }
+        - { value: "monolog.processor", correct: true }
+        - { value: "monolog_processor", correct: false }
+        - { value: "logger.processor", correct: false }
+      help: |
+        http://symfony.com/doc/current/reference/dic_tags.html#monolog-processor
+
+    - question: "What is the listener that handles security exceptions and when appropriate, helps the user to authenticate?"
+      answers:
+        - { value: Symfony\Component\Security\Http\Firewall\AuthenticationListener, correct: false }
+        - { value: Symfony\Component\Security\Http\Firewall\AuthListener, correct: false }
+        - { value: Symfony\Component\Security\Http\Firewall\SecurityListener, correct: false }
+        - { value: Symfony\Component\Security\Http\Firewall\ExceptionListener, correct: true }
+      help: |
+        http://api.symfony.com/master/Symfony/Component/Security/Http/Firewall/ExceptionListener.html
+
+    - question: "Which of the following sentences are true ?"
+      answers:
+        - { value: "TelType form field allows to use HTML5 input type tel and trigger some basic validation on the entered phone number", correct: false }
+        - { value: "PhoneType form field only allows to use HTML5 input type tel", correct: false }
+        - { value: "PhoneType form field allows to use HTML5 input type tel and trigger some basic validation on the entered phone number", correct: false }
+        - { value: "TelType form field only allows to use HTML5 input type tel", correct: true }
+      help: |
+        https://symfony.com/doc/3.4/reference/forms/types/tel.html
+
+#    - question: "Which of the following are not true about streams ?"
+#      answers:
+#        - { value: "They can be filtered.", correct: false }
+#        - { value: "They are always seekable.", correct: true }
+#        - { value: "When used properly, they significantly reduce memory consumption.", correct: false }
+#        - { value: "They are always bi-directional.", correct: false }
+#        - { value: "They can be applied to any data source.", correct: true }
+#      help: |
+#        http://php.net/manual/en/book.stream.php
+
+#    - question: "What is the default change tracking policy?"
+#      answers:
+#        - { value: "NOTIFY", correct: false }
+#        - { value: "DEFERRED_EXPLICIT", correct: false }
+#        - { value: "DEFERRED_IMPLICIT", correct: true }
+#      help: |
+#        http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/change-tracking-policies.html#deferred-implicit
+
+    - question: "Which of the following is the AccessDecisionManager default strategy?"
+      answers:
+        - { value: "unanimous", correct: false }
+        - { value: "consensus", correct: false }
+        - { value: "affirmative", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/security/authorization.html#access-decision-manager
+
+    - question: |
+        In the PHP script below, what line of code should be substituted with /** line **/ to achieve an output of eeeeee?"
+        <?php
+        function sortByLength($a, $b)
+        {
+            $lenA = strlen($a);
+            $lenB = strlen($b);
+
+            if ($lenA == $lenB) { return 0; }
+
+            /** line **/
+        }
+
+        $values = [
+            'ccc',
+            'a',
+            'eeeeee',
+            'dddd',
+            'bb',
+            'fffff'
+        ];
+
+        usort($values, 'sortByLength');
+        echo $values[5];
+      answers:
+        - { value: "return $lenA < $lenB ? 1 : -1;", correct: false }
+        - { value: "return $lenB <=> $lenA;", correct: false }
+        - { value: "return $lenA <=> $lenB;", correct: true }
+        - { value: "return $lenA < $lenB ? 0 : -1;", correct: false }
+      help: |
+        https://php.net/array
+
+    - question: "In Symfony 5 where is defined the render() method available for any controller following Symfony best practises?"
+      answers:
+        - { value: "AbstractController", correct: true }
+        - { value: "ServiceContainerAware", correct: false }
+        - { value: "Controller", correct: false }
+        - { value: "ControllerTrait", correct: false }
+      help: |
+        See symfony repo on github
+
+    - question: |
+        Which of the following methods should be defined in order to implement the Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface?
+      answers:
+        - { value: "public function authenticate(TokenInterface $token);", correct: true }
+        - { value: "public function validate(TokenInterface $token);", correct: false }
+        - { value: "public function check(TokenInterface $token);", correct: false }
+        - { value: "public function supports(TokenInterface $token);", correct: true }
+      help: |
+        http://symfony.com/doc/current/security/custom_authentication_provider.html#the-authentication-provider
+        http://api.symfony.com/3.1/Symfony/Component/Security/Core/Authentication/Provider/AuthenticationProviderInterface.html
+
+    - question: |
+        What is the output of the following PHP script?
+
+        <?php
+        $filenames = [
+            'img12.png',
+            'img7.png',
+            'img21.png',
+            'img1.png'
+        ];
+
+        natsort($filenames);
+        $values = array_values($filenames);
+
+        echo $values[1];
+      answers:
+        - { value: "igm1.png", correct: false }
+        - { value: "img12.png", correct: false }
+        - { value: "img7.png", correct: true }
+        - { value: "An error", correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/en/function.natsort.php
+
+    - question: |
+        What is the aim of the Symfony\Component\HttpKernel\EventListener\FragmentListener::onKernelRequest() listener on kernel.request event?
+      answers:
+        - { value: "Handle as content all files to let user download them.", correct: false }
+        - { value: "Handle as content all image, css, javascript that not require security.", correct: false }
+        - { value: "Handle as content all image, css, javascript that require security.", correct: false }
+        - { value: "Handle as content fragments by this listener all URL paths starting with /_fragment.", correct: true }
+      help: |
+        https://api.symfony.com/3.0/Symfony/Component/HttpKernel/EventListener/FragmentListener.html
+
+    - question: |
+        Will the following code trigger an error if the /tmp/photos directory already exists ?
+
+        $fs = new Filesystem();
+        $fs->mkdir('/tmp/photos', 0700);
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/filesystem.html#mkdir
+
+    - question: "What are the HTTP status codes for Success?"
+      answers:
+        - { value: "5xx", correct: false }
+        - { value: "1xx", correct: false }
+        - { value: "3xx", correct: false }
+        - { value: "4xx", correct: false }
+        - { value: "2xx", correct: true }
+      help: |
+        https://tools.ietf.org/html/rfc2616#section-6.1.1
+
+    - question: |
+        How could you simulate a GET request to /hello-world
+      answers:
+        - { value: "$request = Request::create('/hello-world');", correct: true }
+        - { value: "$request = Request::create(null,'/hello-world');", correct: false }
+        - { value: "$request = Request::create('/hello-world','GET');", correct: true }
+        - { value: "$request = Request::create('GET','/hello-world');", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/http_foundation.html#simulating-a-request
+        http://api.symfony.com/3.1/Symfony/Component/HttpFoundation/Request.html#method_create
+
+    - question: "Which of the following are valid block names ?"
+      answers:
+        - { value: "foo_bar", correct: true }
+        - { value: "123foo", correct: false }
+        - { value: "foo.bar", correct: false }
+        - { value: ".foo", correct: false }
+        - { value: "-foo", correct: false }
+        - { value: "foo123", correct: true }
+        - { value: "_foo", correct: true }
+      help: |
+        https://twig.symfony.com/doc/1.x/tags/block.html
+
+    - question: |
+        You can change where the login form redirects after a successful login using the various config options. In case no previous URL was stored in the session, you may wish to try using the HTTP_REFERER instead. Which security.yml parameter allows you to use the Referer HTTP header?
+      answers:
+        - { value: "use_referer: true", correct: true }
+        - { value: "referer: ~", correct: false }
+      help: |
+        http://symfony.com/doc/current/security/form_login.html#using-the-referring-url
+
+    - question: "Which method is to be implemented from a ServiceSubscriberInterface?"
+      answers:
+        - { value: "public function setSubscribedServices()", correct: false }
+        - { value: "public static function getSubscribedServices()", correct: true }
+        - { value: "public static function addSubscribedService()", correct: false }
+        - { value: "public static function setSubscribedServices()", correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.4/src/Symfony/Contracts/Service/ServiceSubscriberInterface.php
+
+    - question: "Which method is used to disable fetching output and error output from the underlying process ?"
+      answers:
+        - { value: The Symfony\Component\Process::output method, correct: false }
+        - { value: The Symfony\Component\Process::fetchOutput method, correct: false }
+        - { value: The Symfony\Component\Process::setOutput method, correct: false }
+        - { value: The Symfony\Component\Process::disableOutput method, correct: true }
+      help: |
+        http://symfony.com/doc/current/components/process.html#disabling-output
+        http://api.symfony.com/3.1/Symfony/Component/Process/Process.html#method_disableOutput
+
+    - question: |
+        What is the first argument of the Symfony\Component\Config\FileLocator::locate method?
+      answers:
+        - { value: "The name of the file to look for.", correct: true }
+        - { value: "The name of the configuration value to look for.", correct: false }
+        - { value: "The type of file to look for.", correct: false }
+        - { value: "The name of the directory to look for.", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/config/resources.html#locating-resources
+
+    - question: "Which of the followings are not validation constraints?"
+      answers:
+        - { value: "Password", correct: true }
+        - { value: "File", correct: false }
+        - { value: "All", correct: false }
+        - { value: "Search", correct: true }
+      help: |
+        http://symfony.com/doc/current/reference/constraints.html
+
+    - question: "Identify the best approach to compare two variables in a binary-safe fashion"
+      answers:
+        - { value: "Using str_sompare()", correct: false }
+        - { value: "Using strcmp()", correct: true }
+        - { value: "Using == operator", correct: false }
+        - { value: "Using === operator", correct: true }
+        - { value: "Using strstr()", correct: false }
+      help: |
+        http://www.php.net/strings
+        http://php.net/manual/fr/function.strcmp.php
+        http://php.net/manual/en/language.operators.comparison.php
+        http://php.net/manual/fr/function.strstr.php
+
+    - question: |
+        The default value of the opcache.max_accelerated_files PHP configuration option is 2,000. Is this setting correct for a typical Symfony application?
+      answers:
+        - { value: "Yes, 2,000 is correct.", correct: false }
+        - { value: "No, it's recommended to increase it at least to 20,000.", correct: true }
+        - { value: "No, it's recommended to decrease it to 500 to limit the memory consumption in the server.", correct: false }
+        - { value: "Yes, because PHP increases that limit dynamically when needed.", correct: false }
+      help: |
+        http://symfony.com/doc/current/performance.html
+        http://php.net/manual/fr/opcache.configuration.php#ini.opcache.max-accelerated-files
+
+    - question: "What is the correct way to ignore attributes?"
+      answers:
+        - { value: "$serializer->setIgnoredAttributes(['age']);", correct: false }
+        - { value: "$normalizer->ignoreAttributes(['age']);", correct: false }
+        - { value: "$normalizer->setIgnoredAttributes(['age']);", correct: false }
+        - { value: "$serializer->ignoreAttributes(['age']);", correct: false }
+        - { value: "use the 'ignored_attributes' key of the context", correct: true }
+      help: |
+        https://symfony.com/doc/4.4/components/serializer.html#ignoring-attributes
+        Remove from 5.0 use AbstractNormalizer::IGNORED_ATTRIBUTES
+
+    - question: |
+        Is the following code valid?
+
+        use Symfony\Component\Yaml\Yaml;
+
+        $value = Yaml::parse(file_get_contents('/path/to/file.yml'));
+      answers:
+        - { value: "No", correct: false }
+        - { value: "Yes", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/yaml/introduction.html#reading-yaml-files
+
+    - question: |
+        Is it possible make $tags directly indexed with a specified field ?
+
+        /**
+         * @Entity
+         */
+        class Content
+        {
+            /**
+             * @Id @Column(type="integer")
+             * @GeneratedValue
+             * @var int
+             */
+            private $id;
+
+            /**
+             * @OneToMany(targetEntity="Tag")
+             */
+            private $tags;
+        }
+      answers:
+        - { value: "Yes, by adding the attribute indexBy to the OneToMany annotation", correct: true }
+        - { value: "Yes, by implementing the IndexableInterface", correct: false }
+        - { value: "No", correct: false }
+      help: |
+        http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/tutorials/working-with-indexed-associations.html#mapping-indexed-associations
+
+    - question: "Which of the following statements will display bar ?"
+      answers:
+        - { value: "{{ 0 is not empty ? 'foo' : 'bar' }}", correct: false }
+        - { value: "{{ '0' is not empty ? 'foo' : 'bar' }}", correct: false }
+        - { value: "{{ '0' ? 'foo' : 'bar' }}", correct: true }
+        - { value: "{{ [] ? 'foo' : 'bar' }}", correct: true }
+        - { value: "{{ [] is not empty ? 'foo' : 'bar' }}", correct: true }
+        - { value: "{{ 0 ? 'foo' : 'bar' }}", correct: true }
+        - { value: "{{ '' ? 'foo' : 'bar' }}", correct: true }
+        - { value: "{{ '' is not empty ? 'foo' : 'bar' }}", correct: true }
+      help: |
+        https://twig.symfony.com/doc/1.x/tags/if.html
+        https://github.com/twigphp/Twig/blob/1.x/src/Extension/CoreExtension.php (twig_test_empty)
+
+    - question: |
+        Consider the following PHP code snippet:
+
+        trait HelloTrait
+        {
+            private function hello()
+            {
+                return 'Hello';
+            }
+        }
+
+        class PoliteGreeter
+        {
+            use HelloTrait;
+
+            public function greet($someone)
+            {
+                return $this->hello() . ' '. $someone .'!';
+            }
+        }
+
+        class YoGreeter extends PoliteGreeter
+        {
+            private function hello()
+            {
+                return 'Yo';
+            }
+        }
+
+        $greeter = new YoGreeter();
+        echo $greeter->greet('World');
+
+        What will be the outcome of running this code with PHP 5.4 or greater?
+      answers:
+        - { value: "PHP will raise a Fatal Error preventing the private hello() method from being overriden in the YoGreater class.", correct: false }
+        - { value: "This snippet displays the string Yo World! on the standard output.", correct: false }
+        - { value: "This snippet displays the string Hello World! on the standard output.", correct: true }
+      help: |
+        http://php.net/manual/fr/language.oop5.traits.php
+
+    - question: "All array sorting functions take the array to sort as reference and modify it instead of returning the sorted array"
+      answers:
+        - { value: "True", correct: true }
+        - { value: "False", correct: false }
+      help: |
+        https://www.php.net/manual/en/array.sorting.php
+
+    - question: |
+        Given the following two routes, what controller will be executed for the URL /book/123?
+
+        # app/config/routing.yml
+         book_detail_section:
+             path:     /book/{id}/{section}
+             defaults: { _controller: AppBundle:Book:detailSection, section: home }
+         book_detail:
+             path:      /book/{id}
+             defaults:  { _controller: AppBundle:Book:detail }
+      answers:
+        - { value: "Error: The routing file contains unsupported keys for “defaults", correct: false }
+        - { value: "Error: No route found", correct: false }
+        - { value: "AppBundle:Book:detail", correct: false }
+        - { value: "AppBundle:Book:detailSection", correct: true }
+      help: |
+        https://symfony.com/doc/3.4/routing.html#routing-examples
+
+    - question: |
+        Consider the following code snippet:
+
+        $iterator = new LimitIterator(
+            new InfiniteIterator(
+                new ArrayIterator(range('a', 'z'))
+            ),
+            10,
+            2
+        );
+
+        print_r(iterator_to_array($iterator));
+
+        What is the expected output when executing this script?
+      answers:
+        - { value: "Array
+                    (
+                        [10] => k
+                        [11] => l
+                    )", correct: true }
+        - { value: "Array
+                    (
+                        [0] => a
+                        [1] => b
+                        [2] => c
+                        [3] => d
+                        [4] => e
+                        [5] => f
+                        [6] => g
+                        [7] => h
+                        [8] => i
+                        [9] => j
+                    )", correct: false }
+        - { value: "Array
+                    (
+                        [0] => a
+                        [1] => b
+                    )", correct: false }
+        - { value: "Array
+                    (
+                        [0] => z
+                        [1] => y
+                        [2] => x
+                        [3] => w
+                        [4] => v
+                        [5] => u
+                        [6] => t
+                        [7] => s
+                        [8] => r
+                        [9] => q
+                    )", correct: false }
+      help: |
+        http://php.net/manual/en/spl.iterators.php
+        http://php.net/manual/fr/book.spl.php
+        http://php.net/iterator-to-array
+        http://php.net/LimitIterator
+        http://php.net/InfiniteIterator
+        http://php.net/ArrayIterator
+
+    - question: "Which of the following is the correct usage for serializing the $person object into json?"
+      answers:
+        - { value: "$serializer->serialize($person, 'json');", correct: true }
+        - { value: "$serializer->serialize('json', $person);", correct: false }
+        - { value: "$serializer->serialize($person)->toJson();", correct: false }
+        - { value: "$serializer->toJson($person);", correct: false }
+      help: |
+        http://symfony.com/doc/current/components/serializer.html#serializing-an-object
+
+    - question: |
+        Consider the following PHP script.
+
+        <?php
+
+        function square($val)
+        {
+            return $val ** 2;
+        }
+
+        $arr = [1, 2, 3, 4];
+
+        /** line **/
+
+        $i = 0;
+        foreach ($squares as $value) {
+            if ($i++ > 0) {
+                echo ".";
+            }
+
+            echo $value;
+        }
+
+        What /** line **/ should be used to apply a callback function to every element of an array?
+      answers:
+        - { value: "$squares = call_user_func_array('square', $arr);", correct: false }
+        - { value: "$squares = array_walk($arr, 'square');", correct: false }
+        - { value: "$squares = array_map('square', $arr);", correct: true }
+        - { value: "$squares = call_user_func_array($arr, 'square');", correct: false }
+      help: |
+        https://php.net/array
+        https://php.net/manual/en/function.array-map.php
+
+    - question: |
+        Consider the following HTML form snippet:
+
+        <form method="POST" action="/">
+            <input type="hidden" name="_method" value="PUT" />
+        </form>
+
+        Which HTTP method will be used in the Symfony Request object assuming HTTP methods overriding setting is turned on?
+      answers:
+        - { value: "POST", correct: false }
+        - { value: "GET", correct: false }
+        - { value: "PUT", correct: true }
+        - { value: "PATCH", correct: false }
+      help: |
+        http://symfony.com/doc/current/book/forms.html#changing-the-action-and-method-of-a-form
+        http://symfony.com/doc/current/book/forms.html#book-forms-changing-action-and-method
+
+    - question: "Is it possible to change the location of the cache?"
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        http://symfony.com/doc/current/cookbook/configuration/override_dir_structure.html#override-the-cache-directory
+
+    - question: |
+        What are the methods of Symfony\Component\Form\FormTypeInterface?
+      answers:
+        - { value: "public function getDefaultOptions(OptionsResolverInterface $resolver);", correct: false }
+        - { value: "public function buildView(FormView $view, FormInterface $form, array $options);", correct: true }
+        - { value: "public function getType();", correct: false }
+        - { value: "public function getName();", correct: false }
+        - { value: "public function configureOptions(OptionsResolver $resolver);", correct: true }
+        - { value: "public function buildForm(FormBuilderInterface $builder, array $options); ", correct: true }
+        - { value: "public function getDefaultOptions(OptionsResolver $resolver);", correct: false }
+        - { value: "public function configureOptions(OptionsResolverInterface $resolver);", correct: false }
+        - { value: "public function buildView(FormInterface $form, array $options);", correct: false }
+        - { value: "public function finishView(FormView $view, array $options);", correct: false }
+        - { value: "public function buildForm(FormBuilder $builder, array $options);", correct: false }
+        - { value: "public function finishView(FormView $view, FormInterface $form, array $options);", correct: true }
+        - { value: "public function getParentType();", correct: false }
+        - { value: "public function getBlockPrefix();", correct: true }
+        - { value: "public function getParent();", correct: true }
+      help: |
+        http://api.symfony.com/3.0/Symfony/Component/Form/FormTypeInterface.html
+
+    - question: "What is the base class for events thrown in the HttpKernel component."
+      answers:
+        - { value: Symfony\Component\HttpKernel\KernelEvent, correct: false }
+        - { value: Symfony\Component\HttpKernel\Event\HttpKernelEvent, correct: false }
+        - { value: Symfony\Component\HttpKernel\BaseKernelEvent, correct: false }
+        - { value: Symfony\Component\HttpKernel\HttpKernelEvent, correct: false }
+        - { value: Symfony\Component\HttpKernel\Event\BaseKernelEvent, correct: false }
+        - { value: Symfony\Component\HttpKernel\Event\KernelEvent, correct: true }
+      help: |
+        https://api.symfony.com/master/Symfony/Component/HttpKernel/Event/KernelEvent.html
+
+    - question: "I am correctly logged in, but I am not fully authenticated, what is the main cause?"
+      answers:
+        - { value: "I'm connected with an API Token", correct: false }
+        - { value: "My User have no roles", correct: true }
+        - { value: "We're always fully autenticated", correct: false }
+        - { value: "I didn't tick the 'Remember me' checkbox", correct: false }
+      help: |
+        http://symfony.com/doc/current/security.html#roles
+
+    - question: |
+        Considering the following code, which assertions are true?
+
+        $object = $this->entityManager->getReference('App\Entity\User', 1);
+      answers:
+        - { value: $object is an instance of Doctrine\ORM\Reference., correct: false }
+        - { value: $object is an instance of App\Entity\User., correct: true }
+        - { value: $object is an instance of Doctrine\ORM\Proxy\Proxy., correct: true }
+        - { value: $object is an instance of Proxies\__CG__\App\Entity\User, correct: true }
+      help: |
+        When getting a reference, the doctrine proxy generator will create a Proxies\__CG__\App\Entity\User class which extends App\Entity\User class and implements the Doctrine\ORM\Proxy\Proxy interface. Doctrine\ORM\Reference does not exist.
+
+        You can view the code for these auto-generated classes in var/cache/dev/doctrine/orm/Proxies.
+
+    - question: |
+        Consider the following code snippet:
+
+        $a = 4;
+        $b = $a+++$a++;
+
+        Which of the following is the correct evaluated expression for the $b variable value?
+      answers:
+        - { value: "$b = 4 + 5;", correct: true }
+        - { value: "$b = 4 + 4;", correct: false }
+        - { value: "$b = 5 + 7;", correct: false }
+        - { value: "$b = 5 + 5;", correct: false }
+        - { value: "$b = 5 + 6;", correct: false }
+      help: |
+        https://secure.php.net/manual/en/language.operators.increment.php
+
+    - question: |
+        You query for an object joining on a single-valued association object that is configured LAZY.
+      answers:
+        - { value: "Doctrine will eager load this association object.", correct: true }
+        - { value: "Doctrine will create a proxy of this association object.", correct: false }
+      help: |
+        In this case we are explicitly joining this association, so it will be eager loaded.
+        http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/advanced-configuration.html#association-proxies
+
+    - question: |
+        Which of the following are valid statements to generate an ESI tag from Twig?
+      answers:
+      - { value: "{{ render('AppBundle:News:latest', { 'maxPerPage': 5 }, esi=true) }}", correct: true }
+      - { value: "{{ render_esi(controller('AppBundle:News:latest', { 'maxPerPage': 5 })) }}", correct: true }
+      - { value: "{{ render_esi(url('latest_news', { 'maxPerPage': 5 })) }}", correct: true }
+      - { value: "{{ esi(path('latest_news', { 'maxPerPage': 5 })) }}", correct: false }
+      - { value: "{{ render('AppBundle:News:latest', { 'maxPerPage': 5 }) }}", correct: false }
+      help: |
+        https://symfony.com/doc/current/http_cache/esi.html
+
+#    - question: |
+#        With the following service definition how is it possible to create an alias of the foo service?
+#      answers:
+#        - { value: "
+#              $data = [
+#                'full_name' => 'Pierre Dupont',
+#                'location' => [
+#                  'city' => 'Paris',
+#                  'country' => 'France',
+#                ],
+#              ];"
+#            correct: false
+#          }
+#        - { value: "$data = 'foo bar';"
+#            correct: false
+#          }
+#        - { value: "$data = new SomeClass('some string');"
+#            correct: false
+#          }
+#        - { value: "$data = function ($content) {
+#                return trim(strtoupper(strip_tags($content)));
+#              };"
+#            correct: true
+#          }
+#      help: |
+#        http://php.net/manual/en/book.json.php
+#        http://php.net/json-encode
+
+    - question: |
+        Is there any required header in the request ?
+      answers:
+      - { value: "No", correct: false }
+      - { value: "Yes", correct: true }
+      help: |
+        https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.2
+
+    - question: |
+        What will be the duration of this test?
+
+
+        use PHPUnit\Framework\TestCase;
+        use Symfony\Component\Stopwatch\Stopwatch;
+
+        /**
+         * @group time-sensitive
+         */
+        class MyTest extends TestCase
+        {
+            public function testSomething()
+            {
+                $stopwatch = new Stopwatch();
+
+                $stopwatch->start('event');
+                sleep(10);
+                $duration = $stopwatch->stop('event')->getDuration();
+
+                $this->assertEquals(10000, $duration);
+            }
+        }
+      answers:
+      - { value: "< 10s", correct: false }
+      - { value: "> 10s", correct: true }
+      - { value: "This code is invalid.", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/phpunit_bridge.html#clock-mocking
+        https://symfony.com/doc/current/components/stopwatch.html
+
+    - question: |
+        Which of the following classes are Twig loaders available by default?
+      answers:
+      - { value: "ChainLoader", correct: true }
+      - { value: "ArrayLoader", correct: true }
+      - { value: "DoctrineLoader", correct: false }
+      - { value: "FilesystemLoader", correct: true }
+      - { value: "CacheLoader", correct: false }
+      help: |
+        https://github.com/twigphp/Twig/tree/2.x/src/Loader
+
+    - question: |
+        What is the output ?
+
+        <?php
+        $a = 4 << 2 + 1;
+        echo $a;
+        ?>
+      answers:
+      - { value: "9", correct: false }
+      - { value: "32", correct: true }
+      - { value: "16", correct: false }
+      - { value: "1", correct: false }
+      - { value: "17", correct: false }
+      help: |
+        http://php.net/operators.precedence
+
+    - question: |
+        It is possible to set the PHP error levels that throw an exception when a PHP error occurs ?
+      answers:
+      - { value: "No, It's not possible.", correct: false }
+      - { value: "Yes, with the Symfony\\Component\\Debug\\ErrorHandler::throwAt method", correct: true }
+      - { value: "Yes, with the Symfony\\Component\\Debug\\ErrorHandler::setErrorReporting method", correct: false }
+      - { value: "Yes, with the Symfony\\Component\\Debug\\ErrorHandler::setErrorLevel method", correct: false }
+      help: |
+        http://api.symfony.com/3.1/Symfony/Component/Debug/ErrorHandler.html#method_throwAt
+
+    - question: |
+        In which cases the following call will return true?
+      answers:
+      - { value: "$resolver->setRequired('username');", correct: false }
+      - { value: "$resolver->setDefined(array('username'));", correct: true }
+      - { value: "$resolver->setDefault('username');", correct: false }
+      - { value: "$resolver->setDefined('username');", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/options_resolver.html#options-without-default-values
+
+    - question: |
+        Which types of argument accepts the Symfony\Component\Process\InputStream\write() method?
+      answers:
+      - { value: "Arrays", correct: false }
+      - { value: "Stream resources", correct: true }
+      - { value: "Scalars", correct: true }
+      - { value: "Traversable objects", correct: true }
+      - { value: "Boolean", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/process.html#streaming-to-the-standard-input-of-a-process
+        http://api.symfony.com/3.2/Symfony/Component/Process/InputStream.html#method_write
+
+    - question: |
+        What is the output of the following PHP code?
+
+        <?php
+        $myArray = array(
+            0,
+            NULL,
+            '',
+            '0',
+            -1
+        );
+
+        echo count(
+            array_filter($myArray)
+        );
+        ?>
+      answers:
+      - { value: "4", correct: false }
+      - { value: "1", correct: true }
+      - { value: "3", correct: false }
+      - { value: "5", correct: false }
+      - { value: "An error", correct: false }
+      help: |
+        http://php.net/array
+        http://php.net/manual/en/function.array-filter.php
+        http://php.net/manual/en/function.count.php

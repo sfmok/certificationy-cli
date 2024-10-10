@@ -1,0 +1,194 @@
+category: PHP > Object Oriented Programming
+questions:
+    - question: |
+        What three special methods can be used to perform special logic in the event a particular accessed method or member variable is not found ?
+      answers:
+        - { value: "__read($var)", correct: false }
+        - { value: "__write($var)", correct: false }
+        - { value: "__get($var)", correct: true }
+        - { value: "__call($var, $args)", correct: true }
+        - { value: "__set($var)", correct: false }
+        - { value: "__set($var, $arg)", correct: true }
+      help: |
+        https://php.net/manual/en/language.oop5.magic.php
+
+    - question: |
+        Starting from which version of PHP is this code valid?
+        
+        class A
+        {
+            const foo = 1/2;
+            const bar = 100 * self::foo;
+        }
+      answers:
+        - { value: "7.1", correct: false }
+        - { value: "5.5", correct: false }
+        - { value: "5.4", correct: false }
+        - { value: "5.6", correct: true }
+        - { value: "7.0", correct: false }
+      help: |
+        https://php.net/manual/en/language.oop5.constants.php
+
+    - question: |
+        Is it allowed to make an interface use traits?
+      answers:
+        - { value: "yes", correct: false }
+        - { value: "no", correct: true }
+      help: |
+        https://php.net/manual/fr/language.oop5.interfaces.php
+
+    - question: |
+        What statement _______ is missing for this code to display 'bar' as a result ?
+
+        class A
+        {
+            protected static $attr = 'foo';
+            public static function getAttr()
+            {
+                return __________;
+            }
+        }
+
+        class B extends A
+        {
+            protected static $attr = 'bar';
+        }
+
+        echo B::getAttr();
+      answers:
+        - { value: "self::$attr", correct: false }
+        - { value: "$this->attr", correct: false }
+        - { value: "$this->$attr", correct: false }
+        - { value: "static::$attr", correct: true }
+      help: |
+        https://php.net/manual/en/language.oop5.paamayim-nekudotayim.php
+
+    - question: |
+        Is it possible to customize the output of the serialize($obj) method ?
+      answers:
+        - { value: "No", correct: false }
+        - { value: "Yes", correct: true }
+      help: |
+        https://php.net/manual/en/function.serialize
+        https://php.net/manual/en/class.serializable.php
+
+    - question: |
+        Consider the following PHP code:
+        
+        trait FooTrait
+        {
+            private function foo()
+            {
+                return 'Hello';
+            }
+        }
+
+        interface BarInterface
+        {
+            use FooTrait;
+
+            public function bar();
+        }
+
+        class Main implements BarInterface
+        {
+            public function bar()
+            {
+                return 'World!';
+            }
+
+            public function main()
+            {
+                return $this->foo().' '.$this->bar();
+            }
+        }
+
+        $main = new Main();
+        echo $main->main();
+        
+        What will be the outcome of executing this code snippet?
+      answers:
+        - { value: The script will successfully run and output the string `Hello World!*., correct: false }
+        - { value: PHP will raise a Fatal Error telling method foo() cannot be declared private in the FooTrait trait., correct: false }
+        - { value: PHP will raise a Fatal Error telling traits are not allowed inside interfaces., correct: true }
+      help: |
+        https://php.net/manual/fr/language.oop5.traits.php
+        https://php.net/manual/fr/language.oop5.interfaces.php
+
+    - question: |
+        Consider the following PHP code:
+        
+        namespace Application\Exception;
+  
+        class Exception extends \Exception
+        {
+        }
+        
+        Is this class definition valid?
+      answers:
+        - { value: Yes, correct: true }
+        - { value: No, correct: false }
+      help: |
+        https://php.net/manual/en/language.namespaces.php
+
+    - question: |
+        What will be the output of the following code?
+        
+        class Base
+        {
+           public function sayFoo()
+           {
+              echo 'Bar';
+           }
+        }
+        
+        trait SayFoo
+        {
+            public function sayFoo()
+            {
+                parent::sayFoo();
+                echo 'Foo';
+            }
+        }
+        
+        class Foo extends Base
+        {
+            use SayFoo;
+        }
+        
+        $foo = new Foo();
+        $foo->sayFoo();
+      answers:
+        - { value: BarFoo, correct: true }
+        - { value: Foo, correct: false }
+        - { value: FooBar, correct: false }
+        - { value: Bar, correct: false }
+      help: |
+        https://php.net/manual/en/language.oop5.traits.php
+
+    - question: |
+        When checking to see if two variables contain the same instance of an object, which of the following comparisons should be used ?
+      answers:
+        - { value: ===, correct: true }
+        - { value: instanceof, correct: false }
+        - { value: ==, correct: false }
+        - { value: equals, correct: false }
+      help: |
+        https://php.net/manual/en/language.oop5.object-comparison.php
+
+    - question: "Can an interface extend another interface?"
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        https://php.net/manual/en/language.oop5.interfaces.php
+
+    - question: |
+        What is the purpose of the :: operator when accessing a method?
+      answers:
+        - { value: ":: is used to encapsulate the method.", correct: false }
+        - { value: ":: allows access to static methods.", correct: true }
+        - { value: ":: provides access to private methods.", correct: false }
+        - { value: ":: is used to specify the namespace.", correct: false }
+      help: |
+        https://php.net/manual/en/language.oop5.static.php

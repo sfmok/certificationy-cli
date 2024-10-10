@@ -1,0 +1,74 @@
+category: Symfony > Components > Expression Language
+questions:
+    - question: |
+        What are the arguments of the register() method used to register a function?
+      answers:
+        - { value: |
+              string   $name      The function name
+              callable $compiler  A callable able to compile the function
+              callable $evaluator A callable able to evaluate the function
+          , correct: true }
+        - { value: |
+              callable $compiler  A callable able to compile the function
+              callable $evaluator A callable able to evaluate the functio
+          , correct: false }
+        - { value: |
+              CompilerInterface  $compiler  A compiler able to compile the function
+              EvaluatorInterface $evaluator An evaluator able to evaluate the function
+          , correct: false }
+        - { value: |
+              string             $name      The function name
+              CompilerInterface  $compiler  A compiler able to compile the function
+              EvaluatorInterface $evaluator An evaluator able to evaluate the function
+          , correct: false }
+      help: |
+        https://symfony.com/doc/current/components/expression_language/extending.html#registering-functions
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/ExpressionLanguage/ExpressionLanguage.php#L110
+
+    - question: |
+        What are the methods of Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface?
+      answers:
+        - { value: |
+              getFunctions();
+              addFunction(ExpressionFunction $function);
+          , correct: false }
+        - { value: |
+              getFunctions();
+              register($name, callable $compiler, callable $evaluator);
+          , correct: false }
+        - { value: |
+              getFunctions();
+          , correct: true }
+        - { value: |
+              getFunctions();
+              register($name, callable $compiler, callable $evaluator);
+              addFunction(ExpressionFunction $function);
+          , correct: false }
+      help: |
+        https://symfony.com/doc/current/components/expression_language/extending.html#registering-functions
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/ExpressionLanguage/ExpressionLanguage.php#L110
+
+    - question: |
+        What will be displayed by the following code?
+        use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+        $language = new ExpressionLanguage();
+        var_dump($language->compile('1 + 2'));
+      answers:
+        - { value: "integer", correct: false }
+        - { value: "true", correct: false }
+        - { value: "false", correct: false }
+        - { value: "(1 + 2)", correct: true }
+        - { value: "3", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/expression_language.html#usage
+
+    - question: |
+        What are the possibles ways to register new functions in Symfony\Component\ExpressionLanguage\ExpressionLanguage?
+      answers:
+        - { value: "By calling the registerProvider() method.", correct: true }
+        - { value: "By calling the createFunction() method.", correct: false }
+        - { value: "By calling the register() method.", correct: true }
+        - { value: "By calling the setFunctions() method.", correct: true }
+        - { value: "By calling the addFunction() method.", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/expression_language.html#usage

@@ -1,0 +1,78 @@
+category: Symfony > Components > Translation
+questions:
+    - question: "Which of the following are not built-in option variants ?"
+      answers:
+        - { value: "InputOption::VALUE_REQUIRED", correct: false }
+        - { value: "InputOption::VALUE_NONE", correct: false }
+        - { value: "InputOption::VALUE_IS_ARRAY", correct: false }
+        - { value: "InputOption::VALUE_OPTIONAL", correct: false }
+        - { value: "InputOption::VALUE_NOT_REQUIRED", correct: true }
+        - { value: "InputOption::VALUE_IS_MULTIPLE", correct: true }
+      help: |
+        https://symfony.com/doc/current/console/input.html#using-command-options
+
+    - question: |
+        When is executed the Symfony\Component\Console\Command::interact method?
+      answers:
+        - { value: After Symfony\Component\Console\Command::execute method., correct: false }
+        - { value: After Symfony\Component\Console\Command::initialize method., correct: true }
+        - { value: Before Symfony\Component\Console\Command::execute method., correct: true }
+        - { value: Before Symfony\Component\Console\Command::initialize method., correct: false }
+        - { value: After the InputDefinition is validated., correct: false }
+        - { value: Before the InputDefinition is validated., correct: true }
+      help: |
+        https://symfony.com/doc/current/console.html#command-lifecycle
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Console/Command/Command.php#L171
+
+    - question: |
+        What are the console verbosity levels?
+      answers:
+        - { value: OutputInterface::VERBOSITY_NO_DEBUG, correct: false }
+        - { value: OutputInterface::VERBOSITY_VERY_VERBOSE, correct: true }
+        - { value: OutputInterface::VERBOSITY_NONE, correct: false }
+        - { value: OutputInterface::VERBOSITY_DEBUG, correct: true }
+        - { value: OutputInterface::VERBOSITY_QUIET, correct: true }
+        - { value: OutputInterface::VERBOSITY_NORMAL, correct: true }
+        - { value: OutputInterface::VERBOSITY_VERBOSE, correct: true }
+        - { value: OutputInterface::VERBOSITY_VERY_VERY_VERBOSE, correct: false }
+      help: |
+        https://symfony.com/doc/current/console/verbosity.html
+
+    - question: |
+        Which of these events are not built-in?
+      answers:
+        - { value: ConsoleEvents::COMMAND, correct: false }
+        - { value: ConsoleEvents::TERMINATE, correct: false }
+        - { value: ConsoleEvents::EXCEPTION, correct: true }
+        - { value: ConsoleEvents::HANDLE_COMMAND, correct: true }
+        - { value: ConsoleEvents::VIEW, correct: true }
+        - { value: ConsoleEvents::ERROR, correct: false }
+        - { value: ConsoleEvents::SIGNAL, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/console/events.html
+
+    - question: |
+        What is the console option to display debug message verbosity?
+      answers:
+        - { value: --debug, correct: false }
+        - { value: -vvv, correct: true }
+        - { value: --debug-messages, correct: false }
+        - { value: -d, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/console/events.html
+
+    - question: |
+        In a Symfony Standard application, can you use container parameters as the default value of options and arguments? Example:
+        
+        protected function configure()
+        {
+            $this
+                // ...
+                ->addArgument('username', InputArgument::REQUIRED, 'The username.', '%app.default_username%')
+            ;
+        }
+      answers:
+        - { value: No, correct: true }
+        - { value: Yes, correct: false }
+      help: |
+        You can do this if you define the command as a service and inject the container parameter manually. See http://symfony.com/doc/current/console/commands_as_services.html.

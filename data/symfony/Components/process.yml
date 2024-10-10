@@ -1,0 +1,24 @@
+category: Symfony > Components > Process
+questions:
+    - question: |
+        What is returned by the wait() method of Symfony\Component\Process\Process ?
+      answers:
+        - { value: "A Process object", correct: false }
+        - { value: "true or false", correct: false }
+        - { value: "The exitcode of the process", correct: true }
+        - { value: "Nothing", correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/6.2/src/Symfony/Component/Process/Process.php#L398
+        https://symfony.com/doc/current/components/process.html#running-processes-asynchronously
+
+    - question: |
+        Which types of argument accepts the Symfony\Component\Process\InputStream\write() method?
+      answers:
+        - { value: "Arrays", correct: false }
+        - { value: "Stream resources", correct: true }
+        - { value: "Scalars", correct: true }
+        - { value: "Traversable objects", correct: true }
+        - { value: "Boolean", correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Process/InputStream.php#L42
+        https://symfony.com/doc/current/components/process.html#streaming-to-the-standard-input-of-a-process

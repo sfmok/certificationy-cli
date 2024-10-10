@@ -1,0 +1,31 @@
+category: Symfony > Components > Finder
+questions:
+    - question: |
+        It is possible to ignore directories that you don't have permission to read with the Finder ?
+      answers:
+        - { value: "Yes, with the Symfony\\Component\\Finder\\Finder::ignore() mehod", correct: false }
+        - { value: "Yes, with the Symfony\\Component\\Finder\\Finder::ignoreUnreadableDirs() mehod", correct: true }
+        - { value: "It's not possible", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/finder.html#location
+
+    - question: |
+        Which methods belong to Symfony\Component\Finder\Finder class ?
+      answers:
+        - { value: path, correct: true }
+        - { value: notSize, correct: false }
+        - { value: notPath, correct: true }
+        - { value: notName, correct: true }
+        - { value: owner, correct: false }
+        - { value: type, correct: false }
+        - { value: size, correct: true }
+        - { value: name, correct: true }
+        - { value: depth, correct: true }
+        - { value: ignoreDotFiles, correct: true }
+        - { value: ignoreVCS, correct: true }
+        - { value: ignoreVCSIgnored, correct: true }
+        - { value: filter, correct: true }
+        - { value: searchInDirectory, correct: true }
+        - { value: normalizeDir, correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Finder/Finder.php

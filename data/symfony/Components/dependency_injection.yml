@@ -1,0 +1,306 @@
+category: Symfony > Components > Dependency Injection
+questions:
+    - question: "Can you inject a dependency to a service without passing it to the constructor?"
+      answers:
+        - { value: "Yes", correct: true }
+        - { value: "No", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/dependency_injection.html
+        https://symfony.com/doc/current/service_container/injection_types.html
+
+    - question: "Can you inject a dependency to a service without passing it to the constructor?"
+      answers:
+        - { value: "property", correct: true }
+        - { value: "setter", correct: true }
+        - { value: "constructor", correct: true }
+        - { value: "immutable-setter", correct: true }
+      help: |
+        https://symfony.com/doc/current/service_container/injection_types.html
+
+    - question: |
+        Will the following code throw an exception ?
+        
+        services:
+            transformer_html:
+                class:    Acme\Transformer\HtmlTransformer
+            transformer_text:
+                class:    Acme\Transformer\TextTransformer
+            twitter_client:
+                class:    Acme\Model\TwitterClient
+                autowire: true
+        
+        namespace Acme\Model;
+
+        use Acme\Transformer\TransformerInterface;
+
+        class TwitterClient
+        {
+            private $transformer;
+
+            public function __construct(TransformerInterface $transformer)
+            {
+                $this->transformer = $transformer;
+            }
+            // ...
+        }
+      answers:
+        - { value: "yes", correct: true }
+        - { value: "no", correct: false }
+      help: |
+        https://symfony.com/doc/current/service_container/autowiring.html#dealing-with-multiple-implementations-of-the-same-type
+
+    - question: |
+        With the following service definition how is it possible to access the mailer service?
+        
+        services:
+          app.mailer.one:
+            class: AppBundle\OneMailer
+            arguments: [sendmail]
+            public: false
+      
+          app.mailer:
+            alias: app.mailer.one
+      answers:
+        - { value: "$container->get('app.mailer.one');", correct: false }
+        - { value: "It is not possible.", correct: false }
+        - { value: "$container->get('app.mailer');", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/dependency_injection/advanced.html#aliasing
+
+    - question: "Which of these are built-in directives ?"
+      answers:
+        - { value: "import", correct: false }
+        - { value: "security", correct: false }
+        - { value: "parameters", correct: true }
+        - { value: "services", correct: true }
+      help: |
+        http://symfony.com/doc/2.6/book/service_container.html
+
+    - question: "What is the exact meaning of DIC?"
+      answers:
+          - { value: "Dependencies Injected Continuously.", correct: false }
+          - { value: "Dependencies Injection Component", correct: false }
+          - { value: "Dependency Injection Container", correct: true }
+      help: |
+          https://github.com/silexphp/pimple
+          https://fabien.potencier.org/do-you-need-a-dependency-injection-container.html
+
+    - question: |
+        Will the following autowiring declaration work ?
+        
+        services:
+          rot13:
+              class:    Acme\Transformer\Rot13Transformer
+              arguments: [true]
+      
+          rot13_2:
+              class:    Acme\Transformer\Rot13Transformer
+              arguments: [false]
+      
+          twitter_client:
+              class:    Acme\TwitterClient
+              autowire: true
+        
+        namespace Acme;
+
+        use Acme\Transformer\Rot13Transformer;
+
+        class TwitterClient
+        {
+            private $transformer;
+
+            public function __construct(Rot13Transformer $transformer)
+            {
+                $this->transformer = $transformer;
+            }
+
+            public function tweet($user, $key, $status)
+            {
+                $transformedStatus = $this->transformer->transform($status);
+
+                // ... connect to Twitter and send the encoded status
+            }
+        }
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/dependency_injection/autowiring.html
+
+    - question: |
+        Regarding the following code, will the calls directive of service_parent be overridden by the one from service_child ?
+        
+            logger_A:
+                class: Acme\Logger\TextLogger
+            logger_B:
+              class: Acme\Logger\EchoLogger
+        
+            service_parent:
+              abstract: true
+              calls:
+                - ['addLogger', ['@logger_A']]
+        
+            service_child:
+              parent: @service_parent
+              class: Acme\Transformer\TextTransformer
+              calls:
+                - ['addLogger', ['@logger_B']]
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/service_container/parent_services.html
+
+    - question: |
+        What's the difference between findDefinition and getDefinition?
+      answers:
+        - { value: There is no difference, correct: false }
+        - { value: findDefinition doesn't exists, correct: false }
+        - { value: findDefinition Resolves aliases, correct: true }
+        - { value: getDefinition Resolves aliases, correct: false }
+      help: |
+        https://symfony.com/doc/5.0/service_container/definitions.html
+
+    - question: |
+        Is it possible to use a constant in a parameter ?
+      answers:
+        - { value: Yes, in the YAML format (thanks to the expression language component), correct: true }
+        - { value: Yes in XML format, correct: true }
+        - { value: Yes, in PHP, correct: true }
+        - { value: No, correct: false }
+      help: |
+        https://symfony.com/doc/5.0/configuration.html#configuration-parameters
+
+    - question: |
+        Which configuration format is the most efficient for the container when registering new services?
+      answers:
+        - { value: PHP, correct: false }
+        - { value: None of them., correct: true }
+        - { value: XML, correct: false }
+        - { value: YAML, correct: false }
+      help: |
+        https://symfony.com/blog/push-it-to-the-limits-symfony2-for-high-performance-needs#keeping-configuration-in-code-annotations
+
+    - question: "Which mechanism allows to aggregate services by domain in the service container?"
+      answers:
+          - { value: "Scope", correct: false }
+          - { value: "Tag", correct: true }
+          - { value: "Listener", correct: false }
+          - { value: "Abstraction", correct: false }
+      help: |
+          https://symfony.com/doc/current/reference/dic_tags.html
+          https://symfony.com/doc/current/components/dependency_injection/tags.html
+
+    - question: Is it possible to flag a service definition as deprecated ?
+      answers:
+          - { value: Yes, correct: true }
+          - { value: No, correct: false }
+      help: |
+          https://symfony.com/doc/current/reference/dic_tags.html
+          https://symfony.com/doc/current/components/dependency_injection/tags.html
+
+    - question: Which injection types are supported by the Symfony's DIC ?
+      answers:
+          - { value: property, correct: true }
+          - { value: constructor, correct: true }
+          - { value: setter, correct: true }
+      help: |
+        https://symfony.com/doc/current/service_container/injection_types.html
+
+    - question: What is the name of the service that check authorization?
+      answers:
+          - { value: security.checker, correct: false }
+          - { value: security.authorization_manager, correct: false }
+          - { value: security.authorization_checker, correct: true }
+      help: |
+        https://symfony.com/doc/current/security.html
+
+    - question: |
+        Is it possible to autowire the following service ?
+        let's assume that HtmlTransformer implements TransformerInterface
+        
+        services:
+            transformer_html:
+                class:    Acme\HtmlTransformer
+            twitter_client:
+                class:    Acme\TwitterClient
+                autowire: true
+        
+        class TwitterClient
+        {
+            private $transformer;
+
+            public function __construct(TransformerInterface $transformer)
+            {
+                $this->transformer = $transformer;
+            }
+
+            public function tweet($user, $key, $status)
+            {
+                $transformedStatus = $this->transformer->transform($status);
+
+                // ... connect to Twitter and send the encoded status
+            }
+        }
+      answers:
+          - { value: Yes, the autowiring mechanism is smart enough to detect a service definition which implements the TransformerInterface, correct: true }
+          - { value: No, the autowiring mechanism doesn't work with interfaces, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/dependency_injection/autowiring.html#working-with-interfaces
+
+    - question: |
+        What will be the value of the following configuration sample?
+        
+        <parameter key="mailer.transport">
+            sendmail
+        </parameter>
+      answers:
+          - { value: sendmail\n, correct: false }
+          - { value: sendmail, correct: false }
+          - { value: \n sendmail\n, correct: false }
+          - { value: \n   sendmail\n, correct: true }
+      help: |
+        https://symfony.com/doc/current/service_container/parameters.html
+
+#    - question: |
+#        With the following service definition how is it possible to create an alias of the foo service?
+#      answers:
+#        - { value: |
+#              services:
+#                foo:
+#                  class: Example\Foo
+#                  alias:
+#                    - bar
+#            correct: false
+#          }
+#        - { value: |
+#              services:
+#                foo:
+#                  class: Example\Foo
+#                  alias: [bar]
+#            correct: false
+#          }
+#        - { value: |
+#              services:
+#                foo:
+#                  class: Example\Foo
+#                  alias: bar
+#            correct: false
+#          }
+#        - { value: |
+#              services:
+#                foo:
+#                  class: Example\Foo
+#                bar: '@foo'
+#            correct: true
+#          }
+#        - { value: |
+#              services:
+#                foo:
+#                  class: Example\Foo
+#                bar:
+#                  alias: foo
+#            correct: true
+#          }
+#      help: |
+#        http://symfony.com/doc/current/components/dependency_injection/advanced.html#aliasing

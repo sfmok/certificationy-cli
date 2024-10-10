@@ -1,0 +1,24 @@
+category: Symfony > Fullstack > Sensio Framework Extra Bundle
+questions:
+    - question: |
+        Which of theses is the correct way to use the Security annotation to secure a Controller with the ROLE_ADMIN?
+      answers:
+        - { value: "@Security(\"require('ROLE_ADMIN')\")", correct: false }
+        - { value: "@IsGranted(\"ROLE_ADMIN\")", correct: true }
+        - { value: "@Security(\"ROLE_ADMIN\")", correct: false }
+        - { value: "@Security(\"is_granted('ROLE_ADMIN')\")", correct: true }
+      help: |
+        https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/security.html
+
+    - question: |
+        Wich of the following annotations are defined by the SensioFrameworkExtraBundle?
+      answers:
+        - { value: "@Cache", correct: true }
+        - { value: "@ParamConverter", correct: true }
+        - { value: "@Template", correct: true }
+        - { value: "@Route", correct: true }
+        - { value: "@Method", correct: true }
+        - { value: "@Security", correct: true }
+        - { value: "@IsGranted", correct: true }
+      help: |
+        https://symfony.com/bundles/SensioFrameworkExtraBundle/5.0/index.html#annotations-for-controllers

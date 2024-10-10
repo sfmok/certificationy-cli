@@ -1,0 +1,202 @@
+category: Symfony > Fullstack > Framework Bundle
+questions:
+    - question: "What kind of help provides the bin/console config:dump-reference command?"
+      answers:
+        - { value: "Dumps the current configuration in .htaccess format using the php_value directive.", correct: false }
+        - { value: "Dumps the current configuration of a bundle.", correct: false }
+        - { value: "Adds the default configuration of a bundle in the app/config/config.yml file.", correct: false }
+        - { value: "Dumps the default configuration of a bundle.", correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/configuration/framework.html
+
+    - question: "What kind of help provides the bin/console debug:config framework command?"
+      answers:
+        - { value: "Dumps the current configuration in .htaccess format using the php_value directive.", correct: false }
+        - { value: "Dumps the current configuration of a bundle.", correct: true }
+        - { value: "Adds the default configuration of a bundle in the app/config/config.yml file.", correct: false }
+        - { value: "Dumps the default configuration of a bundle.", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/configuration/framework.html
+
+    - question: "What is the tag to register a new encoder in the serializer service?"
+      answers:
+        - { value: "serializer.encode", correct: false }
+        - { value: "serializer.encoder", correct: true }
+        - { value: "serializer_encoder", correct: false }
+        - { value: "serializer.object_encoder", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#serializer-encoder
+
+    - question: |
+        What is the tag to use to create a custom form field type?
+      answers:
+        - { value: "form.type", correct: true }
+        - { value: "form", correct: false }
+        - { value: "form_type", correct: false }
+        - { value: "form.type_extension", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#form-type
+
+    - question: "What is the tag to register a custom validation constraint?"
+      answers:
+        - { value: "validation.constraint", correct: false }
+        - { value: "validator.constraint", correct: false }
+        - { value: "validator_constraint", correct: false }
+        - { value: "validation.constraint_validator", correct: false }
+        - { value: "validation.validator", correct: false }
+        - { value: "constraint_validator", correct: false }
+        - { value: "validator.constraint_validator", correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#validator-constraint-validator
+
+    - question: "What is the tag to use to register your service to be called during the cache clearing process?"
+      answers:
+        - { value: "kernel.cache", correct: false }
+        - { value: "kernel.cache_clearer", correct: true }
+        - { value: "command.cache_clearer", correct: false }
+        - { value: "cache_clearer", correct: false }
+        - { value: "cache_clearer", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#kernel-cache-clearer
+
+    - question: |
+        What is the main purpose of the built-in FrameworkBundle:Template:template controller?
+      answers:
+        - { value: "Provide information about the template being rendered for the profiler.", correct: false }
+        - { value: "Render custom error templates.", correct: false }
+        - { value: "Render templates that do not require a controller, such as static pages.", correct: true }
+        - { value: "Extract translation keys/strings from templates.", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/templates.html#rendering-a-template-directly-from-a-route
+
+    - question: |
+        What is the tag to use to register a value resolver for controller arguments such as Request?
+      answers:
+        - { value: "controller.argument_value_resolver", correct: true }
+        - { value: "controller.argument_resolver", correct: false }
+        - { value: "argument_resolver", correct: false }
+        - { value: "controller.value_resolver", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/reference/dic_tags.html#controller-argument-value-resolver
+        https://symfony.com/doc/5.0/controller/argument_value_resolver.html
+
+    - question: |
+        What are prerequisites to create a FormExtension in a Symfony Fullstack project using FrameworkBundle?
+      answers:
+        - { value: Creating a service with the form.type_extension tag, correct: true }
+        - { value: Extending the Symfony\Component\Form\AbstractTypeExtension, correct: true }
+        - { value: Or Implementing the interface Symfony\Component\Form\FormTypeExtensionInterface, correct: true }
+        - { value: Putting the new MyFormExtension class in the Form\Extension namespace, correct: false }
+      help: |
+        https://symfony.com/doc/current/form/create_form_type_extension.html#defining-the-form-type-extension
+
+    - question: |
+        Is it possible to pass a Response instance to the Symfony\Bundle\FrameworkBundle\Controller\AbstractController::render() method?
+      answers:
+        - { value: No, correct: false }
+        - { value: Yes, correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Bundle/FrameworkBundle/Controller/AbstractController.php
+
+    - question: |
+        What is the command to display the debug information of the container?
+      answers:
+        - { value: container:info, correct: false }
+        - { value: services:debug, correct: false }
+        - { value: debug:services, correct: false }
+        - { value: debug:container, correct: true }
+        - { value: container:debug, correct: false }
+      help: |
+        https://symfony.com/doc/current/book/service_container.html#debugging-services
+
+    - question: |
+        What are the valid ways to get the Session object if the controller class inherits from the base FrameworkBundle's Controller class?
+      answers:
+        - { value: $session = $this->getSession();, correct: false }
+        - { value: $session = $this->getUser()->getSession();, correct: false }
+        - { value: $session = $this->container->getSession();, correct: false }
+        - { value: $session = $this->get('session');, correct: true }
+        - { value: $session = $request->getSession();, correct: true }
+      help: |
+        https://symfony.com/doc/current/book/controller.html#managing-the-session
+
+    - question: |
+        Which of the following statements are true about the AbstractController class located in the FrameworkBundle bundle?
+      answers:
+        - { value: It must always be the parent class for every single controller of your application., correct: false }
+        - { value: It implements the Symfony\Contracts\Service\ServiceSubscriberInterface interface., correct: true }
+        - { value: It has access to the Symfony service container, thus allowing to retrieve any public services or global parameters., correct: true }
+        - { value: It provides lots of useful shortcut methods., correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Bundle/FrameworkBundle/Controller/AbstractController.php
+
+    - question: |
+        What is the tag to register a custom service that dumps messages to a file?
+      answers:
+        - { value: translator_dumper, correct: false }
+        - { value: translation_dumper, correct: false }
+        - { value: translator.dumper, correct: false }
+        - { value: translation.dumper, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#translation-dumper
+
+    - question: "What is the tag to add a new HTTP content rendering strategy?"
+      answers:
+        - { value: "content_renderer", correct: false }
+        - { value: "kernel.fragment_renderer", correct: true }
+        - { value: "fragment_renderer", correct: false }
+        - { value: "kernel.renderer", correct: false }
+        - { value: "renderer", correct: false }
+        - { value: "kernel.content_renderer", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#kernel-fragment-renderer
+
+    - question: |
+        What is the tag to register a service that initializes objects before validation?
+      answers:
+        - { value: "validation_initializer", correct: false }
+        - { value: "validation.initializer", correct: false }
+        - { value: "validator_initializer", correct: false }
+        - { value: validator.initializer, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#validator-initializer
+
+    - question: "How is it possible to generate absolute URLs from the Console?"
+      answers:
+        - { value: "By running : $this->getContainer()->get('router')->getContext()->setHost('example.org');", correct: true }
+        - { value: "The host is automatically known by Symfony, there is no need to specify it in CLI.", correct: false }
+        - { value: "By overloading the parameter router.request_context.host in the configuration.", correct: true }
+        - { value: "By specifying the host parameter in the Twig function url().", correct: false }
+      help: |
+        http://symfony.com/doc/current/cookbook/console/request_context.html#configuring-the-request-context-globally
+        http://symfony.com/doc/current/cookbook/console/request_context.html#configuring-the-request-context-per-command
+
+    - question: What is the tag to use to create a custom form type extension?
+      answers:
+        - { value: form.extension, correct: false }
+        - { value: form.type.extension, correct: false }
+        - { value: type_extension, correct: false }
+        - { value: form.type_extension, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#form-type-extension
+
+    - question: What is the tag to register a custom service that loads routes?
+      answers:
+        - { value: routing.loader, correct: true }
+        - { value: router.loader, correct: false }
+        - { value: router_loader, correct: false }
+        - { value: routing.route_loader, correct: false }
+        - { value: routing_loader, correct: false }
+        - { value: router.route_loader, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/dic_tags.html#routing-loader
+
+    - question: Which of the following are valid methods of the Symfony base abstract controller class?
+      answers:
+        - { value: redirectToRoute, correct: true }
+        - { value: createXmlResponse, correct: false }
+        - { value: generatePath, correct: false }
+        - { value: isCsrfTokenValid, correct: true }
+        - { value: denyAccessUnlessGranted, correct: true }
+      help: |
+        See Symfony\Bundle\FrameworkBundle\Controller\AbstractController

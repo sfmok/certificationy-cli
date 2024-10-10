@@ -1,0 +1,218 @@
+category: Symfony > Components > Validator
+questions:
+    - question: |
+        When using the Symfony\Component\Validator\Constraints\Url validation constraint, what protocols are allowed by default ?
+      answers:
+        - { value: "HTTP and HTTPS.", correct: true }
+        - { value: "Only HTTP.", correct: false }
+        - { value: "HTTP, HTTPS, FTP and SMTP.", correct: false }
+        - { value: "Any protocol.", correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/constraints/Url.html
+
+    - question: |
+        Is the following code correct ?
+
+        namespace Acme\User;
+
+        use Symfony\Component\Security\Core\User\UserInterface;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        /**
+         * @Assert\GroupSequence({"Default", "User"})
+         */
+        class User implements UserInterface
+        {
+            /**
+            * @Assert\NotBlank
+            */
+            private $username;
+
+            /**
+            * @Assert\NotBlank
+            */
+            private $password;
+
+            /**
+             * @Assert\True(message="The password cannot match your username", groups={"Strict"})
+             */
+            public function isPasswordLegal()
+            {
+                return ($this->username !== $this->password);
+            }
+
+            // ...
+        }
+      answers:
+        - { value: "No", correct: true }
+        - { value: "Yes", correct: false }
+      help: |
+        https://symfony.com/doc/current/validation/sequence_provider.html
+
+    - question: |
+        Which of the following are valid targets when adding new validation constraints to a PHP object?
+      answers:
+        - { value: "On certain public methods of the class.", correct: true }
+        - { value: "On any public properties only.", correct: false }
+        - { value: "On the class itself.", correct: true }
+        - { value: "On any public, private or protected properties.", correct: true }
+        - { value: "On any public static methods of the class only.", correct: false }
+      help: |
+        http://symfony.com/doc/current/validation.html#validator-constraint-targets
+
+    - question: "Are annotation enabled by the framework out of the box ?"
+      answers:
+        - { value: "Yes", correct: false }
+        - { value: "No", correct: true }
+      help: |
+        https://symfony.com/doc/current/validation.html#configuration
+
+    - question: |
+        A constraint can be applied on
+      answers:
+        - { value: "public property", correct: true }
+        - { value: "private property", correct: true }
+        - { value: "protected property", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/validation.html#properties
+
+    - question: |
+        Will the following snippet throw an InvalidArgumentException ?
+
+        use Symfony\Component\Validator\Validation;
+        use Symfony\Component\Validator\Constraints\IsTrue;
+
+        $expectedTrue = 123;
+
+        $validator = Validation::createValidator();
+        $violations = $validator->validate($expectedTrue, [new IsTrue()]);
+
+        if (0 !== count($violations)) {
+            throw new InvalidArgumentException('The value is not true !');
+        }
+
+      answers:
+        - { value: "No", correct: false }
+        - { value: "Yes", correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/constraints/IsTrue.html
+
+    - question: |
+        Will the following snippet throw an InvalidArgumentException ?
+
+        use Symfony\Component\Validator\Validation;
+        use Symfony\Component\Validator\Constraints\IsFalse;
+
+        $expectedTrue = '0';
+
+        $validator = Validation::createValidator();
+        $violations = $validator->validate($expectedTrue, [new IsTrue()]);
+
+        if (0 !== count($violations)) {
+            throw new InvalidArgumentException('The value is not false !');
+        }
+      answers:
+        - { value: "No", correct: true }
+        - { value: "Yes", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/reference/constraints/IsFalse.html
+
+    - question: |
+        How can you validate an object but only against a subset of the constraints ?
+      answers:
+        - { value: "Using validation groups.", correct: true }
+        - { value: "Using roles.", correct: false }
+        - { value: "It is not possible to partially validate an object.", correct: false }
+        - { value: "Using the method validate partial() instead of validate(), as it accepts a list of constraints.", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/validation/groups.html
+
+    - question: |
+        What will be the expected outcome when running this piece of code?
+      answers:
+        - { value: The $result variable will contain an array of Symfony\Component\Validator\ConstraintViolation instances., correct: false }
+        - { value: |
+             The validate method will throw a Symfony\Component\Validator\Exception\ValidatorException exception if the given object's state doesn't match its mapped validation constraint rules.
+          , correct: false }
+        - { value: The $result variable will contain a simple boolean value (true  or false)., correct: false }
+        - { value: The $result variable will contain null because the validate method must always return void., correct: false }
+        - { value: |
+             The $result variable will contain a valid implementation of the Symfony\Component\Validator\ConstraintViolationListInterface interface.
+          , correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/ConstraintViolationList.php
+        https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/Validator/ValidatorInterface.php
+
+    - question: |
+        Will the following snippet throw an InvalidArgumentException ?
+
+        use Symfony\Component\Validator\Validation;
+        use Symfony\Component\Validator\Constraints\NotBlank;
+
+        $expectedNotBlank = "0";
+
+        $validator = Validation::createValidator();
+        $violations = $validator->validate($expectedNotBlank, [new NotBlank()]);
+
+        if (0 !== count($violations)) {
+            throw new InvalidArgumentException('The value is blank !');
+        }
+      answers:
+        - { value: "No", correct: true }
+        - { value: "Yes", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/reference/constraints/NotBlank.html
+
+    - question: |
+        Will the following snippet throw an InvalidArgumentException ?
+
+        use Symfony\Component\Validator\Validation;
+        use Symfony\Component\Validator\Constraints\Blank;
+
+        $expectedBlank = [];
+
+        $validator = Validation::createValidator();
+        $violations = $validator->validate($expectedBlank, [new Blank()]);
+
+        if (0 !== count($violations)) {
+            throw new InvalidArgumentException('The value is not blank !');
+        }
+      answers:
+        - { value: "true", correct: true }
+        - { value: "false", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/reference/constraints/Blank.html
+
+    - question: |
+        Which constraint should be used to assert that a collection contains 2 items ?
+
+        We assume that the Assert namespace is an Alias to Symfony\Component\Validator\Constraints
+      answers:
+        - { value: Assert\Count(min=2, max=2), correct: true }
+        - { value: Assert\Length(2), correct: false }
+        - { value: Assert\Count(min=2), correct: false }
+        - { value: Assert\Length(min=2), correct: false }
+      help: |
+        https://symfony.com/doc/5.0/reference/constraints/Count.html
+
+    - question: |
+        Which of the following are Symfony built-in validation constraint?
+      answers:
+        - { value: Blank, correct: true }
+        - { value: IsNull, correct: true }
+        - { value: NotBlank, correct: true }
+        - { value: Null, correct: false }
+        - { value: NotNull, correct: true }
+        - { value: IsBlank, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/constraints.html
+
+    - question: |
+        The Symfony validator is based on…?
+      answers:
+        - { value: PSR-2, correct: false }
+        - { value: RFC 2616, correct: false }
+        - { value: JSR 303, correct: true }
+        - { value: CVE-2015-2308, correct: false }
+      help: |
+        https://symfony.com/doc/current/book/validation.html

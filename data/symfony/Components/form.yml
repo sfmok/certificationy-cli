@@ -1,0 +1,163 @@
+category: Symfony > Components > Form
+questions:
+    - question: |
+        How to customize the validation error message of the validation error caused by a TransformationFailedException ?
+      answers:
+        - { value: "By using the 'invalid_message' option", correct: true }
+        - { value: "The exception message will be used as the validation error message", correct: false }
+        - { value: "HTTP, HTTPS, FTP and SMTP.", correct: false }
+        - { value: "It's not possible", correct: false }
+      help: |
+        https://symfony.com/doc/current/form/data_transformers.html#creating-the-transformer
+
+    - question: "If you need to change request data before binding them to the form, which event should your code hook into?"
+      answers:
+        - { value: "FormEvents::PRE_SET_DATA", correct: false }
+        - { value: "FormEvents::PRE_SUBMIT", correct: true }
+        - { value: "FormEvents::POST_SUBMIT", correct: false }
+        - { value: "FormEvents::SUBMIT", correct: false }
+        - { value: "FormEvents::POST_SET_DATA", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/form/form_events.html#a-the-formevents-pre-submit-event
+
+    - question: |
+        What are the valid values of the type option of the Symfony\Component\Form\Extension\Core\Type\PercentType form type.
+      answers:
+        - { value: "decimal", correct: false }
+        - { value: "rounded", correct: false }
+        - { value: "fractional", correct: true }
+        - { value: "raw", correct: false }
+        - { value: "integer", correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/forms/types/percent.html#type
+
+    - question: 'Are Data Transformers applied on a form field which has the inherit_data option set ?'
+      answers:
+          - { value: "No", correct: true }
+          - { value: "Yes", correct: false }
+      help: |
+          https://symfony.com/doc/current/form/data_transformers.html
+
+    - question: |
+        How to add a DataTransformer to the tags field?
+      answers:
+        - { value: |
+             $builder->add('tags', TextType::class);
+             $builder->get('tags')
+             ->addModelTransformer(...);
+          , correct: true }
+        - { value: |
+             $builder->add('tags', TextType::class);
+             ->addModelTransformer(...);
+          , correct: false }
+        - { value: |
+            $builder->add(
+            $builder
+            ->create('tags', TextType::class)
+            ->addModelTransformer(...)
+            );
+          , correct: true }
+      help: |
+        https://symfony.com/doc/current/form/data_transformers.html#simple-example-transforming-string-tags-from-user-input-to-an-array
+
+    - question: |
+        What will be rendered when using a Symfony\Component\Form\Extension\Core\Type\DateTimeType form type with all default options ?
+      answers:
+        - { value: Three select inputs and one text input., correct: false }
+        - { value: One HTML5 datetime input., correct: false }
+        - { value: Five select inputs, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/forms/types/datetime.html#widget
+
+    - question: |
+        Which of the following are built-in Symfony form events?
+      answers:
+        - { value: FormEvents::SUBMIT, correct: true }
+        - { value: FormEvents::PRE_SUBMIT, correct: true }
+        - { value: FormEvents::POST, correct: false }
+        - { value: FormEvents::SUBMIT_DATA, correct: false }
+        - { value: FormEvents::PRE_SET_DATA, correct: true }
+        - { value: FormEvents::POST_SET_DATA, correct: true }
+        - { value: FormEvents::POST_SUBMIT, correct: true }
+        - { value: FormEvents::POST_DATA, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/form/form_events.html
+
+    - question: |
+        Among the following, which one is not a built-in type?
+      answers:
+        - { value: MoneyType, correct: false }
+        - { value: NumberType, correct: false }
+        - { value: PasswordType, correct: false }
+        - { value: IbanType, correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/forms/types.html
+
+    - question: |
+        Which method should you use to register a new event listener on a FormBuilder instance?
+      answers:
+        - { value: addEventListener, correct: true }
+        - { value: addListener, correct: false }
+        - { value: registerListener, correct: false }
+        - { value: createListener, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/form/form_events.html
+
+    - question: |
+        How to get the value of title set in a form?
+      answers:
+        - { value: {{ form.title.vars.value }}, correct: true }
+        - { value: {{ form.vars.title.value }}, correct: false }
+        - { value: {{ form.title }}, correct: false }
+        - { value: {{ form.vars.title }}, correct: false }
+      help: |
+        - Test it :D
+
+    - question: |
+        Which of the following form types is the parent of the Symfony\Component\Form\Extension\Core\Type\BirthdayType form type ?
+      answers:
+        - { value: Symfony\Component\Form\Extension\Core\Type\DateType, correct: true }
+        - { value: Symfony\Component\Form\Extension\Core\Type\DateTimeType, correct: false }
+        - { value: Symfony\Component\Form\Extension\Core\Type\TimeType, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/forms/types/birthday.html
+
+    - question: |
+        Is there a way to make sure that the {{ form_end(form) }} does not render all the fields not rendered?
+      answers:
+        - { value: Yes, correct: true }
+        - { value: No, correct: false }
+      help: |
+        https://symfony.com/doc/current/reference/forms/twig_reference.html#form-end-view-variables
+
+    - question: |
+        How can you render a form named form in a Twig template?
+      answers:
+        - { value: |
+            {{ form(form) }}
+          , correct: true }
+        - { value: |
+            {{ render_form(form) }}
+          , correct: false }
+        - { value: |
+            {% form(form) %}
+          , correct: false }
+        - { value: |
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+          , correct: true }
+      help: |
+        https://symfony.com/doc/current/reference/forms/twig_reference.html
+        https://symfony.com/doc/current/book/forms.html
+
+    - question: |
+        What are the methods of the Symfony\Component\Form\DataTransformerInterface interface?
+      answers:
+        - { value: reverseTransform, correct: true }
+        - { value: getName, correct: false }
+        - { value: transformReverse, correct: false }
+        - { value: transformBack, correct: false }
+        - { value: transform, correct: true }
+      help: |
+        https://symfony.com/doc/current/cookbook/form/data_transformers.html#creating-the-transformer

@@ -1,0 +1,274 @@
+category: Symfony > Fullstack > Standard Edition
+questions:
+    - question: "If no methods are specified for a route, what methods will be matched?"
+      answers:
+        - { value: "GET", correct: false }
+        - { value: "GET or POST", correct: false }
+        - { value: "Any methods", correct: true }
+        - { value: "Safe methods: GET or HEAD", correct: false }
+      help: |
+        https://symfony.com/doc/current/routing.html#matching-http-methods
+
+    - question: "Which type of loader is not supported by Symfony?"
+      answers:
+        - { value: "YamlFileLoader", correct: false }
+        - { value: "XmlFileLoader", correct: false }
+        - { value: "IniFileLoader", correct: true }
+        - { value: "PhpFileLoader", correct: false }
+        - { value: "ObjectLoader", correct: false }
+        - { value: "GlobFileLoader", correct: false }
+        - { value: "DirectoryLoader", correct: false }
+        - { value: "ContainerLoader", correct: false }
+        - { value: "ClosureLoader", correct: false }
+        - { value: "AnnotationFileLoader", correct: false }
+        - { value: "AnnotationDirectoryLoader", correct: false }
+        - { value: "AnnotationClassLoader", correct: false }
+      help: |
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Component/Routing/Loader
+
+    - question: |
+        In the list below, which url patterns match the following blog route definition?
+
+        $route = new Route(
+            '/blog/{id}/{slug}.{_format}',
+            ['_controller' => 'blogPost', '_format' => 'html'],
+            ['id' => '\d+', '_format' => 'html|json']
+        );
+      answers:
+        - { value: "/blog/12/blog", correct: true }
+        - { value: "/blog/abc/my-blog-post.json", correct: false }
+        - { value: "/blog/30/a.html", correct: true }
+        - { value: "/blog/10/mon-blog-post.xml", correct: false }
+        - { value: "/blog/8/my-blog-post.html", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/routing/introduction.html#defining-routes
+        https://symfony.com/doc/current/routing.html
+
+    - question: |
+        With framework.router.strict_requirements parameter set to true what we should see when going on the /article URL?
+
+        /**
+         * @Route("/article/{id}", name="article", requirements={"id":"\d+"}, defaults={"id":"toto"})
+         */
+        public function articleAction($id)
+        {
+            return new Response($id);
+        }
+      answers:
+        - { value: "toto", correct: true }
+        - { value: Parameter "id" for route "article" must match "\d+" ("toto" given), correct: false }
+        - { value: Unable to find the controller for path "article". The route is wrongly configured., correct: false }
+      help: |
+        https://symfony.com/doc/current/routing/requirements.html
+        https://symfony.com/doc/current/reference/configuration/framework.html#strict-requirements
+
+    - question: |
+        Given the following two routes, what controller will be executed for the URL /book/123?
+        
+        # app/config/routing.yml
+        book_detail_section:
+            path:     /book/{id}/{section}
+            defaults: { _controller: AppBundle:Book:detailSection, section: home }
+        book_detail:
+            path:      /book/{id}
+            defaults:  { _controller: AppBundle:Book:detail }
+      answers:
+        - { value: "Error: The routing file contains unsupported keys for “defaults”", correct: false }
+        - { value: "AppBundle:Book:detail", correct: false }
+        - { value: "AppBundle:Book:detailSection", correct: true }
+        - { value: "Error: No route found", correct: false }
+      help: |
+        https://symfony.com/doc/current/routing.html#routing-examples
+
+    - question: |
+        Which attributes are reserved special routing parameters?
+      answers:
+        - { value: "_locale", correct: true }
+        - { value: "_type", correct: false }
+        - { value: "_fragment", correct: true }
+        - { value: "_controller", correct: true }
+        - { value: "_response", correct: false }
+        - { value: "_format", correct: true }
+      help: |
+        https://symfony.com/doc/current/routing.html#routing-examples
+
+    - question: |
+        Considering the following definition of route:
+        
+        blog:
+          path: /blog/{page}
+          defaults:
+            _controller: AppBundle:Blog:index
+            title: "Hello world!"
+        
+        How can you retrieve the parameter title?
+      answers:
+        - { value: "$title = $request->getAttributes()->get('title');", correct: true }
+        - { value: "$title = $request->attributes['title'];", correct: false }
+        - { value: "$title = $request->getAttributes()['title'];", correct: false }
+        - { value: "$title = $request->attributes->get('title');", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/routing.html#extra-parameters
+
+    - question: |
+        Consider the following XML route definition:
+        
+        <!-- app/config/routing.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <routes xmlns="http://symfony.com/schema/routing"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://symfony.com/schema/routing
+                http://symfony.com/schema/routing/routing-1.0.xsd">
+            <route id="app_agenda_event" path="/agenda/{date}" methods="GET">
+                <default key="_controller">AppBundle:Agenda:event</default>
+                <requirement key="date">(?:20\d{2})-(?:(0?[1-9]|1[1-2]))-(?:(0?|[1-2])\d|3[0-1])</requirement>
+            </route>
+        </routes>
+      answers:
+        - { value: http://localhost/agenda/2018-14-30, correct: false }
+        - { value: http://localhost/agenda/2020-2-30, correct: true }
+        - { value: http://localhost/agenda/2150-12-31, correct: false }
+        - { value: http://localhost/agenda/2011-1-01, correct: true }
+        - { value: http://localhost/agenda/2018-12-12, correct: true }
+        - { value: http://localhost/agenda/2008-04-06, correct: true }
+      help: |
+        https://symfony.com/doc/current/components/routing.html
+
+    - question: |
+        It is possible to specify a default value for an attribute in a route?
+      answers:
+        - { value: No, correct: false }
+        - { value: Yes, correct: true }
+      help: |
+        https://symfony.com/doc/current/create_framework/routing.html
+        https://symfony.com/doc/current/routing.html#giving-placeholders-a-default-value
+
+    - question: |
+        Considering the following definition of route:
+        
+        use Symfony\Component\Routing\RouteCollection;
+        use Symfony\Component\Routing\Route;
+
+        $collection = new RouteCollection();
+        $collection->add('_hello', new Route('/hello/{username}', array(
+            '_controller' => 'AppBundle:Demo:hello',
+        ), array(
+            'username' => '.+',
+        )));
+
+        Will the /hello/John/Doe URI match this route?
+      answers:
+        - { value: No, correct: false }
+        - { value: Yes, correct: true }
+      help: |
+        https://symfony.com/doc/5.0/routing.html#slash-characters-in-route-parameters
+
+    - question: |
+        Is this route configuration valid?
+        
+        mobile_homepage:
+            path:     /
+            host:     "m.{domain}"
+            defaults:
+                _controller: AcmeDemoBundle:Main:mobileHomepage
+                domain: '%domain%'
+            requirements:
+                domain: '%domain%'
+      answers:
+        - { value: No, correct: false }
+        - { value: Yes, correct: true }
+      help: |
+        https://symfony.com/doc/current/routing/hostname_pattern.html#using-placeholders
+
+    - question: |
+        According to the following definition of route, which ones are matching?
+        
+        blog_page:
+          path: /blog/{page}
+          requirements:
+            page: \d*
+          defaults:
+            page: 1
+      answers:
+        - { value: /blog/1, correct: true }
+        - { value: /blog, correct: true }
+        - { value: /blog/page-1, correct: false }
+        - { value: /blog/, correct: true }
+        - { value: /blog/page1, correct: false }
+        - { value: /blog/page, correct: false }
+      help: |
+        https://symfony.com/doc/current/book/routing.html#adding-requirements
+
+    - question: |
+        Is the following definition of route correct?
+        
+        use Symfony\Component\Routing\RouteCollection;
+        use Symfony\Component\Routing\Route;
+        
+        $collection = new RouteCollection();
+        
+        $collection->add('blog_show', new Route('/blog/{page}/category/{slug}/{page}', array(
+        '_controller' => 'AppBundle:Blog:show',
+        )));
+        
+        return $collection;
+      answers:
+        - { value: No, correct: true }
+        - { value: Yes, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/routing.html#usage
+        https://symfony.com/doc/current/routing.html#routing-examples
+
+    - question: |
+        Given the following routes, what controller will be executed for /book/123 ?
+        
+        book_list:
+            path:     /books
+            defaults: { _controller: AppBundle:Default:list }
+        book_detail:
+          path:      /books/{slug}
+          defaults:  { _controller: AppBundle:Default:detail }
+        book_list:
+          path:      /books/{slug}/download
+          defaults:  { _controller: AppBundle:Default:download }
+      answers:
+        - { value: AppBundle:Book:download, correct: false }
+        - { value: AppBundle:Book:detail, correct: false }
+        - { value: "Error: No route found", correct: true }
+        - { value: AppBundle:Book:list, correct: false }
+      help: |
+        https://symfony.com/doc/current/routing.html
+        https://www.youtube.com/watch?v=4F4qzPbcFiA
+
+    - question: |
+        According to the following definition of route, which ones are matching?
+        
+        blog_page:
+          path: /blog/{page}
+          requirements:
+            page: \d+
+          defaults:
+            page: 1
+      answers:
+        - { value: /blog/1, correct: true }
+        - { value: /blog, correct: true }
+        - { value: /blog/page-1, correct: false }
+        - { value: /blog/, correct: true }
+        - { value: /blog/page1, correct: false }
+        - { value: /blog/page, correct: false }
+      help: |
+        https://symfony.com/doc/current/book/routing.html#adding-requirements
+
+    - question: |
+        Considering the following declaration of route in YAML:
+        
+        contact:
+          path:     /contact
+          defaults: { _controller: AppBundle:Default:test }
+          condition: "context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/firefox/i'"
+      answers:
+        - { value: Yes, correct: true }
+        - { value: No, he/she will have a 500 response., correct: false }
+      help: |
+        https://symfony.com/doc/3.0/book/routing.html#completely-customized-route-matching-with-conditions
+

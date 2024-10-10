@@ -1,0 +1,56 @@
+category: Symfony > Components > Filesystem
+questions:
+    - question: "Which exception is thrown when a directory creation has failed ?"
+      answers:
+        - { value: "InvalidFileException", correct: false }
+        - { value: "FileException", correct: false }
+        - { value: "IOException", correct: true }
+        - { value: "DirectoryException", correct: false }
+        - { value: "FileSystemException", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/filesystem.html#error-handling
+
+    - question: |
+        Which exception is thrown when the origin file does not exist when you use the Symfony\Component\Filesystem\Filesystem::copy method ?
+      answers:
+        - { value: "FileNotFoundException", correct: true }
+        - { value: "FileException", correct: false }
+        - { value: "FileErrorException", correct: false }
+        - { value: "FileNotExistException", correct: false }
+        - { value: "FilesystemException", correct: false }
+      help: |
+        https://symfony.com/doc/current/components/filesystem.html#copy
+
+    - question: |
+        What is the Symfony\Component\Filesystem\Filesystem method to check if the given path is absolute ?
+      answers:
+        - { value: "$fs->isAbsolute('/tmp');", correct: false }
+        - { value: "$fs->checkAbsolutePath('/tmp');", correct: false }
+        - { value: "$fs->absolutePath('/tmp');", correct: false }
+        - { value: "$fs->isAbsolutePath('/tmp');", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/filesystem.html#isabsolutepath
+
+    - question: |
+        What is returned by the Symfony\Component\Filesystem\Filesystem::mkdir method if the directory has been successfully created ?
+      answers:
+        - { value: "true or false", correct: false }
+        - { value: "The FileSystem object", correct: false }
+        - { value: "A string with the directory path", correct: false }
+        - { value: "Nothing", correct: true }
+      help: |
+        http://symfony.com/doc/current/components/filesystem.html#mkdir
+        http://api.symfony.com/3.1/Symfony/Component/Filesystem/Filesystem.html#method_mkdir
+        https://github.com/symfony/filesystem/blob/master/Filesystem.php#L86
+
+    - question: |
+        Which of the following are Filesystem methods?
+      answers:
+        - { value: remove, correct: true }
+        - { value: symlink, correct: true }
+        - { value: isAbsolutePath, correct: true }
+        - { value: move, correct: false }
+        - { value: makePathRelative, correct: true }
+        - { value: exists, correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Filesystem/Filesystem.php

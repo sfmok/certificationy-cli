@@ -1,0 +1,93 @@
+category: Symfony > Components > Cache
+questions:
+    - question: |
+        What class should be used to make a caching backend taggable?
+      answers:
+        - { value: Symfony\Component\Cache\Adapter\TagAdapter, correct: false }
+        - { value: Symfony\Component\Cache\Adapter\TagAwareAdapter, correct: true }
+        - { value: Symfony\Component\Cache\Adapter\TaggingAdapter, correct: false }
+        - { value: Symfony\Component\Cache\Adapter\TaggerAdapter, correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapter.php
+
+    - question: "Which cache pool can be used for testing purpose, because contents are stored in memory and not persisted in any way?"
+      answers:
+        - { value: "Array Cache Adapter", correct: true }
+        - { value: "APCu Cache Adapter", correct: false }
+        - { value: "Redis Cache Adapter", correct: false }
+        - { value: "Memory Cache Adapter", correct: false }
+        - { value: "Chain Cache Adapter", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/cache/adapters/array_cache_adapter.html
+
+    - question: |
+        How does a cache differ from a key / value store?
+      answers:
+        - { value: "It is safe to store data in it.", correct: false }
+        - { value: "It can be deleted without making the application crash.", correct: true }
+        - { value: "It should not be used to persist data.", correct: true }
+      help: |
+        https://www.aerospike.com/what-is-a-key-value-store/
+
+    - question: |
+        What is the annotation to enable the HTTP cache controller
+      answers:
+        - { value: "@Caching", correct: false }
+        - { value: "@Http", correct: false }
+        - { value: "@Cache", correct: true }
+        - { value: "@Route", correct: false }
+      help: |
+        https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/cache.html
+
+    - question: |
+        Considering the following code:
+        
+        use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+
+        $cache = new FilesystemAdapter();
+
+        // retrieve the cache item
+        $numProducts = $cache->getItem('stats.num_products');
+      answers:
+        - { value: $numProducts->isHit(), correct: true }
+        - { value: $numProducts->doHave(), correct: false }
+        - { value: $numProducts->exists(), correct: false }
+        - { value: $numProducts->doFetch(), correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/cache.html#basic-usage-psr-6
+
+    - question: |
+        What is the definition of an Adapter?
+      answers:
+        - { value: It implements the actual caching mechanism to store the information., correct: true }
+        - { value: It is a single unit of information stored as a key/value pair., correct: false }
+        - { value: It is a logical repository of cache items., correct: false }
+      help: |
+        https://symfony.com/doc/5.0/components/cache.html#basic-usage-psr-6
+
+    - question: |
+        Which of the following HTTP response headers belong to the expiration caching model?
+      answers:
+        - { value: Etag, correct: false }
+        - { value: Last-Modified, correct: false }
+        - { value: Expires, correct: true }
+        - { value: Cache-Control, correct: true }
+        - { value: Pragma, correct: false }
+      help: |
+        https://tools.ietf.org/html/rfc2616#page-79
+
+    - question: |
+        Given the following code:
+        
+        use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+        $cache = new FilesystemAdapter('app.cache');
+        
+        How would you delete the cache item identified by the some_item key?
+      answers:
+        - { value: $cache->delete('some_item');, correct: false }
+        - { value: $cache->removeItem('some_item');, correct: false }
+        - { value: $cache->deleteItem('some_item');, correct: true }
+        - { value: $cache->remove('some_item');, correct: false }
+      help: |
+        for PSR6
+        https://symfony.com/doc/current/components/cache/cache_pools.html#removing-cache-items

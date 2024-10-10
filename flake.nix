@@ -1,34 +1,49 @@
 {
+  description = "sf cert training dev environment";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    phps.url = "github:fossar/nix-phps";
-    devenv.url = "github:cachix/devenv";
-    systems.url = "github:nix-systems/default";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+      devenv.url = "github:cachix/devenv";
+      phps.url = "github:loophp/nix-shell";
+      systems.url = "github:nix-systems/default";
   };
 
-  outputs = inputs @ { self, flake-parts, ... }: flake-parts.lib.mkFlake { inherit inputs; } {
-    systems = import inputs.systems;
+  outputs = inputs @ {
+    flake-parts,
+    systems,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [inputs.devenv.flakeModule];
+      systems = import systems;
 
-    imports = [
-      inputs.devenv.flakeModule
-    ];
+      perSystem = { system, ... }: let
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [inputs.phps.overlays.default];
+        };
 
-    perSystem = { config, self', inputs', pkgs, system, lib, ... }: {
-      _module.args.pkgs = import self.inputs.nixpkgs {
-        inherit system;
-        overlays = [
-          inputs.phps.overlays.default
-        ];
-      };
-
-      devenv.shells.default = {
-        name = "php-dev-env";
-
+        php = pkgs.api.buildPhpFromComposer {
+          php = pkgs.php81;
+          src = inputs.self;
+          withExtensions = ["xdebug"];
+          extraConfig = ''
+            memory_limit=-1
+            xdebug.file_link_format="phpstorm://open?file=%f&line=%l"
+            xdebug.mode=debug
+          '';
+        };
         packages = [
-          pkgs.php80
-          pkgs.php80.packages.composer
+          php
+          php.packages.composer
         ];
+      in {
+        formatter = pkgs.alejandra;
+        devenv.shells = {
+          default = {
+            inherit packages;
+            dotenv.disableHint = true;
+          };
+       };
       };
     };
-  };
 }

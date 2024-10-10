@@ -1,0 +1,32 @@
+category: Symfony > Components > Error Handler
+questions:
+    - question: |
+        What is the default error reporting level value used by the Symfony\Component\ErrorHandler\Debug::enable method ?
+      answers:
+        - { value: "E_STRICT", correct: false }
+        - { value: "E_NOTICE", correct: false }
+        - { value: "-1", correct: true }
+        - { value: "E_ALL", correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/ErrorHandler/Debug.php
+
+    - question: |
+        Which of the following sentences are correct about the Symfony\Component\ErrorHandler\ErrorHandler class ?
+      answers:
+        - { value: ExceptionHandler converts a Response object to an exception., correct: false }
+        - { value: ExceptionHandler is mostly useful in debug mode to replace the default PHP/XDebug output with something prettier and more useful., correct: true }
+        - { value: The ExceptionHandler class is mainly used during Kernel boot, where nothing is yet available, the Response content is always HTML., correct: true }
+        - { value: The ExceptionHandler class catches PHP errors and converts them to exceptions., correct: false }
+        - { value: ExceptionHandler converts an exception to a Response object., correct: true }
+      help: |
+        https://github.com/symfony/symfony/tree/5.0/src/Symfony/Component/ErrorHandler
+
+    - question: |
+        What is the purpose of the Symfony\Component\ErrorHandler\DebugClassLoader class ?
+      answers:
+        - { value: The DebugClassLoader will wrap all registered autoloaders and will throw an exception if a file is found but does not declare the class., correct: true }
+        - { value: The DebugClassLoader attempts to throw more helpful exceptions when a class isn't found by the registered autoloaders., correct: true }
+        - { value: The DebugClassLoader class catches PHP errors and converts them to exceptions., correct: false }
+        - { value: The DebugClassLoader class catches uncaught PHP exceptions and converts them to a nice PHP response., correct: false }
+      help: |
+        see Symfony\Component\ErrorHandler\DebugClassLoader

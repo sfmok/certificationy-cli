@@ -1,0 +1,10 @@
+category: PHP > PSR
+questions:
+    - question: "Which organization writes and validates PSR recommendations?"
+      answers:
+        - { value: "PHP-FIG", correct: true }
+        - { value: "PHP-MIP", correct: false }
+        - { value: "PHP-RID", correct: false }
+        - { value: "PHP-LIV", correct: false }
+      help: |
+        http://www.php-fig.org/

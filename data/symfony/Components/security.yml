@@ -1,0 +1,178 @@
+category: Symfony > Components > Security
+questions:
+    - question: |
+        Which ROLE allows you to impersonate a user?
+      answers:
+        - { value: "ROLE_ALLOWED_TO_SWITCH", correct: true }
+        - { value: "ROLE_ADMIN", correct: false }
+        - { value: "ROLE_ADMIN_ALLOWED_TO_SWITCH", correct: false }
+        - { value: "ROLE_USER_ALLOWED_TO_SWITCH", correct: false }
+      help: |
+        https://symfony.com/doc/current/security/impersonating_user.html
+
+    - question: "What is the signature of the vote() method from VoterInterface?"
+      answers:
+        - { value: "vote(TokenInterface $token, $object, array $attributes)", correct: false }
+        - { value: "vote(TokenInterface $token, array $attributes, $object)", correct: false }
+        - { value: "vote(TokenInterface $token, $subject, array $attributes)", correct: true }
+        - { value: "vote(TokenInterface $token, array $attributes, $subject)", correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Security/Core/Authorization/Voter/VoterInterface.php
+
+    - question: |
+        Which of the following methods should be defined in order to implement the Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface?
+      answers:
+        - { value: "public function add(NodeDefinition $builder);", correct: false }
+        - { value: "public function getKey();", correct: true }
+        - { value: "public function getPosition();", correct: true }
+        - { value: "public function supports(TokenInterface $token);", correct: false }
+        - { value: "public function getToken();", correct: false }
+        - { value: "public function addConfiguration(NodeDefinition $builder);", correct: true }
+        - { value: "public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint);", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/security/custom_authentication_provider.html#the-factory
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Bundle/SecurityBundle/DependencyInjection/Security/Factory/SecurityFactoryInterface.php
+
+    - question: "Which role allows you to check that a user is logged in (by any means) ?"
+      answers:
+        - { value: "IS_AUTHENTICATED_ANONYMOUSLY", correct: false }
+        - { value: "IS_FULLY_AUTHENTICATED", correct: false }
+        - { value: "IS_AUTHENTICATED_REMEMBERED", correct: false }
+        - { value: "IS_AUTHENTICATED", correct: false }
+        - { value: "IS_AUTHENTICATED_FULLY", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/security.html#checking-to-see-if-a-user-is-logged-in-is-authenticated-fully
+
+    - question: |
+        By default, what parameter can you use inside the login form to specify the target of the redirection ?
+      answers:
+        - { value: "_default_target", correct: false }
+        - { value: "_target_path", correct: true }
+        - { value: "_target", correct: false }
+        - { value: "_path_target", correct: false }
+        - { value: "_path", correct: false }
+      help: |
+        https://symfony.com/doc/5.0/security/form_login.html#control-the-redirect-using-request-parameters
+
+    - question: |
+        Which are built-in user providers?
+      answers:
+        - { value: "chain", correct: true }
+        - { value: "id", correct: false }
+        - { value: "memory", correct: true }
+        - { value: "ldap", correct: true }
+        - { value: "entity", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/security/user_provider.html
+
+    - question: |
+        What does the affirmative strategy of AccessDecisionManager?
+      answers:
+        - { value: "Only grant access if none of the voters has denied access.", correct: false }
+        - { value: "Grant access if there are more voters granting access than there are denying.", correct: false }
+        - { value: "Grant access as soon as there is one voter granting access.", correct: true }
+      help: |
+        https://symfony.com/doc/5.0/components/security/authorization.html#access-decision-manager
+
+    - question: |
+        By default, what kind of exception is thrown by Symfony\Component\Security\Core\Authentication\Provider\UserAuthenticationProvider's authenticate() method?
+      answers:
+        - { value: "UserNotFoundException", correct: false }
+        - { value: "WrongPasswordException", correct: false }
+        - { value: "BadCredentialsException", correct: true }
+        - { value: "AuthenticationException", correct: true }
+        - { value: "AuthenticationServiceException", correct: true }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Security/Core/Authentication/Provider/UserAuthenticationProvider.php
+
+    - question: |
+        Which of the following services exist since Symfony 2.3 and still exist in any Symfony 5.0 version?
+      answers:
+        - { value: "security.authentication_utils", correct: true }
+        - { value: "security.encoder_factory", correct: true }
+        - { value: "security.firewall", correct: true }
+        - { value: "security.secure_random", correct: false }
+        - { value: "security.context", correct: false }
+      help: |
+        See: bin/console debug:container security
+
+    - question: "Authorization is the process that makes sure that a user is who he claims to be?"
+      answers:
+        - { value: "True", correct: false }
+        - { value: "False", correct: true }
+      help: |
+        https://symfony.com/doc/current/components/security/authorization.html
+
+    - question: |
+        Does 
+        $this->get('security.token_storage')->getToken()->getUser()
+        always return null when the user is not logged in?
+      answers:
+        - { value: "True", correct: false }
+        - { value: "False", correct: true }
+      help: |
+        https://symfony.com/doc/current/security.html#always-check-if-the-user-is-logged-in
+
+    - question: |
+        What is the parent of Symfony\Component\Security\Guard\AuthenticatorInterface?
+      answers:
+        - { value: Symfony\Component\Security\Http\AuthenticatorInterface, correct: false }
+        - { value: Symfony\Component\Security\Authenticator\AuthenticatorInterface, correct: false }
+        - { value: Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface, correct: true }
+        - { value: Symfony\Component\Security\AuthenticatorInterface, correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Security/Guard/AuthenticatorInterface.php
+
+    - question: |
+        Which of the following "roles" are built-in ?
+      answers:
+        - { value: IS_AUTHENTICATED_ANONYMOUSLY, correct: true }
+        - { value: IS_AUTHENTICATED_REMEMBERED, correct: true }
+        - { value: IS_AUTHENTICATED_FULLY, correct: true }
+        - { value: IS_ANONYMOUS, correct: true }
+        - { value: IS_AUTHENTICATED_INTERACTIVE, correct: false }
+        - { value: IS_FULLY_AUTHENTICATED, correct: false }
+        - { value: IS_NOT_AUTHENTICATED, correct: false }
+      help: |
+        http://symfony.com/doc/current/security.html#checking-to-see-if-a-user-is-logged-in-is-authenticated-fully
+
+    - question: |
+        Which class can be used to extracts security errors from a Request?
+      answers:
+        - { value: SecurityUtils, correct: false }
+        - { value: FrameworkUtils, correct: false }
+        - { value: HttpUtils, correct: false }
+        - { value: AuthenticationUtils, correct: true }
+        - { value: RequestUtils, correct: false }
+      help: |
+        https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/Security/Http/Authentication/AuthenticationUtils.php
+
+    - question: |
+        What does the AccessDecisionManager do when it's configured with a consensus voting strategy?
+      answers:
+        - { value: It grants access if there is at least a majority of all the voters granting access., correct: true }
+        - { value: It grants access as soon as there is one voter that grants access., correct: false }
+        - { value: It only grants access if none of the voters deny access., correct: false }
+      help: |
+        https://symfony.com/doc/current/components/security/authorization.html#access-decision-manager
+
+    - question: |
+        When using HTTP basic, how does the server starts the authentication process?
+      answers:
+        - { value: Rendering a login form with the fields _user and _password., correct: false }
+        - { value: Sending the WWW-Authenticate HTTP header with the HTTP 401 Not Authorized status code., correct: true }
+        - { value: Sending the status code HTTP 418 Authentication Required., correct: false }
+        - { value: Redirecting the request to the port 443., correct: false }
+      help: |
+        https://en.wikipedia.org/wiki/Basic_access_authentication#Server_side
+        https://tools.ietf.org/html/rfc2617#section-2
+
+    - question: |
+        What are the particularities of the InMemoryUserProvider security provider?
+      answers:
+        - { value: The users are not stored in database., correct: true }
+        - { value: You need to add new user in the config., correct: true }
+        - { value: The users have the same password., correct: false }
+        - { value: The users must have a plaintext password., correct: false }
+      help: |
+        https://symfony.com/doc/current/security/user_providers.html#memory-user-provider

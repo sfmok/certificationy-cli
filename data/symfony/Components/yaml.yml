@@ -1,0 +1,21 @@
+category: Symfony > Components > Yaml
+questions:
+    - question: |
+        What will be the value of $yaml with the following code:
+      answers:
+        - { value: 425865600, correct: true }
+        - { value: An array, correct: false }
+        - { value: 1983-07-01, correct: false }
+        - { value: A DateTime object, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/yaml.html#date-handling
+
+    - question: |
+        Which of the following values are available to define a boolean element in YAML ?
+      answers:
+        - { value: false, correct: true }
+        - { value: true, correct: true }
+        - { value: 1, correct: false }
+        - { value: 0, correct: false }
+      help: |
+        https://symfony.com/doc/current/components/yaml/yaml_format.html#booleans
