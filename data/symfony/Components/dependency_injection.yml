@@ -164,10 +164,10 @@ questions:
     - question: |
         Is it possible to use a constant in a parameter ?
       answers:
-        - { value: Yes, in the YAML format (thanks to the expression language component), correct: true }
-        - { value: Yes in XML format, correct: true }
-        - { value: Yes, in PHP, correct: true }
-        - { value: No, correct: false }
+        - { value: 'Yes, in the YAML format (thanks to the expression language component)', correct: true }
+        - { value: 'Yes, in XML format', correct: true }
+        - { value: 'Yes, in PHP', correct: true }
+        - { value: 'No', correct: false }
       help: |
         https://symfony.com/doc/5.0/configuration.html#configuration-parameters
 
@@ -243,8 +243,8 @@ questions:
             }
         }
       answers:
-          - { value: Yes, the autowiring mechanism is smart enough to detect a service definition which implements the TransformerInterface, correct: true }
-          - { value: No, the autowiring mechanism doesn't work with interfaces, correct: false }
+          - { value: "Yes, the autowiring mechanism is smart enough to detect a service definition which implements the TransformerInterface", correct: true }
+          - { value: "No, the autowiring mechanism doesn't work with interfaces", correct: false }
       help: |
         https://symfony.com/doc/current/components/dependency_injection/autowiring.html#working-with-interfaces
 

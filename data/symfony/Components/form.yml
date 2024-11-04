@@ -41,22 +41,22 @@ questions:
     - question: |
         How to add a DataTransformer to the tags field?
       answers:
-        - { value: |
+        - value: |
              $builder->add('tags', TextType::class);
              $builder->get('tags')
              ->addModelTransformer(...);
-          , correct: true }
-        - { value: |
+          correct: true
+        - value: |
              $builder->add('tags', TextType::class);
              ->addModelTransformer(...);
-          , correct: false }
-        - { value: |
+          correct: false
+        - value: |
             $builder->add(
             $builder
             ->create('tags', TextType::class)
             ->addModelTransformer(...)
             );
-          , correct: true }
+          correct: true
       help: |
         https://symfony.com/doc/current/form/data_transformers.html#simple-example-transforming-string-tags-from-user-input-to-an-array
 
@@ -106,19 +106,19 @@ questions:
     - question: |
         How to get the value of title set in a form?
       answers:
-        - { value: {{ form.title.vars.value }}, correct: true }
-        - { value: {{ form.vars.title.value }}, correct: false }
-        - { value: {{ form.title }}, correct: false }
-        - { value: {{ form.vars.title }}, correct: false }
+        - { value: "{{ form.title.vars.value }}", correct: true }
+        - { value: "{{ form.vars.title.value }}", correct: false }
+        - { value: "{{ form.title }}", correct: false }
+        - { value: "{{ form.vars.title }}", correct: false }
       help: |
         - Test it :D
 
     - question: |
         Which of the following form types is the parent of the Symfony\Component\Form\Extension\Core\Type\BirthdayType form type ?
       answers:
-        - { value: Symfony\Component\Form\Extension\Core\Type\DateType, correct: true }
-        - { value: Symfony\Component\Form\Extension\Core\Type\DateTimeType, correct: false }
-        - { value: Symfony\Component\Form\Extension\Core\Type\TimeType, correct: false }
+        - { value: 'Symfony\Component\Form\Extension\Core\Type\DateType', correct: true }
+        - { value: 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', correct: false }
+        - { value: 'Symfony\Component\Form\Extension\Core\Type\TimeType', correct: false }
       help: |
         https://symfony.com/doc/current/reference/forms/types/birthday.html
 
@@ -133,20 +133,20 @@ questions:
     - question: |
         How can you render a form named form in a Twig template?
       answers:
-        - { value: |
+        - value: |
             {{ form(form) }}
-          , correct: true }
-        - { value: |
+          correct: true
+        - value: |
             {{ render_form(form) }}
-          , correct: false }
-        - { value: |
+          correct: false
+        - value: |
             {% form(form) %}
-          , correct: false }
-        - { value: |
+          correct: false
+        - value: |
             {{ form_start(form) }}
             {{ form_widget(form) }}
             {{ form_end(form) }}
-          , correct: true }
+          correct: true
       help: |
         https://symfony.com/doc/current/reference/forms/twig_reference.html
         https://symfony.com/doc/current/book/forms.html

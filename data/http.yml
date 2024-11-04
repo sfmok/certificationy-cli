@@ -1,39 +1,39 @@
 category: HTTP
 questions:
-      - question: |
-          Which HTTP verbs are idempotent ?
-        answers:
-          - { value: "HEAD", correct: true }
-          - { value: "CONNECT", correct: false }
-          - { value: "TRACE", correct: true }
-          - { value: "GET", correct: true }
-          - { value: "DELETE", correct: true }
-          - { value: "OPTIONS", correct: true }
-          - { value: "PATCH", correct: false }
-          - { value: "PUT", correct: true }
-          - { value: "POST", correct: false }
-        help: |
-          https://tools.ietf.org/html/rfc7231#section-4.2.2
-          https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Idempotent_methods_and_web_applications
+  - question: |
+      Which HTTP verbs are idempotent ?
+    answers:
+      - { value: "HEAD", correct: true }
+      - { value: "CONNECT", correct: false }
+      - { value: "TRACE", correct: true }
+      - { value: "GET", correct: true }
+      - { value: "DELETE", correct: true }
+      - { value: "OPTIONS", correct: true }
+      - { value: "PATCH", correct: false }
+      - { value: "PUT", correct: true }
+      - { value: "POST", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc7231#section-4.2.2
+      https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Idempotent_methods_and_web_applications
 
-      - question: |
-          Which HTTP verbs are safe ?
-        answers:
-        - { value: "PATCH", correct: false }
-        - { value: "TRACE", correct: true }
-        - { value: "GET", correct: true }
-        - { value: "PUT", correct: false }
-        - { value: "OPTIONS", correct: true }
-        - { value: "HEAD", correct: true }
-        - { value: "POST", correct: false }
-        - { value: "DELETE", correct: false }
-        - { value: "CONNECT", correct: false }
-        help: |
-          https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+  - question: |
+      Which HTTP verbs are safe ?
+    answers:
+    - { value: "PATCH", correct: false }
+    - { value: "TRACE", correct: true }
+    - { value: "GET", correct: true }
+    - { value: "PUT", correct: false }
+    - { value: "OPTIONS", correct: true }
+    - { value: "HEAD", correct: true }
+    - { value: "POST", correct: false }
+    - { value: "DELETE", correct: false }
+    - { value: "CONNECT", correct: false }
+    help: |
+      https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
 
-    - question: |
-        Which HTTP verbs are Cacheable ?
-      answers:
+  - question: |
+      Which HTTP verbs are Cacheable ?
+    answers:
       - { value: "PATCH", correct: false }
       - { value: "TRACE", correct: false }
       - { value: "GET", correct: true }
@@ -43,224 +43,224 @@ questions:
       - { value: "POST", correct: true }
       - { value: "DELETE", correct: false }
       - { value: "CONNECT", correct: false }
-      help: |
-        https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+    help: |
+      https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
 
-    - question: "What is the HTTP status codes for Internal Server Error?"
-      answers:
-        - { value: "500", correct: true }
-        - { value: "502", correct: false }
-        - { value: "501", correct: false }
-        - { value: "505", correct: false }
-        - { value: "503", correct: false }
-        - { value: "504", correct: false }
-      help: |
-        https://tools.ietf.org/html/rfc2616#section-6.1.1
-        https://tools.ietf.org/html/rfc2616#section-10.5.1
+  - question: "What is the HTTP status codes for Internal Server Error?"
+    answers:
+      - { value: "500", correct: true }
+      - { value: "502", correct: false }
+      - { value: "501", correct: false }
+      - { value: "505", correct: false }
+      - { value: "503", correct: false }
+      - { value: "504", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#section-6.1.1
+      https://tools.ietf.org/html/rfc2616#section-10.5.1
 
-    - question: "Which HTTP response headers are involved in the validation caching model?"
-      answers:
-        - { value: "Etag", correct: true }
-        - { value: "Cache-Control: s-max-age", correct: false }
-        - { value: "Cache-Control: max-age", correct: false }
-        - { value: "Last-Modified", correct: true }
-      help: |
-        https://tools.ietf.org/html/rfc2616#page-85
+  - question: "Which HTTP response headers are involved in the validation caching model?"
+    answers:
+      - { value: "Etag", correct: true }
+      - { value: "Cache-Control: s-max-age", correct: false }
+      - { value: "Cache-Control: max-age", correct: false }
+      - { value: "Last-Modified", correct: true }
+    help: |
+      https://tools.ietf.org/html/rfc2616#page-85
 
-    - question: "What do 1xx codes stand for ?"
-      answers:
-        - { value: "Informational", correct: true }
-        - { value: "Server Error", correct: false }
-        - { value: "They don't exist.", correct: false }
-        - { value: "Client Error", correct: false }
-      help: |
-        https://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
+  - question: "What do 1xx codes stand for ?"
+    answers:
+      - { value: "Informational", correct: true }
+      - { value: "Server Error", correct: false }
+      - { value: "They don't exist.", correct: false }
+      - { value: "Client Error", correct: false }
+    help: |
+      https://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
 
-    - question: "What is the HTTP status codes for HTTP Version Not Supported?"
-      answers:
-        - { value: "502", correct: false }
-        - { value: "500", correct: false }
-        - { value: "503", correct: false }
-        - { value: "505", correct: true }
-        - { value: "501", correct: false }
-        - { value: "504", correct: false }
-      help: |
-          https://tools.ietf.org/html/rfc2616#section-6.1.1
-          https://tools.ietf.org/html/rfc2616#section-10.5.6
+  - question: "What is the HTTP status codes for HTTP Version Not Supported?"
+    answers:
+      - { value: "502", correct: false }
+      - { value: "500", correct: false }
+      - { value: "503", correct: false }
+      - { value: "505", correct: true }
+      - { value: "501", correct: false }
+      - { value: "504", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#section-6.1.1
+      https://tools.ietf.org/html/rfc2616#section-10.5.6
 
-    - question: "What is the request structure ?"
-      answers:
-        - { value: "Request-Line CRLF Headers CRLF CRLF Body", correct: false }
-        - { value: "Request-Line Headers CRLF CRLF Body", correct: false }
-        - { value: "Request-Line Headers CRLF Body", correct: false }
-        - { value: "Request-Line Headers Body", correct: true }
-      help: |
-        https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html
+  - question: "What is the request structure ?"
+    answers:
+      - { value: "Request-Line CRLF Headers CRLF CRLF Body", correct: false }
+      - { value: "Request-Line Headers CRLF CRLF Body", correct: false }
+      - { value: "Request-Line Headers CRLF Body", correct: false }
+      - { value: "Request-Line Headers Body", correct: true }
+    help: |
+      https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html
 
-    - question: "What is the status code for Too Many Requests?"
-      answers:
-        - { value: "503", correct: false }
-        - { value: "431", correct: false }
-        - { value: "429", correct: true }
-        - { value: "502", correct: false }
-        - { value: "420", correct: false }
-      help: |
-        https://tools.ietf.org/html/rfc6585#section-4
+  - question: "What is the status code for Too Many Requests?"
+    answers:
+      - { value: "503", correct: false }
+      - { value: "431", correct: false }
+      - { value: "429", correct: true }
+      - { value: "502", correct: false }
+      - { value: "420", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc6585#section-4
 
-    - question: "Which header/directive will be ignored if Expires, s-maxage and max-age are both present in response ?"
-      answers:
-        - { value: "maxage", correct: false }
-        - { value: "Expires", correct: true }
-        - { value: "max-age", correct: true }
-      help: |
-        https://tools.ietf.org/html/rfc7234#section-5.2.2.8
-        https://tools.ietf.org/html/rfc7234#section-5.2.2.9
-        https://tools.ietf.org/html/rfc7234#section-5.3
+  - question: "Which header/directive will be ignored if Expires, s-maxage and max-age are both present in response ?"
+    answers:
+      - { value: "maxage", correct: false }
+      - { value: "Expires", correct: true }
+      - { value: "max-age", correct: true }
+    help: |
+      https://tools.ietf.org/html/rfc7234#section-5.2.2.8
+      https://tools.ietf.org/html/rfc7234#section-5.2.2.9
+      https://tools.ietf.org/html/rfc7234#section-5.3
 
-    - question: |
-        What is the HTTP status codes for Service Unavailable?
-      answers:
-        - { value: "503", correct: true }
-        - { value: "504", correct: false }
-        - { value: "500", correct: false }
-        - { value: "501", correct: false }
-        - { value: "502", correct: false }
-        - { value: "505", correct: false }
-      help: |
-        https://tools.ietf.org/html/rfc2616#section-6.1.1
-        https://tools.ietf.org/html/rfc2616#section-10.5.4
+  - question: |
+      What is the HTTP status codes for Service Unavailable?
+    answers:
+      - { value: "503", correct: true }
+      - { value: "504", correct: false }
+      - { value: "500", correct: false }
+      - { value: "501", correct: false }
+      - { value: "502", correct: false }
+      - { value: "505", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#section-6.1.1
+      https://tools.ietf.org/html/rfc2616#section-10.5.4
 
-    - question: |
-        Which are the directives that can be found in the Cache-Control header?
-      answers:
-        - { value: "no-limit", correct: false }
-        - { value: "max-age", correct: true }
-        - { value: "no-cache", correct: true }
-        - { value: "no-rule", correct: false }
-        - { value: "no-store", correct: true }
-      help: |
-        https://tools.ietf.org/html/rfc2616#section-14.9
+  - question: |
+      Which are the directives that can be found in the Cache-Control header?
+    answers:
+      - { value: "no-limit", correct: false }
+      - { value: "max-age", correct: true }
+      - { value: "no-cache", correct: true }
+      - { value: "no-rule", correct: false }
+      - { value: "no-store", correct: true }
+    help: |
+      https://tools.ietf.org/html/rfc2616#section-14.9
 
-    - question: "What is the HTTP status codes for Gateway Timeout?"
-      answers:
-          - { value: "500", correct: false }
-          - { value: "504", correct: true }
-          - { value: "502", correct: false }
-          - { value: "505", correct: false }
-          - { value: "503", correct: false }
-          - { value: "501", correct: false }
-      help: |
-          https://tools.ietf.org/html/rfc2616#section-6.1.1
-          https://tools.ietf.org/html/rfc2616#section-10.5.5
+  - question: "What is the HTTP status codes for Gateway Timeout?"
+    answers:
+      - { value: "500", correct: false }
+      - { value: "504", correct: true }
+      - { value: "502", correct: false }
+      - { value: "505", correct: false }
+      - { value: "503", correct: false }
+      - { value: "501", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#section-6.1.1
+      https://tools.ietf.org/html/rfc2616#section-10.5.5
 
-    - question: "What is the status code for Gone?"
-      answers:
-        - { value: "409", correct: false }
-        - { value: "410", correct: true }
-        - { value: "403", correct: false }
-        - { value: "404", correct: false }
-        - { value: "411", correct: false }
-      help: |
-        https://datatracker.ietf.org/doc/html/rfc2616#section-10.4.11
+  - question: "What is the status code for Gone?"
+    answers:
+      - { value: "409", correct: false }
+      - { value: "410", correct: true }
+      - { value: "403", correct: false }
+      - { value: "404", correct: false }
+      - { value: "411", correct: false }
+    help: |
+      https://datatracker.ietf.org/doc/html/rfc2616#section-10.4.11
 
-    - question: "What is the Response structure ?"
-      answers:
-        - { value: Status-Line
-            Headers CRLF
-            Message-body, correct: false }
-        - { value: Status-Line CRLF
-            Headers CRLF
-            CRLF
-            Message-body, correct: false }
-        - { value: Status-Line
-            CRLF
-            Headers
-            CRLF
-            Message-body, correct: false }
-        - { value: Status-Line
-            
-            Headers
-            
-            Message-body, correct: true }
-      help: |
-        https://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html
+  - question: "What is the Response structure ?"
+    answers:
+      - { value: Status-Line
+          Headers CRLF
+          Message-body, correct: false }
+      - { value: Status-Line CRLF
+          Headers CRLF
+          CRLF
+          Message-body, correct: false }
+      - { value: Status-Line
+          CRLF
+          Headers
+          CRLF
+          Message-body, correct: false }
+      - { value: Status-Line
+          
+          Headers
+          
+          Message-body, correct: true }
+    help: |
+      https://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html
 
-    - question: |
-        What happens for an HTTP response if it has both the Expires and Cache-Control headers set?
-      answers:
-        - { value: The response won't be cachable and caching systems will simply ignore it., correct: false }
-        - { value: Caching systems will use the Expires header field if the response is generated if the current day number is odd, otherwise they will use the Cache-Control header field., correct: false }
-        - { value: Caching systems will favor the Cache-Control header field over the Expires field to cache the response., correct: true }
-        - { value: Caching systems will favor the Expires header field over the Cache-Control field to cache the response., correct: false }
-      help: |
-        https://tools.ietf.org/html/rfc2616#page-79
+  - question: |
+      What happens for an HTTP response if it has both the Expires and Cache-Control headers set?
+    answers:
+      - { value: "The response won't be cachable and caching systems will simply ignore it.", correct: false }
+      - { value: "Caching systems will use the Expires header field if the response is generated if the current day number is odd, otherwise they will use the Cache-Control header field.", correct: false }
+      - { value: "Caching systems will favor the Cache-Control header field over the Expires field to cache the response.", correct: true }
+      - { value: "Caching systems will favor the Expires header field over the Cache-Control field to cache the response.", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#page-79
 
-    - question: |
-        Which of the following assertions is true about HTTP caching?
-      answers:
-        - { value: Validation always wins over expiration., correct: false }
-        - { value: Expiration and validation are mutually exclusive and therefore cannot be used simultaneously., correct: false }
-        - { value: Expiration always wins over validation., correct: true }
-      help: |
-        https://symfony.com/doc/current/http_cache/validation.html
+  - question: |
+      Which of the following assertions is true about HTTP caching?
+    answers:
+      - { value: Validation always wins over expiration., correct: false }
+      - { value: Expiration and validation are mutually exclusive and therefore cannot be used simultaneously., correct: false }
+      - { value: Expiration always wins over validation., correct: true }
+    help: |
+      https://symfony.com/doc/current/http_cache/validation.html
 
-    - question: "What does the 502 HTTP status code stand for?"
-      answers:
-        - { value: "Service Unavailable", correct: false }
-        - { value: "Gateway timeout", correct: false }
-        - { value: "Not implemented", correct: false }
-        - { value: "Bad Gateway", correct: true }
-      help: |
-        https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502
+  - question: "What does the 502 HTTP status code stand for?"
+    answers:
+      - { value: "Service Unavailable", correct: false }
+      - { value: "Gateway timeout", correct: false }
+      - { value: "Not implemented", correct: false }
+      - { value: "Bad Gateway", correct: true }
+    help: |
+      https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502
 
-    - question: |
-        What separate the body from the headers request ?
-      answers:
-        - { value: BEGIN BODY, correct: false }
-        - { value: CRLF, correct: true }
-        - { value: -, correct: false }
-        - { value: Nothing, there is no separator, correct: false }
-      help: |
-        https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.2
+  - question: |
+      What separate the body from the headers request ?
+    answers:
+      - { value: "BEGIN BODY", correct: false }
+      - { value: "CRLF", correct: true }
+      - { value: "-", correct: false }
+      - { value: "Nothing, there is no separator", correct: false }
+    help: |
+      https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.2
 
-    - question: |
-        What are the http codes status involved by the caching models?
-      answers:
-        - { value: 200, correct: true }
-        - { value: 304, correct: false }
-        - { value: 204, correct: true }
-        - { value: 300, correct: true }
-      help: |
-        200: https://tools.ietf.org/html/rfc2616#section-10.2.1
-        204: https://tools.ietf.org/html/rfc2616#section-10.2.5
-        300: https://tools.ietf.org/html/rfc2616#section-10.3.1
-        304: https://tools.ietf.org/html/rfc2616#section-10.3.5
+  - question: |
+      What are the http codes status involved by the caching models?
+    answers:
+      - { value: 200, correct: true }
+      - { value: 304, correct: false }
+      - { value: 204, correct: true }
+      - { value: 300, correct: true }
+    help: |
+      200: https://tools.ietf.org/html/rfc2616#section-10.2.1
+      204: https://tools.ietf.org/html/rfc2616#section-10.2.5
+      300: https://tools.ietf.org/html/rfc2616#section-10.3.1
+      304: https://tools.ietf.org/html/rfc2616#section-10.3.5
 
-    - question: |
-        What can happen to an HTTP response whose Cache-Control header value equals public, s-maxage=120?
-      answers:
-        - { value: It can be cached by a reverse proxy cache like Varnish., correct: true }
-        - { value: It can be cached by any proxy server., correct: true }
-        - { value: It can be cached by the web browser., correct: true }
-        - { value: It prevents the response from being cached by the web browser or any shared proxies., correct: false }
-        - { value: It can only be cached by the web browser., correct: false }
-      help: |
-        https://tools.ietf.org/html/rfc2616#page-79
+  - question: |
+      What can happen to an HTTP response whose Cache-Control header value equals public, s-maxage=120?
+    answers:
+      - { value: It can be cached by a reverse proxy cache like Varnish., correct: true }
+      - { value: It can be cached by any proxy server., correct: true }
+      - { value: It can be cached by the web browser., correct: true }
+      - { value: It prevents the response from being cached by the web browser or any shared proxies., correct: false }
+      - { value: It can only be cached by the web browser., correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#page-79
 
-    - question: "What can happen to an HTTP response whose Cache-Control header value equals private, max-age=120?"
-      answers:
-        - { value: "It prevents the response from being cached by the web browser or any shared proxies.", correct: false }
-        - { value: "It will be cached by a reverse proxy cache like Varnish.", correct: false }
-        - { value: "It will only be cached by any shared proxy servers including reverse proxies.", correct: false }
-        - { value: "It will be cached by the web browser.", correct: true }
-        - { value: "It will be cached by any proxy server.", correct: false }
-      help: |
-        https://tools.ietf.org/html/rfc2616#page-79
+  - question: "What can happen to an HTTP response whose Cache-Control header value equals private, max-age=120?"
+    answers:
+      - { value: "It prevents the response from being cached by the web browser or any shared proxies.", correct: false }
+      - { value: "It will be cached by a reverse proxy cache like Varnish.", correct: false }
+      - { value: "It will only be cached by any shared proxy servers including reverse proxies.", correct: false }
+      - { value: "It will be cached by the web browser.", correct: true }
+      - { value: "It will be cached by any proxy server.", correct: false }
+    help: |
+      https://tools.ietf.org/html/rfc2616#page-79
 
-    - question: "How does the browser communicate to the server what is the preferred language of the user?"
-      answers:
-        - { value: User language preferences are sent using the Accept-Language header, correct: true }
-        - { value: The main language is included in the User-Agent header, correct: false }
-        - { value: The browser doesn’t communicate the language of the user, it’s inferred from the user IP., correct: false }
-      help: |
-        https://www.w3.org/International/questions/qa-lang-priorities
+  - question: "How does the browser communicate to the server what is the preferred language of the user?"
+    answers:
+      - { value: "User language preferences are sent using the Accept-Language header", correct: true }
+      - { value: "The main language is included in the User-Agent header", correct: false }
+      - { value: "The browser doesn’t communicate the language of the user, it’s inferred from the user IP.", correct: false }
+    help: |
+      https://www.w3.org/International/questions/qa-lang-priorities

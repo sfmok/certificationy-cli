@@ -456,9 +456,9 @@ questions:
     - question: |
         What is the best way to split a string with the -=- pattern?
       answers:
-        - { value: explode("-=-", $string);, correct: true }
-        - { value: preg_split("-=-", $string);, correct: false }
-        - { value: str_split($string, strpos($string, "-=-"));, correct: false }
+        - { value: 'explode("-=-", $string);', correct: true }
+        - { value: 'preg_split("-=-", $string);', correct: false }
+        - { value: 'str_split($string, strpos($string, "-=-"));', correct: false }
       help: |
         https://php.net/manual/en/language.types.type-juggling.php
         https://php.net/manual/en/language.types.object.php#language.types.object.casting

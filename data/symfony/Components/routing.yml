@@ -55,9 +55,9 @@ questions:
             return new Response($id);
         }
       answers:
-        - { value: "toto", correct: true }
-        - { value: Parameter "id" for route "article" must match "\d+" ("toto" given), correct: false }
-        - { value: Unable to find the controller for path "article". The route is wrongly configured., correct: false }
+        - { value: 'toto', correct: true }
+        - { value: 'Parameter "id" for route "article" must match "\d+" ("toto" given)', correct: false }
+        - { value: 'Unable to find the controller for path "article". The route is wrongly configured.', correct: false }
       help: |
         https://symfony.com/doc/current/routing/requirements.html
         https://symfony.com/doc/current/reference/configuration/framework.html#strict-requirements
@@ -125,12 +125,12 @@ questions:
             </route>
         </routes>
       answers:
-        - { value: http://localhost/agenda/2018-14-30, correct: false }
-        - { value: http://localhost/agenda/2020-2-30, correct: true }
-        - { value: http://localhost/agenda/2150-12-31, correct: false }
-        - { value: http://localhost/agenda/2011-1-01, correct: true }
-        - { value: http://localhost/agenda/2018-12-12, correct: true }
-        - { value: http://localhost/agenda/2008-04-06, correct: true }
+        - { value: 'http://localhost/agenda/2018-14-30', correct: false }
+        - { value: 'http://localhost/agenda/2020-2-30', correct: true }
+        - { value: 'http://localhost/agenda/2150-12-31', correct: false }
+        - { value: 'http://localhost/agenda/2011-1-01', correct: true }
+        - { value: 'http://localhost/agenda/2018-12-12', correct: true }
+        - { value: 'http://localhost/agenda/2008-04-06', correct: true }
       help: |
         https://symfony.com/doc/current/components/routing.html
 
@@ -267,8 +267,8 @@ questions:
           defaults: { _controller: AppBundle:Default:test }
           condition: "context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/firefox/i'"
       answers:
-        - { value: Yes, correct: true }
-        - { value: No, he/she will have a 500 response., correct: false }
+        - { value: 'Yes', correct: true }
+        - { value: 'No, he/she will have a 500 response.', correct: false }
       help: |
         https://symfony.com/doc/3.0/book/routing.html#completely-customized-route-matching-with-conditions
 

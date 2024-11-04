@@ -130,15 +130,21 @@ questions:
     - question: |
         What will be the expected outcome when running this piece of code?
       answers:
-        - { value: The $result variable will contain an array of Symfony\Component\Validator\ConstraintViolation instances., correct: false }
-        - { value: |
-             The validate method will throw a Symfony\Component\Validator\Exception\ValidatorException exception if the given object's state doesn't match its mapped validation constraint rules.
-          , correct: false }
-        - { value: The $result variable will contain a simple boolean value (true  or false)., correct: false }
-        - { value: The $result variable will contain null because the validate method must always return void., correct: false }
-        - { value: |
+        - value: |
+            The $result variable will contain an array of Symfony\Component\Validator\ConstraintViolation instances.
+          correct: false
+        - value: |
+            The validate method will throw a Symfony\Component\Validator\Exception\ValidatorException exception if the given object's state doesn't match its mapped validation constraint rules.
+          correct: false
+        - value: |
+            The $result variable will contain a simple boolean value (true  or false).
+          correct: false
+        - value: |
+            The $result variable will contain null because the validate method must always return void.
+          correct: false
+        - value: |
              The $result variable will contain a valid implementation of the Symfony\Component\Validator\ConstraintViolationListInterface interface.
-          , correct: true }
+          correct: true
       help: |
         https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/ConstraintViolationList.php
         https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/Validator/ValidatorInterface.php
@@ -188,10 +194,10 @@ questions:
 
         We assume that the Assert namespace is an Alias to Symfony\Component\Validator\Constraints
       answers:
-        - { value: Assert\Count(min=2, max=2), correct: true }
-        - { value: Assert\Length(2), correct: false }
-        - { value: Assert\Count(min=2), correct: false }
-        - { value: Assert\Length(min=2), correct: false }
+        - { value: 'Assert\Count(min=2, max=2)', correct: true }
+        - { value: 'Assert\Length(2)', correct: false }
+        - { value: 'Assert\Count(min=2)', correct: false }
+        - { value: 'Assert\Length(min=2)', correct: false }
       help: |
         https://symfony.com/doc/5.0/reference/constraints/Count.html
 

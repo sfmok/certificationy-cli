@@ -56,11 +56,11 @@ questions:
             'usernme' => 'johndoe',
         ));
       answers:
-        - { value: A Symfony\Component\OptionsResolver\Exception\InvalidOptionsException., correct: false }
-        - { value: A Symfony\Component\OptionsResolver\Exception\NoSuchOptionException., correct: false }
-        - { value: A Symfony\Component\OptionsResolver\Exception\OptionDefinitionException., correct: false }
-        - { value: A Symfony\Component\OptionsResolver\Exception\MissingOptionsException., correct: false }
-        - { value: A Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException., correct: true }
+        - { value: 'A Symfony\Component\OptionsResolver\Exception\InvalidOptionsException.', correct: false }
+        - { value: 'A Symfony\Component\OptionsResolver\Exception\NoSuchOptionException.', correct: false }
+        - { value: 'A Symfony\Component\OptionsResolver\Exception\OptionDefinitionException.', correct: false }
+        - { value: 'A Symfony\Component\OptionsResolver\Exception\MissingOptionsException.', correct: false }
+        - { value: 'A Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException.', correct: true }
       help: |
         https://symfony.com/doc/current/components/options_resolver.html#usage
 
@@ -98,19 +98,19 @@ questions:
         what would be the resolved $options passed as:
         $options = array('encryption' => 'SSL');
       answers:
-      - { value: |
+      - value: |
             $options = array(
              'encryption' => 'SSL',
              'port' => 465,
             );
-        , correct: false }
-      - { value: |
+        correct: false
+      - value: |
             $options = array(
               'encryption' => 'SSL',
               'port' => null,
             );
-        , correct: false }
-      - { value: |
+        correct: false
+      - value: |
             $options = array(
               'encryption' => 'SSL',
               'port' => function () {
@@ -120,12 +120,12 @@ questions:
                 return 25;
               },
             );
-        , correct: true }
-      - { value: |
+        correct: true
+      - value: |
             $options = array(
               'encryption' => 'SSL',
               'port' => 25,
             );
-        , correct: false }
+        correct: false
       help: |
         https://symfony.com/doc/current/components/options_resolver.html#default-values-that-depend-on-another-option

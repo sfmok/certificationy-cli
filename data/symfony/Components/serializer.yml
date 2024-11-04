@@ -34,22 +34,22 @@ questions:
     - question: |
         Which of the following is a correct YAML group definition?
       answers:
-        - { value: |
+        - value: |
               Acme\MyObj:
                 foo:
                   groups: ['group1', 'group2']
                 bar:
                   groups: ['group3']
-          , correct: false }
-        - { value: |
+          correct: false
+        - value: |
               Acme\MyObj:
                 attributes:
                   foo:
                     groups: ['group1', 'group2']
                   bar:
                     groups: ['group3']
-          , correct: true }
-        - { value: |
+          correct: true
+        - value: |
               Acme\MyObj:
                 groups:
                   group1:
@@ -58,8 +58,8 @@ questions:
                     attributes: ['foo']
                   group3:
                     attributes: ['bar']
-          , correct: false }
-        - { value: |
+          correct: false
+        - value: |
               Acme\MyObj:
                 group1:
                   attributes: ['foo']
@@ -67,7 +67,7 @@ questions:
                   attributes: ['foo']
                 group3:
                   attributes: ['bar']
-          , correct: true }
+          correct: true
       help: |
         https://symfony.com/doc/current/components/serializer.html#attributes-groups
 

@@ -3,24 +3,24 @@ questions:
     - question: |
         What are the arguments of the register() method used to register a function?
       answers:
-        - { value: |
-              string   $name      The function name
-              callable $compiler  A callable able to compile the function
-              callable $evaluator A callable able to evaluate the function
-          , correct: true }
-        - { value: |
-              callable $compiler  A callable able to compile the function
-              callable $evaluator A callable able to evaluate the functio
-          , correct: false }
-        - { value: |
-              CompilerInterface  $compiler  A compiler able to compile the function
-              EvaluatorInterface $evaluator An evaluator able to evaluate the function
-          , correct: false }
-        - { value: |
-              string             $name      The function name
-              CompilerInterface  $compiler  A compiler able to compile the function
-              EvaluatorInterface $evaluator An evaluator able to evaluate the function
-          , correct: false }
+        - value: |
+            string   $name      The function name
+            callable $compiler  A callable able to compile the function
+            callable $evaluator A callable able to evaluate the function
+          correct: true
+        - value: |
+            callable $compiler  A callable able to compile the function
+            callable $evaluator A callable able to evaluate the functio
+          correct: false
+        - value: |
+            CompilerInterface  $compiler  A compiler able to compile the function
+            EvaluatorInterface $evaluator An evaluator able to evaluate the function
+          correct: false
+        - value: |
+            string             $name      The function name
+            CompilerInterface  $compiler  A compiler able to compile the function
+            EvaluatorInterface $evaluator An evaluator able to evaluate the function
+          correct: false
       help: |
         https://symfony.com/doc/current/components/expression_language/extending.html#registering-functions
         https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/ExpressionLanguage/ExpressionLanguage.php#L110
@@ -28,22 +28,22 @@ questions:
     - question: |
         What are the methods of Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface?
       answers:
-        - { value: |
-              getFunctions();
-              addFunction(ExpressionFunction $function);
-          , correct: false }
-        - { value: |
-              getFunctions();
-              register($name, callable $compiler, callable $evaluator);
-          , correct: false }
-        - { value: |
-              getFunctions();
-          , correct: true }
-        - { value: |
-              getFunctions();
-              register($name, callable $compiler, callable $evaluator);
-              addFunction(ExpressionFunction $function);
-          , correct: false }
+        - value: |
+            getFunctions();
+            addFunction(ExpressionFunction $function);
+          correct: false
+        - value: |
+            getFunctions();
+            register($name, callable $compiler, callable $evaluator);
+          correct: false
+        - value: |
+            getFunctions();
+          correct: true
+        - value: |
+            getFunctions();
+            register($name, callable $compiler, callable $evaluator);
+            addFunction(ExpressionFunction $function);
+          correct: false
       help: |
         https://symfony.com/doc/current/components/expression_language/extending.html#registering-functions
         https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/ExpressionLanguage/ExpressionLanguage.php#L110

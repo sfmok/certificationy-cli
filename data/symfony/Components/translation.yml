@@ -32,11 +32,11 @@ questions:
     - question: |
         Which method must implement a TranslationLoader that implements Symfony\Component\Translation\Loader\LoaderInterface?
       answers:
-        - { value: public function load($locale, $domain);, correct: false }
-        - { value: public function load($resource, $locale, $domain);, correct: false }
-        - { value: public function load($resource, $locale, $domain = 'messages');, correct: false }
-        - { value: public function load($resource, $locale = 'en', $domain = 'messages');, correct: false }
-        - { value: public function load($locale = 'en', $domain = 'messages');, correct: false }
+        - { value: "public function load($locale, $domain);", correct: false }
+        - { value: "public function load($resource, $locale, $domain);", correct: false }
+        - { value: "public function load($resource, $locale, $domain = 'messages');", correct: false }
+        - { value: "public function load($resource, $locale = 'en', $domain = 'messages');", correct: false }
+        - { value: "public function load($locale = 'en', $domain = 'messages');", correct: false }
       help: |
         https://symfony.com/doc/current/components/translation/custom_formats.html
 
@@ -54,19 +54,19 @@ questions:
     - question: |
         When you want to use a translation in another domain than the default domain, you must specify the domain as:
       answers:
-        - { value: second argument of trans(), correct: false }
-        - { value: first argument of trans(), correct: false }
-        - { value: fourth argument of trans(), correct: false }
-        - { value: third argument of trans(), correct: true }
+        - { value: "second argument of trans()", correct: false }
+        - { value: "first argument of trans()", correct: false }
+        - { value: "fourth argument of trans()", correct: false }
+        - { value: "third argument of trans()", correct: true }
       help: |
         https://symfony.com/doc/current/components/translation/introduction.html#using-message-domains
 
     - question: |
         What is the way to add a loader to the translator?
       answers:
-        - { value: $translator->addLoader(new ArrayLoader());, correct: false }
+        - { value: "$translator->addLoader(new ArrayLoader());", correct: false }
         - { value: "$translator->addLoader('array', new ArrayLoader());", correct: true }
         - { value: "$translator->addLoader(new ArrayLoader(), 'array');", correct: false }
-        - { value: $translator->addArrayLoader(new ArrayLoader());, correct: false }
+        - { value: "$translator->addArrayLoader(new ArrayLoader());", correct: false }
       help: |
         https://github.com/symfony/translation/blob/5.0/Translator.php#L103
